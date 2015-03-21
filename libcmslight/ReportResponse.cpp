@@ -5,7 +5,7 @@
  *      Author: carlos
  */
 
-#include "ReportResponse.h"
+#include "../libcmslight/ReportResponse.h"
 
 using namespace std;
 

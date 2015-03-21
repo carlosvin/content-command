@@ -2,7 +2,7 @@
 // source: cms.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "cms.pb.h"
+#include "../libcmslight/cms.pb.h"
 
 #include <algorithm>
 

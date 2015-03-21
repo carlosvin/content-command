@@ -60,10 +60,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/cms
-pkgincludedir = $(includedir)/cms
-pkglibdir = $(libdir)/cms
-pkglibexecdir = $(libexecdir)/cms
+pkgdatadir = $(datadir)/cms-light
+pkgincludedir = $(includedir)/cms-light
+pkglibdir = $(libdir)/cms-light
+pkglibexecdir = $(libexecdir)/cms-light
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -167,7 +167,7 @@ CXX = g++
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"cms\" -DPACKAGE_TARNAME=\"cms\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"cms\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"cms\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_GRPC_GRPC_H=1
+DEFS = -DPACKAGE_NAME=\"cms-light\" -DPACKAGE_TARNAME=\"cms-light\" -DPACKAGE_VERSION=\"1.0\" -DPACKAGE_STRING=\"cms-light\ 1.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"cms-light\" -DVERSION=\"1.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_GRPC_GRPC_H=1
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -187,11 +187,11 @@ LTLIBOBJS =
 MAKEINFO = ${SHELL} /home/carlos/workspaces/grpc/cms-light/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
-PACKAGE = cms
+PACKAGE = cms-light
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = cms
-PACKAGE_STRING = cms 1.0
-PACKAGE_TARNAME = cms
+PACKAGE_NAME = cms-light
+PACKAGE_STRING = cms-light 1.0
+PACKAGE_TARNAME = cms-light
 PACKAGE_URL = 
 PACKAGE_VERSION = 1.0
 PATH_SEPARATOR = :
@@ -255,8 +255,10 @@ target_vendor = suse
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+AM_CXXFLAGS = -std=c++11 -I../libcmslight
 client_SOURCES = client.cpp
 AM_LDFLAGS = -lgrpc -lgrpc++ -lprotobuf
+client_LADD = -lcmslight
 all: all-am
 
 .SUFFIXES:

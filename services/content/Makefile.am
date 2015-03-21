@@ -1,8 +1,8 @@
-AM_CXXFLAGS = -std=c++11
+AM_CXXFLAGS = -std=c++11 -I../../libcmslight
 
 bin_PROGRAMS	= server
 
 server_SOURCES		= server.cpp
 
-AM_LDFLAGS = -lgrpc -lgrpc++ -lcms-light-common
-
+AM_LDFLAGS = -lgrpc -lgrpc++ -lprotobuf
+server_LADD = -lcmslight

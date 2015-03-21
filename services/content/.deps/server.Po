@@ -150,7 +150,8 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/local/include/grpc++/impl/service_type.h \
  /usr/local/include/grpc++/server_builder.h \
  /usr/local/include/grpc++/server_context.h \
- /usr/local/include/grpc++/server_credentials.h cms.pb.h \
+ /usr/local/include/grpc++/server_credentials.h \
+ ../../libcmslight/cms.pb.h \
  /usr/local/include/google/protobuf/arenastring.h \
  /usr/local/include/google/protobuf/stubs/fastmem.h \
  /usr/local/include/google/protobuf/generated_message_util.h \
@@ -582,7 +583,7 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/local/include/grpc++/server_credentials.h:
 
-cms.pb.h:
+../../libcmslight/cms.pb.h:
 
 /usr/local/include/google/protobuf/arenastring.h:
 
