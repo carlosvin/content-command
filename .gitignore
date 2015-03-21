@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+/autom4te.cache/
+/config.log
+/config.status
+/config.guess
+/config.sub
+/missing
