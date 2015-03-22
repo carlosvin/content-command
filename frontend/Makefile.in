@@ -94,7 +94,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_client_OBJECTS = client.$(OBJEXT)
 client_OBJECTS = $(am_client_OBJECTS)
-client_LDADD = $(LDADD)
+client_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -256,9 +256,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = -std=c++11 -I../libcmslight
+AM_LDFLAGS = -L../libcmslight
 client_SOURCES = client.cpp
-AM_LDFLAGS = -lgrpc -lgrpc++ -lprotobuf
-client_LADD = -lcmslight
+client_LDADD = -lcmslight -lgrpc -lgrpc++ -lprotobuf
 all: all-am
 
 .SUFFIXES:

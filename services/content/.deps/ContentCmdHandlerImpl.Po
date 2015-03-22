@@ -164,7 +164,8 @@ ContentCmdHandlerImpl.o: ContentCmdHandlerImpl.cpp \
  /usr/local/include/google/protobuf/extension_set.h \
  /usr/local/include/google/protobuf/generated_enum_reflection.h \
  /usr/local/include/grpc++/impl/internal_stub.h \
- /usr/local/include/grpc++/channel_interface.h
+ /usr/local/include/grpc++/channel_interface.h \
+ /usr/include/c++/4.8/iostream
 
 /usr/include/stdc-predef.h:
 
@@ -607,3 +608,5 @@ ContentCmdHandlerImpl.h:
 /usr/local/include/grpc++/impl/internal_stub.h:
 
 /usr/local/include/grpc++/channel_interface.h:
+
+/usr/include/c++/4.8/iostream:
