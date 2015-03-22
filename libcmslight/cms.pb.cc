@@ -143,9 +143,10 @@ void protobuf_AssignDesc_cms_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Filter, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Filter, _is_default_instance_));
   CmdResponse_descriptor_ = file->message_type(5);
-  static const int CmdResponse_offsets_[2] = {
+  static const int CmdResponse_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, path_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, info_),
   };
   CmdResponse_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -257,19 +258,19 @@ void protobuf_AddDesc_cms_2eproto() {
     "y\030\002 \001(\t\"&\n\004Page\022\014\n\004page\030\001 \001(\r\022\020\n\010element"
     "s\030\002 \001(\r\";\n\005Query\022\031\n\005order\030\001 \003(\0132\n.cms.Or"
     "der\022\027\n\004page\030\002 \003(\0132\t.cms.Page\"/\n\006Filter\022\n"
-    "\n\002by\030\001 \001(\t\022\031\n\005order\030\002 \001(\0132\n.cms.Order\"u\n"
-    "\013CmdResponse\022\014\n\004path\030\001 \001(\t\022%\n\005level\030\002 \001("
-    "\0162\026.cms.CmdResponse.Level\"1\n\005Level\022\t\n\005DE"
-    "BUG\020\000\022\010\n\004INFO\020\001\022\010\n\004WARN\020\002\022\t\n\005ERROR\020\003\"{\n\007"
-    "Content\022\025\n\002id\030\001 \001(\0132\t.cms.Uuid\022\r\n\005title\030"
-    "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\032\n\022creation_t"
-    "imestamp\030\004 \001(\r\022\031\n\021updated_timestamp\030\005 \001("
-    "\r\"-\n\013ContentList\022\036\n\010contents\030\001 \003(\0132\014.cms"
-    ".Content2\?\n\021ContentCmdHandler\022*\n\006Create\022"
-    "\014.cms.Content\032\020.cms.CmdResponse\"\0002W\n\010Cms"
-    "Query\022 \n\003get\022\t.cms.Uuid\032\014.cms.Content\"\000\022"
-    ")\n\007get_all\022\n.cms.Query\032\020.cms.ContentList"
-    "\"\000B\014\n\007com.cms\370\001\001b\006proto3", 744);
+    "\n\002by\030\001 \001(\t\022\031\n\005order\030\002 \001(\0132\n.cms.Order\"\203\001"
+    "\n\013CmdResponse\022\014\n\004path\030\001 \001(\t\022%\n\005level\030\002 \001"
+    "(\0162\026.cms.CmdResponse.Level\022\014\n\004info\030\003 \001(\t"
+    "\"1\n\005Level\022\t\n\005DEBUG\020\000\022\010\n\004INFO\020\001\022\010\n\004WARN\020\002"
+    "\022\t\n\005ERROR\020\003\"{\n\007Content\022\025\n\002id\030\001 \001(\0132\t.cms"
+    ".Uuid\022\r\n\005title\030\002 \001(\t\022\023\n\013description\030\003 \001("
+    "\t\022\032\n\022creation_timestamp\030\004 \001(\r\022\031\n\021updated"
+    "_timestamp\030\005 \001(\r\"-\n\013ContentList\022\036\n\010conte"
+    "nts\030\001 \003(\0132\014.cms.Content2\?\n\021ContentCmdHan"
+    "dler\022*\n\006Create\022\014.cms.Content\032\020.cms.CmdRe"
+    "sponse\"\0002W\n\010CmsQuery\022 \n\003get\022\t.cms.Uuid\032\014"
+    ".cms.Content\"\000\022)\n\007get_all\022\n.cms.Query\032\020."
+    "cms.ContentList\"\000B\014\n\007com.cms\370\001\001b\006proto3", 759);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "cms.proto", &protobuf_RegisterTypes);
   Uuid::default_instance_ = new Uuid();
@@ -1764,6 +1765,7 @@ const int CmdResponse::Level_ARRAYSIZE;
 #ifndef _MSC_VER
 const int CmdResponse::kPathFieldNumber;
 const int CmdResponse::kLevelFieldNumber;
+const int CmdResponse::kInfoFieldNumber;
 #endif  // !_MSC_VER
 
 CmdResponse::CmdResponse()
@@ -1798,6 +1800,7 @@ void CmdResponse::SharedCtor() {
   _cached_size_ = 0;
   path_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   level_ = 0;
+  info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 CmdResponse::~CmdResponse() {
@@ -1811,6 +1814,7 @@ void CmdResponse::SharedDtor() {
   }
 
   path_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+  info_.Destroy(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   if (this != default_instance_) {
   }
 }
@@ -1845,6 +1849,7 @@ CmdResponse* CmdResponse::New(::google::protobuf::Arena* arena) const {
 void CmdResponse::Clear() {
   path_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   level_ = 0;
+  info_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
 
 bool CmdResponse::MergePartialFromCodedStream(
@@ -1882,6 +1887,23 @@ bool CmdResponse::MergePartialFromCodedStream(
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
           set_level(static_cast< ::cms::CmdResponse_Level >(value));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_info;
+        break;
+      }
+
+      // optional string info = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_info:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_info()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->info().data(), this->info().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "cms.CmdResponse.info");
         } else {
           goto handle_unusual;
         }
@@ -1929,6 +1951,16 @@ void CmdResponse::SerializeWithCachedSizes(
       2, this->level(), output);
   }
 
+  // optional string info = 3;
+  if (this->info().size() > 0) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->info().data(), this->info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "cms.CmdResponse.info");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->info(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:cms.CmdResponse)
 }
 
@@ -1952,6 +1984,17 @@ void CmdResponse::SerializeWithCachedSizes(
       2, this->level(), target);
   }
 
+  // optional string info = 3;
+  if (this->info().size() > 0) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->info().data(), this->info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "cms.CmdResponse.info");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->info(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:cms.CmdResponse)
   return target;
 }
@@ -1970,6 +2013,13 @@ int CmdResponse::ByteSize() const {
   if (this->level() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->level());
+  }
+
+  // optional string info = 3;
+  if (this->info().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->info());
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -1997,6 +2047,9 @@ void CmdResponse::MergeFrom(const CmdResponse& from) {
   }
   if (from.level() != 0) {
     set_level(from.level());
+  }
+  if (from.info().size() > 0) {
+    set_info(from.info());
   }
 }
 
@@ -2036,6 +2089,7 @@ void CmdResponse::UnsafeArenaSwap(CmdResponse* other) {
 void CmdResponse::InternalSwap(CmdResponse* other) {
   path_.Swap(&other->path_);
   std::swap(level_, other->level_);
+  info_.Swap(&other->info_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }

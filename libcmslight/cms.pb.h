@@ -719,6 +719,20 @@ class CmdResponse : public ::google::protobuf::Message {
   inline ::cms::CmdResponse_Level level() const;
   inline void set_level(::cms::CmdResponse_Level value);
 
+  // optional string info = 3;
+  inline void clear_info();
+  static const int kInfoFieldNumber = 3;
+  inline const ::std::string& info() const;
+  inline void set_info(const ::std::string& value);
+  inline void set_info(const char* value);
+  inline void set_info(const char* value, size_t size);
+  inline ::std::string* mutable_info();
+  inline ::std::string* release_info();
+  inline void set_allocated_info(::std::string* info);
+  inline ::std::string* unsafe_arena_release_info();
+  inline void unsafe_arena_set_allocated_info(
+      ::std::string* info);
+
   // @@protoc_insertion_point(class_scope:cms.CmdResponse)
  private:
 
@@ -728,6 +742,7 @@ class CmdResponse : public ::google::protobuf::Message {
   typedef void DestructorSkippable_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr path_;
+  ::google::protobuf::internal::ArenaStringPtr info_;
   int level_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_cms_2eproto();
@@ -1422,6 +1437,71 @@ inline void CmdResponse::set_level(::cms::CmdResponse_Level value) {
   
   level_ = value;
   // @@protoc_insertion_point(field_set:cms.CmdResponse.level)
+}
+
+// optional string info = 3;
+inline void CmdResponse::clear_info() {
+  info_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& CmdResponse::info() const {
+  // @@protoc_insertion_point(field_get:cms.CmdResponse.info)
+  return info_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void CmdResponse::set_info(const ::std::string& value) {
+  
+  info_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:cms.CmdResponse.info)
+}
+inline void CmdResponse::set_info(const char* value) {
+  
+  info_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:cms.CmdResponse.info)
+}
+inline void CmdResponse::set_info(const char* value,
+    size_t size) {
+  
+  info_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:cms.CmdResponse.info)
+}
+inline ::std::string* CmdResponse::mutable_info() {
+  
+  // @@protoc_insertion_point(field_mutable:cms.CmdResponse.info)
+  return info_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* CmdResponse::release_info() {
+  
+  return info_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* CmdResponse::unsafe_arena_release_info() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return info_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void CmdResponse::set_allocated_info(::std::string* info) {
+  if (info != NULL) {
+    
+  } else {
+    
+  }
+  info_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), info,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.CmdResponse.info)
+}
+inline void CmdResponse::unsafe_arena_set_allocated_info(
+    ::std::string* info) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (info != NULL) {
+    
+  } else {
+    
+  }
+  
+  info_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      info, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.CmdResponse.info)
 }
 
 // -------------------------------------------------------------------

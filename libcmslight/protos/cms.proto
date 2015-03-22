@@ -42,6 +42,7 @@ message CmdResponse {
 
   	string path = 1;
   	Level level = 2;
+  	string info = 3;
 }
 
 message Content {
