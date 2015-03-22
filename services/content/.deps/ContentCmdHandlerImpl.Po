@@ -1,65 +1,70 @@
-server.o: server.cpp /usr/include/stdc-predef.h \
- /usr/include/c++/4.8/iostream \
+ContentCmdHandlerImpl.o: ContentCmdHandlerImpl.cpp \
+ /usr/include/stdc-predef.h ContentCmdHandlerImpl.h \
+ /usr/local/include/grpc++/server.h \
+ /usr/include/c++/4.8/condition_variable /usr/include/c++/4.8/chrono \
+ /usr/include/c++/4.8/ratio /usr/include/c++/4.8/type_traits \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/os_defines.h \
  /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/cpu_defines.h \
- /usr/include/c++/4.8/ostream /usr/include/c++/4.8/ios \
- /usr/include/c++/4.8/iosfwd /usr/include/c++/4.8/bits/stringfwd.h \
- /usr/include/c++/4.8/bits/memoryfwd.h \
- /usr/include/c++/4.8/bits/postypes.h /usr/include/c++/4.8/cwchar \
- /usr/include/wchar.h /usr/include/stdio.h \
- /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdarg.h \
- /usr/include/bits/wchar.h \
+ /usr/include/c++/4.8/cstdint \
+ /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h \
+ /usr/include/c++/4.8/limits /usr/include/c++/4.8/ctime \
+ /usr/include/time.h \
  /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stddef.h \
- /usr/include/xlocale.h /usr/include/c++/4.8/exception \
+ /usr/include/bits/time.h /usr/include/bits/types.h \
+ /usr/include/bits/typesizes.h /usr/include/bits/timex.h \
+ /usr/include/xlocale.h /usr/include/c++/4.8/mutex \
+ /usr/include/c++/4.8/tuple /usr/include/c++/4.8/utility \
+ /usr/include/c++/4.8/bits/stl_relops.h \
+ /usr/include/c++/4.8/bits/stl_pair.h /usr/include/c++/4.8/bits/move.h \
+ /usr/include/c++/4.8/bits/concept_check.h \
+ /usr/include/c++/4.8/initializer_list /usr/include/c++/4.8/array \
+ /usr/include/c++/4.8/stdexcept /usr/include/c++/4.8/exception \
  /usr/include/c++/4.8/bits/atomic_lockfree_defines.h \
  /usr/include/c++/4.8/bits/exception_ptr.h \
  /usr/include/c++/4.8/bits/exception_defines.h \
- /usr/include/c++/4.8/bits/nested_exception.h \
+ /usr/include/c++/4.8/bits/nested_exception.h /usr/include/c++/4.8/string \
+ /usr/include/c++/4.8/bits/stringfwd.h \
+ /usr/include/c++/4.8/bits/memoryfwd.h \
  /usr/include/c++/4.8/bits/char_traits.h \
  /usr/include/c++/4.8/bits/stl_algobase.h \
  /usr/include/c++/4.8/bits/functexcept.h \
  /usr/include/c++/4.8/bits/cpp_type_traits.h \
  /usr/include/c++/4.8/ext/type_traits.h \
  /usr/include/c++/4.8/ext/numeric_traits.h \
- /usr/include/c++/4.8/bits/stl_pair.h /usr/include/c++/4.8/bits/move.h \
- /usr/include/c++/4.8/bits/concept_check.h \
- /usr/include/c++/4.8/type_traits \
  /usr/include/c++/4.8/bits/stl_iterator_base_types.h \
  /usr/include/c++/4.8/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/4.8/debug/debug.h \
- /usr/include/c++/4.8/bits/stl_iterator.h /usr/include/c++/4.8/cstdint \
- /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdint.h \
- /usr/include/stdint.h /usr/include/c++/4.8/bits/localefwd.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/c++locale.h \
- /usr/include/c++/4.8/clocale /usr/include/locale.h \
- /usr/include/bits/locale.h /usr/include/c++/4.8/cctype \
- /usr/include/ctype.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/bits/byteswap-16.h /usr/include/c++/4.8/bits/ios_base.h \
- /usr/include/c++/4.8/ext/atomicity.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/gthr.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h /usr/include/time.h \
- /usr/include/bits/sched.h /usr/include/bits/time.h \
- /usr/include/bits/timex.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/setjmp.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/atomic_word.h \
- /usr/include/c++/4.8/bits/locale_classes.h /usr/include/c++/4.8/string \
+ /usr/include/c++/4.8/bits/stl_iterator.h \
+ /usr/include/c++/4.8/bits/postypes.h /usr/include/c++/4.8/cwchar \
+ /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdarg.h \
  /usr/include/c++/4.8/bits/allocator.h \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/c++allocator.h \
  /usr/include/c++/4.8/ext/new_allocator.h /usr/include/c++/4.8/new \
+ /usr/include/c++/4.8/bits/localefwd.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/c++locale.h \
+ /usr/include/c++/4.8/clocale /usr/include/locale.h \
+ /usr/include/bits/locale.h /usr/include/c++/4.8/iosfwd \
+ /usr/include/c++/4.8/cctype /usr/include/ctype.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/bits/byteswap-16.h \
  /usr/include/c++/4.8/bits/ostream_insert.h \
  /usr/include/c++/4.8/bits/cxxabi_forced.h \
  /usr/include/c++/4.8/bits/stl_function.h \
  /usr/include/c++/4.8/backward/binders.h \
  /usr/include/c++/4.8/bits/range_access.h \
  /usr/include/c++/4.8/bits/basic_string.h \
- /usr/include/c++/4.8/initializer_list \
+ /usr/include/c++/4.8/ext/atomicity.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/gthr.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/gthr-default.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/setjmp.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/atomic_word.h \
  /usr/include/c++/4.8/ext/string_conversions.h \
  /usr/include/c++/4.8/cstdlib /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
@@ -77,18 +82,12 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/functional_hash.h \
  /usr/include/c++/4.8/bits/hash_bytes.h \
  /usr/include/c++/4.8/bits/basic_string.tcc \
- /usr/include/c++/4.8/bits/locale_classes.tcc \
- /usr/include/c++/4.8/streambuf /usr/include/c++/4.8/bits/streambuf.tcc \
- /usr/include/c++/4.8/bits/basic_ios.h \
- /usr/include/c++/4.8/bits/locale_facets.h /usr/include/c++/4.8/cwctype \
- /usr/include/wctype.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_base.h \
- /usr/include/c++/4.8/bits/streambuf_iterator.h \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_inline.h \
- /usr/include/c++/4.8/bits/locale_facets.tcc \
- /usr/include/c++/4.8/bits/basic_ios.tcc \
- /usr/include/c++/4.8/bits/ostream.tcc /usr/include/c++/4.8/istream \
- /usr/include/c++/4.8/bits/istream.tcc /usr/include/c++/4.8/memory \
+ /usr/include/c++/4.8/bits/uses_allocator.h \
+ /usr/include/c++/4.8/functional /usr/include/c++/4.8/typeinfo \
+ /usr/include/c++/4.8/system_error \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/error_constants.h \
+ /usr/include/c++/4.8/list /usr/include/c++/4.8/bits/stl_list.h \
+ /usr/include/c++/4.8/bits/list.tcc /usr/include/c++/4.8/memory \
  /usr/include/c++/4.8/bits/stl_construct.h \
  /usr/include/c++/4.8/ext/alloc_traits.h \
  /usr/include/c++/4.8/bits/alloc_traits.h \
@@ -96,32 +95,11 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/stl_uninitialized.h \
  /usr/include/c++/4.8/bits/stl_tempbuf.h \
  /usr/include/c++/4.8/bits/stl_raw_storage_iter.h \
- /usr/include/c++/4.8/typeinfo /usr/include/c++/4.8/ext/concurrence.h \
- /usr/include/c++/4.8/bits/uses_allocator.h \
- /usr/include/c++/4.8/functional /usr/include/c++/4.8/tuple \
- /usr/include/c++/4.8/utility /usr/include/c++/4.8/bits/stl_relops.h \
- /usr/include/c++/4.8/array /usr/include/c++/4.8/stdexcept \
+ /usr/include/c++/4.8/ext/concurrence.h \
  /usr/include/c++/4.8/bits/unique_ptr.h \
  /usr/include/c++/4.8/bits/shared_ptr.h \
  /usr/include/c++/4.8/bits/shared_ptr_base.h \
- /usr/include/c++/4.8/backward/auto_ptr.h /usr/local/include/grpc/grpc.h \
- /usr/local/include/grpc/status.h /usr/local/include/grpc/support/slice.h \
- /usr/local/include/grpc/support/sync.h \
- /usr/local/include/grpc/support/port_platform.h \
- /usr/local/include/grpc/support/sync_generic.h \
- /usr/local/include/grpc/support/atm.h \
- /usr/local/include/grpc/support/atm_gcc_atomic.h \
- /usr/local/include/grpc/support/sync_posix.h \
- /usr/local/include/grpc/support/time.h \
- /usr/local/include/grpc/support/cancellable_platform.h \
- ContentCmdHandlerImpl.h /usr/local/include/grpc++/server.h \
- /usr/include/c++/4.8/condition_variable /usr/include/c++/4.8/chrono \
- /usr/include/c++/4.8/ratio /usr/include/c++/4.8/limits \
- /usr/include/c++/4.8/ctime /usr/include/c++/4.8/mutex \
- /usr/include/c++/4.8/system_error \
- /usr/include/c++/4.8/x86_64-suse-linux/bits/error_constants.h \
- /usr/include/c++/4.8/list /usr/include/c++/4.8/bits/stl_list.h \
- /usr/include/c++/4.8/bits/list.tcc \
+ /usr/include/c++/4.8/backward/auto_ptr.h \
  /usr/local/include/grpc++/completion_queue.h \
  /usr/local/include/grpc++/impl/client_unary_call.h \
  /usr/local/include/grpc++/config.h \
@@ -143,7 +121,17 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_set.h \
  /usr/include/c++/4.8/bits/stl_multiset.h \
  /usr/local/include/google/protobuf/io/zero_copy_stream.h \
- /usr/local/include/grpc++/impl/call.h /usr/local/include/grpc++/status.h \
+ /usr/local/include/grpc++/impl/call.h /usr/local/include/grpc/grpc.h \
+ /usr/local/include/grpc/status.h /usr/local/include/grpc/support/slice.h \
+ /usr/local/include/grpc/support/sync.h \
+ /usr/local/include/grpc/support/port_platform.h \
+ /usr/local/include/grpc/support/sync_generic.h \
+ /usr/local/include/grpc/support/atm.h \
+ /usr/local/include/grpc/support/atm_gcc_atomic.h \
+ /usr/local/include/grpc/support/sync_posix.h \
+ /usr/local/include/grpc/support/time.h \
+ /usr/local/include/grpc/support/cancellable_platform.h \
+ /usr/local/include/grpc++/status.h \
  /usr/local/include/grpc++/status_code_enum.h /usr/include/c++/4.8/map \
  /usr/include/c++/4.8/bits/stl_map.h \
  /usr/include/c++/4.8/bits/stl_multimap.h \
@@ -156,7 +144,21 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/local/include/google/protobuf/metadata.h \
  /usr/local/include/google/protobuf/unknown_field_set.h \
  /usr/local/include/google/protobuf/repeated_field.h \
- /usr/include/c++/4.8/iterator \
+ /usr/include/c++/4.8/iterator /usr/include/c++/4.8/ostream \
+ /usr/include/c++/4.8/ios /usr/include/c++/4.8/bits/ios_base.h \
+ /usr/include/c++/4.8/bits/locale_classes.h \
+ /usr/include/c++/4.8/bits/locale_classes.tcc \
+ /usr/include/c++/4.8/streambuf /usr/include/c++/4.8/bits/streambuf.tcc \
+ /usr/include/c++/4.8/bits/basic_ios.h \
+ /usr/include/c++/4.8/bits/locale_facets.h /usr/include/c++/4.8/cwctype \
+ /usr/include/wctype.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_base.h \
+ /usr/include/c++/4.8/bits/streambuf_iterator.h \
+ /usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_inline.h \
+ /usr/include/c++/4.8/bits/locale_facets.tcc \
+ /usr/include/c++/4.8/bits/basic_ios.tcc \
+ /usr/include/c++/4.8/bits/ostream.tcc /usr/include/c++/4.8/istream \
+ /usr/include/c++/4.8/bits/istream.tcc \
  /usr/include/c++/4.8/bits/stream_iterator.h \
  /usr/local/include/google/protobuf/stubs/casts.h \
  /usr/local/include/google/protobuf/extension_set.h \
@@ -166,7 +168,17 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/stdc-predef.h:
 
-/usr/include/c++/4.8/iostream:
+ContentCmdHandlerImpl.h:
+
+/usr/local/include/grpc++/server.h:
+
+/usr/include/c++/4.8/condition_variable:
+
+/usr/include/c++/4.8/chrono:
+
+/usr/include/c++/4.8/ratio:
+
+/usr/include/c++/4.8/type_traits:
 
 /usr/include/c++/4.8/x86_64-suse-linux/bits/c++config.h:
 
@@ -184,31 +196,51 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/x86_64-suse-linux/bits/cpu_defines.h:
 
-/usr/include/c++/4.8/ostream:
+/usr/include/c++/4.8/cstdint:
 
-/usr/include/c++/4.8/ios:
+/usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdint.h:
 
-/usr/include/c++/4.8/iosfwd:
-
-/usr/include/c++/4.8/bits/stringfwd.h:
-
-/usr/include/c++/4.8/bits/memoryfwd.h:
-
-/usr/include/c++/4.8/bits/postypes.h:
-
-/usr/include/c++/4.8/cwchar:
-
-/usr/include/wchar.h:
-
-/usr/include/stdio.h:
-
-/usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdarg.h:
+/usr/include/stdint.h:
 
 /usr/include/bits/wchar.h:
 
+/usr/include/c++/4.8/limits:
+
+/usr/include/c++/4.8/ctime:
+
+/usr/include/time.h:
+
 /usr/lib64/gcc/x86_64-suse-linux/4.8/include/stddef.h:
 
+/usr/include/bits/time.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/bits/timex.h:
+
 /usr/include/xlocale.h:
+
+/usr/include/c++/4.8/mutex:
+
+/usr/include/c++/4.8/tuple:
+
+/usr/include/c++/4.8/utility:
+
+/usr/include/c++/4.8/bits/stl_relops.h:
+
+/usr/include/c++/4.8/bits/stl_pair.h:
+
+/usr/include/c++/4.8/bits/move.h:
+
+/usr/include/c++/4.8/bits/concept_check.h:
+
+/usr/include/c++/4.8/initializer_list:
+
+/usr/include/c++/4.8/array:
+
+/usr/include/c++/4.8/stdexcept:
 
 /usr/include/c++/4.8/exception:
 
@@ -219,6 +251,12 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/4.8/bits/exception_defines.h:
 
 /usr/include/c++/4.8/bits/nested_exception.h:
+
+/usr/include/c++/4.8/string:
+
+/usr/include/c++/4.8/bits/stringfwd.h:
+
+/usr/include/c++/4.8/bits/memoryfwd.h:
 
 /usr/include/c++/4.8/bits/char_traits.h:
 
@@ -232,14 +270,6 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/ext/numeric_traits.h:
 
-/usr/include/c++/4.8/bits/stl_pair.h:
-
-/usr/include/c++/4.8/bits/move.h:
-
-/usr/include/c++/4.8/bits/concept_check.h:
-
-/usr/include/c++/4.8/type_traits:
-
 /usr/include/c++/4.8/bits/stl_iterator_base_types.h:
 
 /usr/include/c++/4.8/bits/stl_iterator_base_funcs.h:
@@ -248,11 +278,23 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/bits/stl_iterator.h:
 
-/usr/include/c++/4.8/cstdint:
+/usr/include/c++/4.8/bits/postypes.h:
 
-/usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdint.h:
+/usr/include/c++/4.8/cwchar:
 
-/usr/include/stdint.h:
+/usr/include/wchar.h:
+
+/usr/include/stdio.h:
+
+/usr/lib64/gcc/x86_64-suse-linux/4.8/include/stdarg.h:
+
+/usr/include/c++/4.8/bits/allocator.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/c++allocator.h:
+
+/usr/include/c++/4.8/ext/new_allocator.h:
+
+/usr/include/c++/4.8/new:
 
 /usr/include/c++/4.8/bits/localefwd.h:
 
@@ -264,13 +306,11 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/bits/locale.h:
 
+/usr/include/c++/4.8/iosfwd:
+
 /usr/include/c++/4.8/cctype:
 
 /usr/include/ctype.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
 
 /usr/include/endian.h:
 
@@ -279,44 +319,6 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 /usr/include/bits/byteswap.h:
 
 /usr/include/bits/byteswap-16.h:
-
-/usr/include/c++/4.8/bits/ios_base.h:
-
-/usr/include/c++/4.8/ext/atomicity.h:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/gthr.h:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/gthr-default.h:
-
-/usr/include/pthread.h:
-
-/usr/include/sched.h:
-
-/usr/include/time.h:
-
-/usr/include/bits/sched.h:
-
-/usr/include/bits/time.h:
-
-/usr/include/bits/timex.h:
-
-/usr/include/bits/pthreadtypes.h:
-
-/usr/include/bits/setjmp.h:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/atomic_word.h:
-
-/usr/include/c++/4.8/bits/locale_classes.h:
-
-/usr/include/c++/4.8/string:
-
-/usr/include/c++/4.8/bits/allocator.h:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/c++allocator.h:
-
-/usr/include/c++/4.8/ext/new_allocator.h:
-
-/usr/include/c++/4.8/new:
 
 /usr/include/c++/4.8/bits/ostream_insert.h:
 
@@ -330,7 +332,23 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/bits/basic_string.h:
 
-/usr/include/c++/4.8/initializer_list:
+/usr/include/c++/4.8/ext/atomicity.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/gthr.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/gthr-default.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/pthreadtypes.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/atomic_word.h:
 
 /usr/include/c++/4.8/ext/string_conversions.h:
 
@@ -390,35 +408,21 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/bits/basic_string.tcc:
 
-/usr/include/c++/4.8/bits/locale_classes.tcc:
+/usr/include/c++/4.8/bits/uses_allocator.h:
 
-/usr/include/c++/4.8/streambuf:
+/usr/include/c++/4.8/functional:
 
-/usr/include/c++/4.8/bits/streambuf.tcc:
+/usr/include/c++/4.8/typeinfo:
 
-/usr/include/c++/4.8/bits/basic_ios.h:
+/usr/include/c++/4.8/system_error:
 
-/usr/include/c++/4.8/bits/locale_facets.h:
+/usr/include/c++/4.8/x86_64-suse-linux/bits/error_constants.h:
 
-/usr/include/c++/4.8/cwctype:
+/usr/include/c++/4.8/list:
 
-/usr/include/wctype.h:
+/usr/include/c++/4.8/bits/stl_list.h:
 
-/usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_base.h:
-
-/usr/include/c++/4.8/bits/streambuf_iterator.h:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_inline.h:
-
-/usr/include/c++/4.8/bits/locale_facets.tcc:
-
-/usr/include/c++/4.8/bits/basic_ios.tcc:
-
-/usr/include/c++/4.8/bits/ostream.tcc:
-
-/usr/include/c++/4.8/istream:
-
-/usr/include/c++/4.8/bits/istream.tcc:
+/usr/include/c++/4.8/bits/list.tcc:
 
 /usr/include/c++/4.8/memory:
 
@@ -436,23 +440,7 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/bits/stl_raw_storage_iter.h:
 
-/usr/include/c++/4.8/typeinfo:
-
 /usr/include/c++/4.8/ext/concurrence.h:
-
-/usr/include/c++/4.8/bits/uses_allocator.h:
-
-/usr/include/c++/4.8/functional:
-
-/usr/include/c++/4.8/tuple:
-
-/usr/include/c++/4.8/utility:
-
-/usr/include/c++/4.8/bits/stl_relops.h:
-
-/usr/include/c++/4.8/array:
-
-/usr/include/c++/4.8/stdexcept:
 
 /usr/include/c++/4.8/bits/unique_ptr.h:
 
@@ -461,54 +449,6 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 /usr/include/c++/4.8/bits/shared_ptr_base.h:
 
 /usr/include/c++/4.8/backward/auto_ptr.h:
-
-/usr/local/include/grpc/grpc.h:
-
-/usr/local/include/grpc/status.h:
-
-/usr/local/include/grpc/support/slice.h:
-
-/usr/local/include/grpc/support/sync.h:
-
-/usr/local/include/grpc/support/port_platform.h:
-
-/usr/local/include/grpc/support/sync_generic.h:
-
-/usr/local/include/grpc/support/atm.h:
-
-/usr/local/include/grpc/support/atm_gcc_atomic.h:
-
-/usr/local/include/grpc/support/sync_posix.h:
-
-/usr/local/include/grpc/support/time.h:
-
-/usr/local/include/grpc/support/cancellable_platform.h:
-
-ContentCmdHandlerImpl.h:
-
-/usr/local/include/grpc++/server.h:
-
-/usr/include/c++/4.8/condition_variable:
-
-/usr/include/c++/4.8/chrono:
-
-/usr/include/c++/4.8/ratio:
-
-/usr/include/c++/4.8/limits:
-
-/usr/include/c++/4.8/ctime:
-
-/usr/include/c++/4.8/mutex:
-
-/usr/include/c++/4.8/system_error:
-
-/usr/include/c++/4.8/x86_64-suse-linux/bits/error_constants.h:
-
-/usr/include/c++/4.8/list:
-
-/usr/include/c++/4.8/bits/stl_list.h:
-
-/usr/include/c++/4.8/bits/list.tcc:
 
 /usr/local/include/grpc++/completion_queue.h:
 
@@ -564,6 +504,28 @@ ContentCmdHandlerImpl.h:
 
 /usr/local/include/grpc++/impl/call.h:
 
+/usr/local/include/grpc/grpc.h:
+
+/usr/local/include/grpc/status.h:
+
+/usr/local/include/grpc/support/slice.h:
+
+/usr/local/include/grpc/support/sync.h:
+
+/usr/local/include/grpc/support/port_platform.h:
+
+/usr/local/include/grpc/support/sync_generic.h:
+
+/usr/local/include/grpc/support/atm.h:
+
+/usr/local/include/grpc/support/atm_gcc_atomic.h:
+
+/usr/local/include/grpc/support/sync_posix.h:
+
+/usr/local/include/grpc/support/time.h:
+
+/usr/local/include/grpc/support/cancellable_platform.h:
+
 /usr/local/include/grpc++/status.h:
 
 /usr/local/include/grpc++/status_code_enum.h:
@@ -595,6 +557,44 @@ ContentCmdHandlerImpl.h:
 /usr/local/include/google/protobuf/repeated_field.h:
 
 /usr/include/c++/4.8/iterator:
+
+/usr/include/c++/4.8/ostream:
+
+/usr/include/c++/4.8/ios:
+
+/usr/include/c++/4.8/bits/ios_base.h:
+
+/usr/include/c++/4.8/bits/locale_classes.h:
+
+/usr/include/c++/4.8/bits/locale_classes.tcc:
+
+/usr/include/c++/4.8/streambuf:
+
+/usr/include/c++/4.8/bits/streambuf.tcc:
+
+/usr/include/c++/4.8/bits/basic_ios.h:
+
+/usr/include/c++/4.8/bits/locale_facets.h:
+
+/usr/include/c++/4.8/cwctype:
+
+/usr/include/wctype.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_base.h:
+
+/usr/include/c++/4.8/bits/streambuf_iterator.h:
+
+/usr/include/c++/4.8/x86_64-suse-linux/bits/ctype_inline.h:
+
+/usr/include/c++/4.8/bits/locale_facets.tcc:
+
+/usr/include/c++/4.8/bits/basic_ios.tcc:
+
+/usr/include/c++/4.8/bits/ostream.tcc:
+
+/usr/include/c++/4.8/istream:
+
+/usr/include/c++/4.8/bits/istream.tcc:
 
 /usr/include/c++/4.8/bits/stream_iterator.h:
 

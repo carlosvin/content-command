@@ -27,8 +27,19 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_enum_reflection.h>
-#include <google/protobuf/service.h>
 #include <google/protobuf/unknown_field_set.h>
+#include <grpc++/impl/internal_stub.h>
+#include <grpc++/impl/service_type.h>
+#include <grpc++/status.h>
+
+namespace grpc {
+class CompletionQueue;
+class ChannelInterface;
+class RpcService;
+class ServerContext;
+template <class OutMessage> class ClientAsyncResponseReader;
+template <class OutMessage> class ServerAsyncResponseWriter;
+}  // namespace grpc
 // @@protoc_insertion_point(includes)
 
 namespace cms {
@@ -43,32 +54,32 @@ class Order;
 class Page;
 class Query;
 class Filter;
-class Response;
+class CmdResponse;
 class Content;
 class ContentList;
 
-enum Response_Level {
-  Response_Level_DEBUG = 0,
-  Response_Level_INFO = 1,
-  Response_Level_WARN = 2,
-  Response_Level_ERROR = 3,
-  Response_Level_Response_Level_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  Response_Level_Response_Level_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum CmdResponse_Level {
+  CmdResponse_Level_DEBUG = 0,
+  CmdResponse_Level_INFO = 1,
+  CmdResponse_Level_WARN = 2,
+  CmdResponse_Level_ERROR = 3,
+  CmdResponse_Level_CmdResponse_Level_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  CmdResponse_Level_CmdResponse_Level_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool Response_Level_IsValid(int value);
-const Response_Level Response_Level_Level_MIN = Response_Level_DEBUG;
-const Response_Level Response_Level_Level_MAX = Response_Level_ERROR;
-const int Response_Level_Level_ARRAYSIZE = Response_Level_Level_MAX + 1;
+bool CmdResponse_Level_IsValid(int value);
+const CmdResponse_Level CmdResponse_Level_Level_MIN = CmdResponse_Level_DEBUG;
+const CmdResponse_Level CmdResponse_Level_Level_MAX = CmdResponse_Level_ERROR;
+const int CmdResponse_Level_Level_ARRAYSIZE = CmdResponse_Level_Level_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* Response_Level_descriptor();
-inline const ::std::string& Response_Level_Name(Response_Level value) {
+const ::google::protobuf::EnumDescriptor* CmdResponse_Level_descriptor();
+inline const ::std::string& CmdResponse_Level_Name(CmdResponse_Level value) {
   return ::google::protobuf::internal::NameOfEnum(
-    Response_Level_descriptor(), value);
+    CmdResponse_Level_descriptor(), value);
 }
-inline bool Response_Level_Parse(
-    const ::std::string& name, Response_Level* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Response_Level>(
-    Response_Level_descriptor(), name, value);
+inline bool CmdResponse_Level_Parse(
+    const ::std::string& name, CmdResponse_Level* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CmdResponse_Level>(
+    CmdResponse_Level_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -139,16 +150,16 @@ class Uuid : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional sint64 least_significant_bits = 1;
-  void clear_least_significant_bits();
+  inline void clear_least_significant_bits();
   static const int kLeastSignificantBitsFieldNumber = 1;
-  ::google::protobuf::int64 least_significant_bits() const;
-  void set_least_significant_bits(::google::protobuf::int64 value);
+  inline ::google::protobuf::int64 least_significant_bits() const;
+  inline void set_least_significant_bits(::google::protobuf::int64 value);
 
   // optional sint64 most_significant_bits = 2;
-  void clear_most_significant_bits();
+  inline void clear_most_significant_bits();
   static const int kMostSignificantBitsFieldNumber = 2;
-  ::google::protobuf::int64 most_significant_bits() const;
-  void set_most_significant_bits(::google::protobuf::int64 value);
+  inline ::google::protobuf::int64 most_significant_bits() const;
+  inline void set_most_significant_bits(::google::protobuf::int64 value);
 
   // @@protoc_insertion_point(class_scope:cms.Uuid)
  private:
@@ -237,23 +248,23 @@ class Order : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional bool asc = 1;
-  void clear_asc();
+  inline void clear_asc();
   static const int kAscFieldNumber = 1;
-  bool asc() const;
-  void set_asc(bool value);
+  inline bool asc() const;
+  inline void set_asc(bool value);
 
   // optional string property = 2;
-  void clear_property();
+  inline void clear_property();
   static const int kPropertyFieldNumber = 2;
-  const ::std::string& property() const;
-  void set_property(const ::std::string& value);
-  void set_property(const char* value);
-  void set_property(const char* value, size_t size);
-  ::std::string* mutable_property();
-  ::std::string* release_property();
-  void set_allocated_property(::std::string* property);
-  ::std::string* unsafe_arena_release_property();
-  void unsafe_arena_set_allocated_property(
+  inline const ::std::string& property() const;
+  inline void set_property(const ::std::string& value);
+  inline void set_property(const char* value);
+  inline void set_property(const char* value, size_t size);
+  inline ::std::string* mutable_property();
+  inline ::std::string* release_property();
+  inline void set_allocated_property(::std::string* property);
+  inline ::std::string* unsafe_arena_release_property();
+  inline void unsafe_arena_set_allocated_property(
       ::std::string* property);
 
   // @@protoc_insertion_point(class_scope:cms.Order)
@@ -343,16 +354,16 @@ class Page : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional uint32 page = 1;
-  void clear_page();
+  inline void clear_page();
   static const int kPageFieldNumber = 1;
-  ::google::protobuf::uint32 page() const;
-  void set_page(::google::protobuf::uint32 value);
+  inline ::google::protobuf::uint32 page() const;
+  inline void set_page(::google::protobuf::uint32 value);
 
   // optional uint32 elements = 2;
-  void clear_elements();
+  inline void clear_elements();
   static const int kElementsFieldNumber = 2;
-  ::google::protobuf::uint32 elements() const;
-  void set_elements(::google::protobuf::uint32 value);
+  inline ::google::protobuf::uint32 elements() const;
+  inline void set_elements(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:cms.Page)
  private:
@@ -441,27 +452,27 @@ class Query : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // repeated .cms.Order order = 1;
-  int order_size() const;
-  void clear_order();
+  inline int order_size() const;
+  inline void clear_order();
   static const int kOrderFieldNumber = 1;
-  const ::cms::Order& order(int index) const;
-  ::cms::Order* mutable_order(int index);
-  ::cms::Order* add_order();
-  const ::google::protobuf::RepeatedPtrField< ::cms::Order >&
+  inline const ::cms::Order& order(int index) const;
+  inline ::cms::Order* mutable_order(int index);
+  inline ::cms::Order* add_order();
+  inline const ::google::protobuf::RepeatedPtrField< ::cms::Order >&
       order() const;
-  ::google::protobuf::RepeatedPtrField< ::cms::Order >*
+  inline ::google::protobuf::RepeatedPtrField< ::cms::Order >*
       mutable_order();
 
   // repeated .cms.Page page = 2;
-  int page_size() const;
-  void clear_page();
+  inline int page_size() const;
+  inline void clear_page();
   static const int kPageFieldNumber = 2;
-  const ::cms::Page& page(int index) const;
-  ::cms::Page* mutable_page(int index);
-  ::cms::Page* add_page();
-  const ::google::protobuf::RepeatedPtrField< ::cms::Page >&
+  inline const ::cms::Page& page(int index) const;
+  inline ::cms::Page* mutable_page(int index);
+  inline ::cms::Page* add_page();
+  inline const ::google::protobuf::RepeatedPtrField< ::cms::Page >&
       page() const;
-  ::google::protobuf::RepeatedPtrField< ::cms::Page >*
+  inline ::google::protobuf::RepeatedPtrField< ::cms::Page >*
       mutable_page();
 
   // @@protoc_insertion_point(class_scope:cms.Query)
@@ -551,35 +562,29 @@ class Filter : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional string by = 1;
-  void clear_by();
+  inline void clear_by();
   static const int kByFieldNumber = 1;
-  const ::std::string& by() const;
-  void set_by(const ::std::string& value);
-  void set_by(const char* value);
-  void set_by(const char* value, size_t size);
-  ::std::string* mutable_by();
-  ::std::string* release_by();
-  void set_allocated_by(::std::string* by);
-  ::std::string* unsafe_arena_release_by();
-  void unsafe_arena_set_allocated_by(
+  inline const ::std::string& by() const;
+  inline void set_by(const ::std::string& value);
+  inline void set_by(const char* value);
+  inline void set_by(const char* value, size_t size);
+  inline ::std::string* mutable_by();
+  inline ::std::string* release_by();
+  inline void set_allocated_by(::std::string* by);
+  inline ::std::string* unsafe_arena_release_by();
+  inline void unsafe_arena_set_allocated_by(
       ::std::string* by);
 
   // optional .cms.Order order = 2;
-  bool has_order() const;
-  void clear_order();
+  inline bool has_order() const;
+  inline void clear_order();
   static const int kOrderFieldNumber = 2;
-  private:
-  void _slow_mutable_order();
-  void _slow_set_allocated_order(
-      ::google::protobuf::Arena* message_arena, ::cms::Order** order);
-  ::cms::Order* _slow_release_order();
-  public:
-  const ::cms::Order& order() const;
-  ::cms::Order* mutable_order();
-  ::cms::Order* release_order();
-  void set_allocated_order(::cms::Order* order);
-  ::cms::Order* unsafe_arena_release_order();
-  void unsafe_arena_set_allocated_order(
+  inline const ::cms::Order& order() const;
+  inline ::cms::Order* mutable_order();
+  inline ::cms::Order* release_order();
+  inline void set_allocated_order(::cms::Order* order);
+  inline ::cms::Order* unsafe_arena_release_order();
+  inline void unsafe_arena_set_allocated_order(
       ::cms::Order* order);
 
   // @@protoc_insertion_point(class_scope:cms.Filter)
@@ -602,14 +607,14 @@ class Filter : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class Response : public ::google::protobuf::Message {
+class CmdResponse : public ::google::protobuf::Message {
  public:
-  Response();
-  virtual ~Response();
+  CmdResponse();
+  virtual ~CmdResponse();
 
-  Response(const Response& from);
+  CmdResponse(const CmdResponse& from);
 
-  inline Response& operator=(const Response& from) {
+  inline CmdResponse& operator=(const CmdResponse& from) {
     CopyFrom(from);
     return *this;
   }
@@ -619,20 +624,20 @@ class Response : public ::google::protobuf::Message {
     return MaybeArenaPtr();
   }
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Response& default_instance();
+  static const CmdResponse& default_instance();
 
-  void UnsafeArenaSwap(Response* other);
-  void Swap(Response* other);
+  void UnsafeArenaSwap(CmdResponse* other);
+  void Swap(CmdResponse* other);
 
   // implements Message ----------------------------------------------
 
-  inline Response* New() const { return New(NULL); }
+  inline CmdResponse* New() const { return New(NULL); }
 
-  Response* New(::google::protobuf::Arena* arena) const;
+  CmdResponse* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Response& from);
-  void MergeFrom(const Response& from);
+  void CopyFrom(const CmdResponse& from);
+  void MergeFrom(const CmdResponse& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -647,9 +652,9 @@ class Response : public ::google::protobuf::Message {
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(Response* other);
+  void InternalSwap(CmdResponse* other);
   protected:
-  explicit Response(::google::protobuf::Arena* arena);
+  explicit CmdResponse(::google::protobuf::Arena* arena);
   private:
   static void ArenaDtor(void* object);
   inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
@@ -666,55 +671,55 @@ class Response : public ::google::protobuf::Message {
 
   // nested types ----------------------------------------------------
 
-  typedef Response_Level Level;
-  static const Level DEBUG = Response_Level_DEBUG;
-  static const Level INFO = Response_Level_INFO;
-  static const Level WARN = Response_Level_WARN;
-  static const Level ERROR = Response_Level_ERROR;
+  typedef CmdResponse_Level Level;
+  static const Level DEBUG = CmdResponse_Level_DEBUG;
+  static const Level INFO = CmdResponse_Level_INFO;
+  static const Level WARN = CmdResponse_Level_WARN;
+  static const Level ERROR = CmdResponse_Level_ERROR;
   static inline bool Level_IsValid(int value) {
-    return Response_Level_IsValid(value);
+    return CmdResponse_Level_IsValid(value);
   }
   static const Level Level_MIN =
-    Response_Level_Level_MIN;
+    CmdResponse_Level_Level_MIN;
   static const Level Level_MAX =
-    Response_Level_Level_MAX;
+    CmdResponse_Level_Level_MAX;
   static const int Level_ARRAYSIZE =
-    Response_Level_Level_ARRAYSIZE;
+    CmdResponse_Level_Level_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   Level_descriptor() {
-    return Response_Level_descriptor();
+    return CmdResponse_Level_descriptor();
   }
   static inline const ::std::string& Level_Name(Level value) {
-    return Response_Level_Name(value);
+    return CmdResponse_Level_Name(value);
   }
   static inline bool Level_Parse(const ::std::string& name,
       Level* value) {
-    return Response_Level_Parse(name, value);
+    return CmdResponse_Level_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
   // optional string path = 1;
-  void clear_path();
+  inline void clear_path();
   static const int kPathFieldNumber = 1;
-  const ::std::string& path() const;
-  void set_path(const ::std::string& value);
-  void set_path(const char* value);
-  void set_path(const char* value, size_t size);
-  ::std::string* mutable_path();
-  ::std::string* release_path();
-  void set_allocated_path(::std::string* path);
-  ::std::string* unsafe_arena_release_path();
-  void unsafe_arena_set_allocated_path(
+  inline const ::std::string& path() const;
+  inline void set_path(const ::std::string& value);
+  inline void set_path(const char* value);
+  inline void set_path(const char* value, size_t size);
+  inline ::std::string* mutable_path();
+  inline ::std::string* release_path();
+  inline void set_allocated_path(::std::string* path);
+  inline ::std::string* unsafe_arena_release_path();
+  inline void unsafe_arena_set_allocated_path(
       ::std::string* path);
 
-  // optional .cms.Response.Level level = 2;
-  void clear_level();
+  // optional .cms.CmdResponse.Level level = 2;
+  inline void clear_level();
   static const int kLevelFieldNumber = 2;
-  ::cms::Response_Level level() const;
-  void set_level(::cms::Response_Level value);
+  inline ::cms::CmdResponse_Level level() const;
+  inline void set_level(::cms::CmdResponse_Level value);
 
-  // @@protoc_insertion_point(class_scope:cms.Response)
+  // @@protoc_insertion_point(class_scope:cms.CmdResponse)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -730,7 +735,7 @@ class Response : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_cms_2eproto();
 
   void InitAsDefaultInstance();
-  static Response* default_instance_;
+  static CmdResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -801,62 +806,56 @@ class Content : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional .cms.Uuid id = 1;
-  bool has_id() const;
-  void clear_id();
+  inline bool has_id() const;
+  inline void clear_id();
   static const int kIdFieldNumber = 1;
-  private:
-  void _slow_mutable_id();
-  void _slow_set_allocated_id(
-      ::google::protobuf::Arena* message_arena, ::cms::Uuid** id);
-  ::cms::Uuid* _slow_release_id();
-  public:
-  const ::cms::Uuid& id() const;
-  ::cms::Uuid* mutable_id();
-  ::cms::Uuid* release_id();
-  void set_allocated_id(::cms::Uuid* id);
-  ::cms::Uuid* unsafe_arena_release_id();
-  void unsafe_arena_set_allocated_id(
+  inline const ::cms::Uuid& id() const;
+  inline ::cms::Uuid* mutable_id();
+  inline ::cms::Uuid* release_id();
+  inline void set_allocated_id(::cms::Uuid* id);
+  inline ::cms::Uuid* unsafe_arena_release_id();
+  inline void unsafe_arena_set_allocated_id(
       ::cms::Uuid* id);
 
   // optional string title = 2;
-  void clear_title();
+  inline void clear_title();
   static const int kTitleFieldNumber = 2;
-  const ::std::string& title() const;
-  void set_title(const ::std::string& value);
-  void set_title(const char* value);
-  void set_title(const char* value, size_t size);
-  ::std::string* mutable_title();
-  ::std::string* release_title();
-  void set_allocated_title(::std::string* title);
-  ::std::string* unsafe_arena_release_title();
-  void unsafe_arena_set_allocated_title(
+  inline const ::std::string& title() const;
+  inline void set_title(const ::std::string& value);
+  inline void set_title(const char* value);
+  inline void set_title(const char* value, size_t size);
+  inline ::std::string* mutable_title();
+  inline ::std::string* release_title();
+  inline void set_allocated_title(::std::string* title);
+  inline ::std::string* unsafe_arena_release_title();
+  inline void unsafe_arena_set_allocated_title(
       ::std::string* title);
 
   // optional string description = 3;
-  void clear_description();
+  inline void clear_description();
   static const int kDescriptionFieldNumber = 3;
-  const ::std::string& description() const;
-  void set_description(const ::std::string& value);
-  void set_description(const char* value);
-  void set_description(const char* value, size_t size);
-  ::std::string* mutable_description();
-  ::std::string* release_description();
-  void set_allocated_description(::std::string* description);
-  ::std::string* unsafe_arena_release_description();
-  void unsafe_arena_set_allocated_description(
+  inline const ::std::string& description() const;
+  inline void set_description(const ::std::string& value);
+  inline void set_description(const char* value);
+  inline void set_description(const char* value, size_t size);
+  inline ::std::string* mutable_description();
+  inline ::std::string* release_description();
+  inline void set_allocated_description(::std::string* description);
+  inline ::std::string* unsafe_arena_release_description();
+  inline void unsafe_arena_set_allocated_description(
       ::std::string* description);
 
   // optional uint32 creation_timestamp = 4;
-  void clear_creation_timestamp();
+  inline void clear_creation_timestamp();
   static const int kCreationTimestampFieldNumber = 4;
-  ::google::protobuf::uint32 creation_timestamp() const;
-  void set_creation_timestamp(::google::protobuf::uint32 value);
+  inline ::google::protobuf::uint32 creation_timestamp() const;
+  inline void set_creation_timestamp(::google::protobuf::uint32 value);
 
   // optional uint32 updated_timestamp = 5;
-  void clear_updated_timestamp();
+  inline void clear_updated_timestamp();
   static const int kUpdatedTimestampFieldNumber = 5;
-  ::google::protobuf::uint32 updated_timestamp() const;
-  void set_updated_timestamp(::google::protobuf::uint32 value);
+  inline ::google::protobuf::uint32 updated_timestamp() const;
+  inline void set_updated_timestamp(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:cms.Content)
  private:
@@ -948,15 +947,15 @@ class ContentList : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // repeated .cms.Content contents = 1;
-  int contents_size() const;
-  void clear_contents();
+  inline int contents_size() const;
+  inline void clear_contents();
   static const int kContentsFieldNumber = 1;
-  const ::cms::Content& contents(int index) const;
-  ::cms::Content* mutable_contents(int index);
-  ::cms::Content* add_contents();
-  const ::google::protobuf::RepeatedPtrField< ::cms::Content >&
+  inline const ::cms::Content& contents(int index) const;
+  inline ::cms::Content* mutable_contents(int index);
+  inline ::cms::Content* add_contents();
+  inline const ::google::protobuf::RepeatedPtrField< ::cms::Content >&
       contents() const;
-  ::google::protobuf::RepeatedPtrField< ::cms::Content >*
+  inline ::google::protobuf::RepeatedPtrField< ::cms::Content >*
       mutable_contents();
 
   // @@protoc_insertion_point(class_scope:cms.ContentList)
@@ -978,136 +977,9 @@ class ContentList : public ::google::protobuf::Message {
 };
 // ===================================================================
 
-class CmsCmd_Stub;
-
-class CmsCmd : public ::google::protobuf::Service {
- protected:
-  // This class should be treated as an abstract interface.
-  inline CmsCmd() {};
- public:
-  virtual ~CmsCmd();
-
-  typedef CmsCmd_Stub Stub;
-
-  static const ::google::protobuf::ServiceDescriptor* descriptor();
-
-  virtual void Create(::google::protobuf::RpcController* controller,
-                       const ::cms::Content* request,
-                       ::cms::Response* response,
-                       ::google::protobuf::Closure* done);
-
-  // implements Service ----------------------------------------------
-
-  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  void CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                  ::google::protobuf::RpcController* controller,
-                  const ::google::protobuf::Message* request,
-                  ::google::protobuf::Message* response,
-                  ::google::protobuf::Closure* done);
-  const ::google::protobuf::Message& GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-  const ::google::protobuf::Message& GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CmsCmd);
-};
-
-class CmsCmd_Stub : public CmsCmd {
- public:
-  CmsCmd_Stub(::google::protobuf::RpcChannel* channel);
-  CmsCmd_Stub(::google::protobuf::RpcChannel* channel,
-                   ::google::protobuf::Service::ChannelOwnership ownership);
-  ~CmsCmd_Stub();
-
-  inline ::google::protobuf::RpcChannel* channel() { return channel_; }
-
-  // implements CmsCmd ------------------------------------------
-
-  void Create(::google::protobuf::RpcController* controller,
-                       const ::cms::Content* request,
-                       ::cms::Response* response,
-                       ::google::protobuf::Closure* done);
- private:
-  ::google::protobuf::RpcChannel* channel_;
-  bool owns_channel_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CmsCmd_Stub);
-};
-
-
-// -------------------------------------------------------------------
-
-class CmsQuery_Stub;
-
-class CmsQuery : public ::google::protobuf::Service {
- protected:
-  // This class should be treated as an abstract interface.
-  inline CmsQuery() {};
- public:
-  virtual ~CmsQuery();
-
-  typedef CmsQuery_Stub Stub;
-
-  static const ::google::protobuf::ServiceDescriptor* descriptor();
-
-  virtual void get(::google::protobuf::RpcController* controller,
-                       const ::cms::Uuid* request,
-                       ::cms::Content* response,
-                       ::google::protobuf::Closure* done);
-  virtual void get_all(::google::protobuf::RpcController* controller,
-                       const ::cms::Query* request,
-                       ::cms::ContentList* response,
-                       ::google::protobuf::Closure* done);
-
-  // implements Service ----------------------------------------------
-
-  const ::google::protobuf::ServiceDescriptor* GetDescriptor();
-  void CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                  ::google::protobuf::RpcController* controller,
-                  const ::google::protobuf::Message* request,
-                  ::google::protobuf::Message* response,
-                  ::google::protobuf::Closure* done);
-  const ::google::protobuf::Message& GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-  const ::google::protobuf::Message& GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const;
-
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CmsQuery);
-};
-
-class CmsQuery_Stub : public CmsQuery {
- public:
-  CmsQuery_Stub(::google::protobuf::RpcChannel* channel);
-  CmsQuery_Stub(::google::protobuf::RpcChannel* channel,
-                   ::google::protobuf::Service::ChannelOwnership ownership);
-  ~CmsQuery_Stub();
-
-  inline ::google::protobuf::RpcChannel* channel() { return channel_; }
-
-  // implements CmsQuery ------------------------------------------
-
-  void get(::google::protobuf::RpcController* controller,
-                       const ::cms::Uuid* request,
-                       ::cms::Content* response,
-                       ::google::protobuf::Closure* done);
-  void get_all(::google::protobuf::RpcController* controller,
-                       const ::cms::Query* request,
-                       ::cms::ContentList* response,
-                       ::google::protobuf::Closure* done);
- private:
-  ::google::protobuf::RpcChannel* channel_;
-  bool owns_channel_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(CmsQuery_Stub);
-};
-
 
 // ===================================================================
 
-
-// ===================================================================
-
-#if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // Uuid
 
 // optional sint64 least_significant_bits = 1;
@@ -1401,27 +1273,51 @@ inline const ::cms::Order& Filter::order() const {
 inline ::cms::Order* Filter::mutable_order() {
   
   if (order_ == NULL) {
-    _slow_mutable_order();  }
+    order_ = ::google::protobuf::Arena::CreateMessage< ::cms::Order >(
+        GetArenaNoVirtual());
+  }
   // @@protoc_insertion_point(field_mutable:cms.Filter.order)
   return order_;
 }
 inline ::cms::Order* Filter::release_order() {
   
   if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_order();
+    if (order_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::Order* temp = new ::cms::Order;
+      temp->MergeFrom(*order_);
+      order_ = NULL;
+      return temp;
+    }
   } else {
     ::cms::Order* temp = order_;
     order_ = NULL;
     return temp;
   }
 }
+inline ::cms::Order* Filter::unsafe_arena_release_order() {
+  
+  ::cms::Order* temp = order_;
+  order_ = NULL;
+  return temp;
+}
 inline void Filter::set_allocated_order(::cms::Order* order) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (GetArenaNoVirtual() == NULL) {
     delete order_;
   }
   if (order != NULL) {
-    _slow_set_allocated_order(message_arena, &order);
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(order) == NULL) {
+      GetArenaNoVirtual()->Own(order);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(order)) {
+      ::cms::Order* new_order = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::Order >(
+            GetArenaNoVirtual());
+      new_order->CopyFrom(*order);
+      order = new_order;
+    }
   }
   order_ = order;
   if (order) {
@@ -1431,53 +1327,66 @@ inline void Filter::set_allocated_order(::cms::Order* order) {
   }
   // @@protoc_insertion_point(field_set_allocated:cms.Filter.order)
 }
+inline void Filter::unsafe_arena_set_allocated_order(
+    ::cms::Order* order) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete order_;
+  }
+  order_ = order;
+  if (order) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Filter.order)
+}
 
 // -------------------------------------------------------------------
 
-// Response
+// CmdResponse
 
 // optional string path = 1;
-inline void Response::clear_path() {
+inline void CmdResponse::clear_path() {
   path_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline const ::std::string& Response::path() const {
-  // @@protoc_insertion_point(field_get:cms.Response.path)
+inline const ::std::string& CmdResponse::path() const {
+  // @@protoc_insertion_point(field_get:cms.CmdResponse.path)
   return path_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Response::set_path(const ::std::string& value) {
+inline void CmdResponse::set_path(const ::std::string& value) {
   
   path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Response.path)
+  // @@protoc_insertion_point(field_set:cms.CmdResponse.path)
 }
-inline void Response::set_path(const char* value) {
+inline void CmdResponse::set_path(const char* value) {
   
   path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
               GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Response.path)
+  // @@protoc_insertion_point(field_set_char:cms.CmdResponse.path)
 }
-inline void Response::set_path(const char* value,
+inline void CmdResponse::set_path(const char* value,
     size_t size) {
   
   path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
       reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Response.path)
+  // @@protoc_insertion_point(field_set_pointer:cms.CmdResponse.path)
 }
-inline ::std::string* Response::mutable_path() {
+inline ::std::string* CmdResponse::mutable_path() {
   
-  // @@protoc_insertion_point(field_mutable:cms.Response.path)
+  // @@protoc_insertion_point(field_mutable:cms.CmdResponse.path)
   return path_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* Response::release_path() {
+inline ::std::string* CmdResponse::release_path() {
   
   return path_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 }
-inline ::std::string* Response::unsafe_arena_release_path() {
+inline ::std::string* CmdResponse::unsafe_arena_release_path() {
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   
   return path_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       GetArenaNoVirtual());
 }
-inline void Response::set_allocated_path(::std::string* path) {
+inline void CmdResponse::set_allocated_path(::std::string* path) {
   if (path != NULL) {
     
   } else {
@@ -1485,9 +1394,9 @@ inline void Response::set_allocated_path(::std::string* path) {
   }
   path_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), path,
       GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Response.path)
+  // @@protoc_insertion_point(field_set_allocated:cms.CmdResponse.path)
 }
-inline void Response::unsafe_arena_set_allocated_path(
+inline void CmdResponse::unsafe_arena_set_allocated_path(
     ::std::string* path) {
   GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
   if (path != NULL) {
@@ -1498,21 +1407,21 @@ inline void Response::unsafe_arena_set_allocated_path(
   
   path_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       path, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Response.path)
+  // @@protoc_insertion_point(field_set_allocated:cms.CmdResponse.path)
 }
 
-// optional .cms.Response.Level level = 2;
-inline void Response::clear_level() {
+// optional .cms.CmdResponse.Level level = 2;
+inline void CmdResponse::clear_level() {
   level_ = 0;
 }
-inline ::cms::Response_Level Response::level() const {
-  // @@protoc_insertion_point(field_get:cms.Response.level)
-  return static_cast< ::cms::Response_Level >(level_);
+inline ::cms::CmdResponse_Level CmdResponse::level() const {
+  // @@protoc_insertion_point(field_get:cms.CmdResponse.level)
+  return static_cast< ::cms::CmdResponse_Level >(level_);
 }
-inline void Response::set_level(::cms::Response_Level value) {
+inline void CmdResponse::set_level(::cms::CmdResponse_Level value) {
   
   level_ = value;
-  // @@protoc_insertion_point(field_set:cms.Response.level)
+  // @@protoc_insertion_point(field_set:cms.CmdResponse.level)
 }
 
 // -------------------------------------------------------------------
@@ -1534,27 +1443,51 @@ inline const ::cms::Uuid& Content::id() const {
 inline ::cms::Uuid* Content::mutable_id() {
   
   if (id_ == NULL) {
-    _slow_mutable_id();  }
+    id_ = ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+        GetArenaNoVirtual());
+  }
   // @@protoc_insertion_point(field_mutable:cms.Content.id)
   return id_;
 }
 inline ::cms::Uuid* Content::release_id() {
   
   if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_id();
+    if (id_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::Uuid* temp = new ::cms::Uuid;
+      temp->MergeFrom(*id_);
+      id_ = NULL;
+      return temp;
+    }
   } else {
     ::cms::Uuid* temp = id_;
     id_ = NULL;
     return temp;
   }
 }
+inline ::cms::Uuid* Content::unsafe_arena_release_id() {
+  
+  ::cms::Uuid* temp = id_;
+  id_ = NULL;
+  return temp;
+}
 inline void Content::set_allocated_id(::cms::Uuid* id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
+  if (GetArenaNoVirtual() == NULL) {
     delete id_;
   }
   if (id != NULL) {
-    _slow_set_allocated_id(message_arena, &id);
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(id) == NULL) {
+      GetArenaNoVirtual()->Own(id);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(id)) {
+      ::cms::Uuid* new_id = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+            GetArenaNoVirtual());
+      new_id->CopyFrom(*id);
+      id = new_id;
+    }
   }
   id_ = id;
   if (id) {
@@ -1563,6 +1496,19 @@ inline void Content::set_allocated_id(::cms::Uuid* id) {
     
   }
   // @@protoc_insertion_point(field_set_allocated:cms.Content.id)
+}
+inline void Content::unsafe_arena_set_allocated_id(
+    ::cms::Uuid* id) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete id_;
+  }
+  id_ = id;
+  if (id) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Content.id)
 }
 
 // optional string title = 2;
@@ -1757,7 +1703,62 @@ ContentList::mutable_contents() {
   return &contents_;
 }
 
-#endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+
+class ContentCmdHandler GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status Create(::grpc::ClientContext* context, const ::cms::Content& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> AsyncCreate(::grpc::ClientContext* context, const ::cms::Content& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status Create(::grpc::ServerContext* context, const ::cms::Content* request, ::cms::CmdResponse* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void RequestCreate(::grpc::ServerContext* context, ::cms::Content* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
+
+class CmsQuery GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status get(::grpc::ClientContext* context, const ::cms::Uuid& request, ::cms::Content* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::Content>> Asyncget(::grpc::ClientContext* context, const ::cms::Uuid& request, ::grpc::CompletionQueue* cq, void* tag);
+    ::grpc::Status get_all(::grpc::ClientContext* context, const ::cms::Query& request, ::cms::ContentList* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::ContentList>> Asyncget_all(::grpc::ClientContext* context, const ::cms::Query& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status get(::grpc::ServerContext* context, const ::cms::Uuid* request, ::cms::Content* response);
+    virtual ::grpc::Status get_all(::grpc::ServerContext* context, const ::cms::Query* request, ::cms::ContentList* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void Requestget(::grpc::ServerContext* context, ::cms::Uuid* request, ::grpc::ServerAsyncResponseWriter< ::cms::Content>* response, ::grpc::CompletionQueue* cq, void *tag);
+    void Requestget_all(::grpc::ServerContext* context, ::cms::Query* request, ::grpc::ServerAsyncResponseWriter< ::cms::ContentList>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -1767,10 +1768,10 @@ ContentList::mutable_contents() {
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::cms::Response_Level> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::cms::CmdResponse_Level> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::cms::Response_Level>() {
-  return ::cms::Response_Level_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::cms::CmdResponse_Level>() {
+  return ::cms::CmdResponse_Level_descriptor();
 }
 
 }  // namespace protobuf

@@ -2,7 +2,7 @@
 // source: cms.proto
 
 #define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION
-#include "../libcmslight/cms.pb.h"
+#include "cms.pb.h"
 
 #include <algorithm>
 
@@ -14,6 +14,13 @@
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
+#include <grpc++/async_unary_call.h>
+#include <grpc++/channel_interface.h>
+#include <grpc++/impl/client_unary_call.h>
+#include <grpc++/impl/rpc_method.h>
+#include <grpc++/impl/rpc_service_method.h>
+#include <grpc++/impl/service_type.h>
+#include <grpc++/stream.h>
 // @@protoc_insertion_point(includes)
 
 namespace cms {
@@ -35,18 +42,16 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Filter_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Filter_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Response_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* CmdResponse_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  Response_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* Response_Level_descriptor_ = NULL;
+  CmdResponse_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* CmdResponse_Level_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* Content_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Content_reflection_ = NULL;
 const ::google::protobuf::Descriptor* ContentList_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ContentList_reflection_ = NULL;
-const ::google::protobuf::ServiceDescriptor* CmsCmd_descriptor_ = NULL;
-const ::google::protobuf::ServiceDescriptor* CmsQuery_descriptor_ = NULL;
 
 }  // namespace
 
@@ -137,23 +142,23 @@ void protobuf_AssignDesc_cms_2eproto() {
       sizeof(Filter),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Filter, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Filter, _is_default_instance_));
-  Response_descriptor_ = file->message_type(5);
-  static const int Response_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, path_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, level_),
+  CmdResponse_descriptor_ = file->message_type(5);
+  static const int CmdResponse_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, path_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, level_),
   };
-  Response_reflection_ =
+  CmdResponse_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      Response_descriptor_,
-      Response::default_instance_,
-      Response_offsets_,
+      CmdResponse_descriptor_,
+      CmdResponse::default_instance_,
+      CmdResponse_offsets_,
       -1,
       -1,
       -1,
-      sizeof(Response),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Response, _is_default_instance_));
-  Response_Level_descriptor_ = Response_descriptor_->enum_type(0);
+      sizeof(CmdResponse),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CmdResponse, _is_default_instance_));
+  CmdResponse_Level_descriptor_ = CmdResponse_descriptor_->enum_type(0);
   Content_descriptor_ = file->message_type(6);
   static const int Content_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Content, id_),
@@ -188,8 +193,6 @@ void protobuf_AssignDesc_cms_2eproto() {
       sizeof(ContentList),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContentList, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContentList, _is_default_instance_));
-  CmsCmd_descriptor_ = file->service(0);
-  CmsQuery_descriptor_ = file->service(1);
 }
 
 namespace {
@@ -213,7 +216,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Filter_descriptor_, &Filter::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      Response_descriptor_, &Response::default_instance());
+      CmdResponse_descriptor_, &CmdResponse::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Content_descriptor_, &Content::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -233,8 +236,8 @@ void protobuf_ShutdownFile_cms_2eproto() {
   delete Query_reflection_;
   delete Filter::default_instance_;
   delete Filter_reflection_;
-  delete Response::default_instance_;
-  delete Response_reflection_;
+  delete CmdResponse::default_instance_;
+  delete CmdResponse_reflection_;
   delete Content::default_instance_;
   delete Content_reflection_;
   delete ContentList::default_instance_;
@@ -254,19 +257,19 @@ void protobuf_AddDesc_cms_2eproto() {
     "y\030\002 \001(\t\"&\n\004Page\022\014\n\004page\030\001 \001(\r\022\020\n\010element"
     "s\030\002 \001(\r\";\n\005Query\022\031\n\005order\030\001 \003(\0132\n.cms.Or"
     "der\022\027\n\004page\030\002 \003(\0132\t.cms.Page\"/\n\006Filter\022\n"
-    "\n\002by\030\001 \001(\t\022\031\n\005order\030\002 \001(\0132\n.cms.Order\"o\n"
-    "\010Response\022\014\n\004path\030\001 \001(\t\022\"\n\005level\030\002 \001(\0162\023"
-    ".cms.Response.Level\"1\n\005Level\022\t\n\005DEBUG\020\000\022"
-    "\010\n\004INFO\020\001\022\010\n\004WARN\020\002\022\t\n\005ERROR\020\003\"{\n\007Conten"
-    "t\022\025\n\002id\030\001 \001(\0132\t.cms.Uuid\022\r\n\005title\030\002 \001(\t\022"
-    "\023\n\013description\030\003 \001(\t\022\032\n\022creation_timesta"
-    "mp\030\004 \001(\r\022\031\n\021updated_timestamp\030\005 \001(\r\"-\n\013C"
-    "ontentList\022\036\n\010contents\030\001 \003(\0132\014.cms.Conte"
-    "nt21\n\006CmsCmd\022\'\n\006Create\022\014.cms.Content\032\r.c"
-    "ms.Response\"\0002W\n\010CmsQuery\022 \n\003get\022\t.cms.U"
-    "uid\032\014.cms.Content\"\000\022)\n\007get_all\022\n.cms.Que"
-    "ry\032\020.cms.ContentList\"\000B\017\n\007com.cms\200\001\001\370\001\001b"
-    "\006proto3", 727);
+    "\n\002by\030\001 \001(\t\022\031\n\005order\030\002 \001(\0132\n.cms.Order\"u\n"
+    "\013CmdResponse\022\014\n\004path\030\001 \001(\t\022%\n\005level\030\002 \001("
+    "\0162\026.cms.CmdResponse.Level\"1\n\005Level\022\t\n\005DE"
+    "BUG\020\000\022\010\n\004INFO\020\001\022\010\n\004WARN\020\002\022\t\n\005ERROR\020\003\"{\n\007"
+    "Content\022\025\n\002id\030\001 \001(\0132\t.cms.Uuid\022\r\n\005title\030"
+    "\002 \001(\t\022\023\n\013description\030\003 \001(\t\022\032\n\022creation_t"
+    "imestamp\030\004 \001(\r\022\031\n\021updated_timestamp\030\005 \001("
+    "\r\"-\n\013ContentList\022\036\n\010contents\030\001 \003(\0132\014.cms"
+    ".Content2\?\n\021ContentCmdHandler\022*\n\006Create\022"
+    "\014.cms.Content\032\020.cms.CmdResponse\"\0002W\n\010Cms"
+    "Query\022 \n\003get\022\t.cms.Uuid\032\014.cms.Content\"\000\022"
+    ")\n\007get_all\022\n.cms.Query\032\020.cms.ContentList"
+    "\"\000B\014\n\007com.cms\370\001\001b\006proto3", 744);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "cms.proto", &protobuf_RegisterTypes);
   Uuid::default_instance_ = new Uuid();
@@ -274,7 +277,7 @@ void protobuf_AddDesc_cms_2eproto() {
   Page::default_instance_ = new Page();
   Query::default_instance_ = new Query();
   Filter::default_instance_ = new Filter();
-  Response::default_instance_ = new Response();
+  CmdResponse::default_instance_ = new CmdResponse();
   Content::default_instance_ = new Content();
   ContentList::default_instance_ = new ContentList();
   Uuid::default_instance_->InitAsDefaultInstance();
@@ -282,7 +285,7 @@ void protobuf_AddDesc_cms_2eproto() {
   Page::default_instance_->InitAsDefaultInstance();
   Query::default_instance_->InitAsDefaultInstance();
   Filter::default_instance_->InitAsDefaultInstance();
-  Response::default_instance_->InitAsDefaultInstance();
+  CmdResponse::default_instance_->InitAsDefaultInstance();
   Content::default_instance_->InitAsDefaultInstance();
   ContentList::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_cms_2eproto);
@@ -387,17 +390,19 @@ Uuid* Uuid::New(::google::protobuf::Arena* arena) const {
 }
 
 void Uuid::Clear() {
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<Uuid*>(16)->f)
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Uuid*>(16)->f) - \
+   reinterpret_cast<char*>(16))
 
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
 
   ZR_(least_significant_bits_, most_significant_bits_);
 
-#undef ZR_HELPER_
+#undef OFFSET_OF_FIELD_
 #undef ZR_
 
 }
@@ -588,38 +593,6 @@ void Uuid::InternalSwap(Uuid* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Uuid
-
-// optional sint64 least_significant_bits = 1;
- void Uuid::clear_least_significant_bits() {
-  least_significant_bits_ = GOOGLE_LONGLONG(0);
-}
- ::google::protobuf::int64 Uuid::least_significant_bits() const {
-  // @@protoc_insertion_point(field_get:cms.Uuid.least_significant_bits)
-  return least_significant_bits_;
-}
- void Uuid::set_least_significant_bits(::google::protobuf::int64 value) {
-  
-  least_significant_bits_ = value;
-  // @@protoc_insertion_point(field_set:cms.Uuid.least_significant_bits)
-}
-
-// optional sint64 most_significant_bits = 2;
- void Uuid::clear_most_significant_bits() {
-  most_significant_bits_ = GOOGLE_LONGLONG(0);
-}
- ::google::protobuf::int64 Uuid::most_significant_bits() const {
-  // @@protoc_insertion_point(field_get:cms.Uuid.most_significant_bits)
-  return most_significant_bits_;
-}
- void Uuid::set_most_significant_bits(::google::protobuf::int64 value) {
-  
-  most_significant_bits_ = value;
-  // @@protoc_insertion_point(field_set:cms.Uuid.most_significant_bits)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
@@ -906,89 +879,6 @@ void Order::InternalSwap(Order* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Order
-
-// optional bool asc = 1;
- void Order::clear_asc() {
-  asc_ = false;
-}
- bool Order::asc() const {
-  // @@protoc_insertion_point(field_get:cms.Order.asc)
-  return asc_;
-}
- void Order::set_asc(bool value) {
-  
-  asc_ = value;
-  // @@protoc_insertion_point(field_set:cms.Order.asc)
-}
-
-// optional string property = 2;
- void Order::clear_property() {
-  property_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- const ::std::string& Order::property() const {
-  // @@protoc_insertion_point(field_get:cms.Order.property)
-  return property_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void Order::set_property(const ::std::string& value) {
-  
-  property_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Order.property)
-}
- void Order::set_property(const char* value) {
-  
-  property_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Order.property)
-}
- void Order::set_property(const char* value,
-    size_t size) {
-  
-  property_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Order.property)
-}
- ::std::string* Order::mutable_property() {
-  
-  // @@protoc_insertion_point(field_mutable:cms.Order.property)
-  return property_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Order::release_property() {
-  
-  return property_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Order::unsafe_arena_release_property() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  
-  return property_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
-}
- void Order::set_allocated_property(::std::string* property) {
-  if (property != NULL) {
-    
-  } else {
-    
-  }
-  property_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), property,
-      GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Order.property)
-}
- void Order::unsafe_arena_set_allocated_property(
-    ::std::string* property) {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (property != NULL) {
-    
-  } else {
-    
-  }
-  
-  property_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      property, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Order.property)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
@@ -1072,17 +962,19 @@ Page* Page::New(::google::protobuf::Arena* arena) const {
 }
 
 void Page::Clear() {
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<Page*>(16)->f)
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Page*>(16)->f) - \
+   reinterpret_cast<char*>(16))
 
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
 
   ZR_(page_, elements_);
 
-#undef ZR_HELPER_
+#undef OFFSET_OF_FIELD_
 #undef ZR_
 
 }
@@ -1273,38 +1165,6 @@ void Page::InternalSwap(Page* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Page
-
-// optional uint32 page = 1;
- void Page::clear_page() {
-  page_ = 0u;
-}
- ::google::protobuf::uint32 Page::page() const {
-  // @@protoc_insertion_point(field_get:cms.Page.page)
-  return page_;
-}
- void Page::set_page(::google::protobuf::uint32 value) {
-  
-  page_ = value;
-  // @@protoc_insertion_point(field_set:cms.Page.page)
-}
-
-// optional uint32 elements = 2;
- void Page::clear_elements() {
-  elements_ = 0u;
-}
- ::google::protobuf::uint32 Page::elements() const {
-  // @@protoc_insertion_point(field_get:cms.Page.elements)
-  return elements_;
-}
- void Page::set_elements(::google::protobuf::uint32 value) {
-  
-  elements_ = value;
-  // @@protoc_insertion_point(field_set:cms.Page.elements)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
@@ -1581,120 +1441,9 @@ void Query::InternalSwap(Query* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Query
-
-// repeated .cms.Order order = 1;
- int Query::order_size() const {
-  return order_.size();
-}
- void Query::clear_order() {
-  order_.Clear();
-}
- const ::cms::Order& Query::order(int index) const {
-  // @@protoc_insertion_point(field_get:cms.Query.order)
-  return order_.Get(index);
-}
- ::cms::Order* Query::mutable_order(int index) {
-  // @@protoc_insertion_point(field_mutable:cms.Query.order)
-  return order_.Mutable(index);
-}
- ::cms::Order* Query::add_order() {
-  // @@protoc_insertion_point(field_add:cms.Query.order)
-  return order_.Add();
-}
- const ::google::protobuf::RepeatedPtrField< ::cms::Order >&
-Query::order() const {
-  // @@protoc_insertion_point(field_list:cms.Query.order)
-  return order_;
-}
- ::google::protobuf::RepeatedPtrField< ::cms::Order >*
-Query::mutable_order() {
-  // @@protoc_insertion_point(field_mutable_list:cms.Query.order)
-  return &order_;
-}
-
-// repeated .cms.Page page = 2;
- int Query::page_size() const {
-  return page_.size();
-}
- void Query::clear_page() {
-  page_.Clear();
-}
- const ::cms::Page& Query::page(int index) const {
-  // @@protoc_insertion_point(field_get:cms.Query.page)
-  return page_.Get(index);
-}
- ::cms::Page* Query::mutable_page(int index) {
-  // @@protoc_insertion_point(field_mutable:cms.Query.page)
-  return page_.Mutable(index);
-}
- ::cms::Page* Query::add_page() {
-  // @@protoc_insertion_point(field_add:cms.Query.page)
-  return page_.Add();
-}
- const ::google::protobuf::RepeatedPtrField< ::cms::Page >&
-Query::page() const {
-  // @@protoc_insertion_point(field_list:cms.Query.page)
-  return page_;
-}
- ::google::protobuf::RepeatedPtrField< ::cms::Page >*
-Query::mutable_page() {
-  // @@protoc_insertion_point(field_mutable_list:cms.Query.page)
-  return &page_;
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
-void Filter::_slow_mutable_order() {
-  order_ = ::google::protobuf::Arena::CreateMessage< ::cms::Order >(
-        GetArenaNoVirtual());
-}
-::cms::Order* Filter::_slow_release_order() {
-  if (order_ == NULL) {
-    return NULL;
-  } else {
-    ::cms::Order* temp = new ::cms::Order;
-    temp->MergeFrom(*order_);
-    order_ = NULL;
-    return temp;
-  }
-}
-::cms::Order* Filter::unsafe_arena_release_order() {
-  
-  ::cms::Order* temp = order_;
-  order_ = NULL;
-  return temp;
-}
-void Filter::_slow_set_allocated_order(
-    ::google::protobuf::Arena* message_arena, ::cms::Order** order) {
-    if (message_arena != NULL && 
-        ::google::protobuf::Arena::GetArena(*order) == NULL) {
-      message_arena->Own(*order);
-    } else if (message_arena !=
-               ::google::protobuf::Arena::GetArena(*order)) {
-      ::cms::Order* new_order = 
-            ::google::protobuf::Arena::CreateMessage< ::cms::Order >(
-            message_arena);
-      new_order->CopyFrom(**order);
-      *order = new_order;
-    }
-}
-void Filter::unsafe_arena_set_allocated_order(
-    ::cms::Order* order) {
-  if (GetArenaNoVirtual() == NULL) {
-    delete order_;
-  }
-  order_ = order;
-  if (order) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Filter.order)
-}
 #ifndef _MSC_VER
 const int Filter::kByFieldNumber;
 const int Filter::kOrderFieldNumber;
@@ -1984,129 +1733,14 @@ void Filter::InternalSwap(Filter* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Filter
-
-// optional string by = 1;
- void Filter::clear_by() {
-  by_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- const ::std::string& Filter::by() const {
-  // @@protoc_insertion_point(field_get:cms.Filter.by)
-  return by_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void Filter::set_by(const ::std::string& value) {
-  
-  by_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Filter.by)
-}
- void Filter::set_by(const char* value) {
-  
-  by_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Filter.by)
-}
- void Filter::set_by(const char* value,
-    size_t size) {
-  
-  by_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Filter.by)
-}
- ::std::string* Filter::mutable_by() {
-  
-  // @@protoc_insertion_point(field_mutable:cms.Filter.by)
-  return by_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Filter::release_by() {
-  
-  return by_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Filter::unsafe_arena_release_by() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  
-  return by_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
-}
- void Filter::set_allocated_by(::std::string* by) {
-  if (by != NULL) {
-    
-  } else {
-    
-  }
-  by_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), by,
-      GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Filter.by)
-}
- void Filter::unsafe_arena_set_allocated_by(
-    ::std::string* by) {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (by != NULL) {
-    
-  } else {
-    
-  }
-  
-  by_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      by, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Filter.by)
-}
-
-// optional .cms.Order order = 2;
- bool Filter::has_order() const {
-  return !_is_default_instance_ && order_ != NULL;
-}
- void Filter::clear_order() {
-  if (order_ != NULL) delete order_;
-  order_ = NULL;
-}
- const ::cms::Order& Filter::order() const {
-  // @@protoc_insertion_point(field_get:cms.Filter.order)
-  return order_ != NULL ? *order_ : *default_instance_->order_;
-}
- ::cms::Order* Filter::mutable_order() {
-  
-  if (order_ == NULL) {
-    _slow_mutable_order();  }
-  // @@protoc_insertion_point(field_mutable:cms.Filter.order)
-  return order_;
-}
- ::cms::Order* Filter::release_order() {
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_order();
-  } else {
-    ::cms::Order* temp = order_;
-    order_ = NULL;
-    return temp;
-  }
-}
- void Filter::set_allocated_order(::cms::Order* order) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete order_;
-  }
-  if (order != NULL) {
-    _slow_set_allocated_order(message_arena, &order);
-  }
-  order_ = order;
-  if (order) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:cms.Filter.order)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* Response_Level_descriptor() {
+const ::google::protobuf::EnumDescriptor* CmdResponse_Level_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Response_Level_descriptor_;
+  return CmdResponse_Level_descriptor_;
 }
-bool Response_Level_IsValid(int value) {
+bool CmdResponse_Level_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -2119,46 +1753,46 @@ bool Response_Level_IsValid(int value) {
 }
 
 #ifndef _MSC_VER
-const Response_Level Response::DEBUG;
-const Response_Level Response::INFO;
-const Response_Level Response::WARN;
-const Response_Level Response::ERROR;
-const Response_Level Response::Level_MIN;
-const Response_Level Response::Level_MAX;
-const int Response::Level_ARRAYSIZE;
+const CmdResponse_Level CmdResponse::DEBUG;
+const CmdResponse_Level CmdResponse::INFO;
+const CmdResponse_Level CmdResponse::WARN;
+const CmdResponse_Level CmdResponse::ERROR;
+const CmdResponse_Level CmdResponse::Level_MIN;
+const CmdResponse_Level CmdResponse::Level_MAX;
+const int CmdResponse::Level_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
-const int Response::kPathFieldNumber;
-const int Response::kLevelFieldNumber;
+const int CmdResponse::kPathFieldNumber;
+const int CmdResponse::kLevelFieldNumber;
 #endif  // !_MSC_VER
 
-Response::Response()
+CmdResponse::CmdResponse()
   : ::google::protobuf::Message() , _internal_metadata_(NULL)  {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:cms.Response)
+  // @@protoc_insertion_point(constructor:cms.CmdResponse)
 }
 
-Response::Response(::google::protobuf::Arena* arena)
+CmdResponse::CmdResponse(::google::protobuf::Arena* arena)
   : ::google::protobuf::Message(),
   _internal_metadata_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
-  // @@protoc_insertion_point(arena_constructor:cms.Response)
+  // @@protoc_insertion_point(arena_constructor:cms.CmdResponse)
 }
 
-void Response::InitAsDefaultInstance() {
+void CmdResponse::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-Response::Response(const Response& from)
+CmdResponse::CmdResponse(const CmdResponse& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:cms.Response)
+  // @@protoc_insertion_point(copy_constructor:cms.CmdResponse)
 }
 
-void Response::SharedCtor() {
+void CmdResponse::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
@@ -2166,12 +1800,12 @@ void Response::SharedCtor() {
   level_ = 0;
 }
 
-Response::~Response() {
-  // @@protoc_insertion_point(destructor:cms.Response)
+CmdResponse::~CmdResponse() {
+  // @@protoc_insertion_point(destructor:cms.CmdResponse)
   SharedDtor();
 }
 
-void Response::SharedDtor() {
+void CmdResponse::SharedDtor() {
   if (GetArenaNoVirtual() != NULL) {
     return;
   }
@@ -2181,43 +1815,43 @@ void Response::SharedDtor() {
   }
 }
 
-void Response::ArenaDtor(void* object) {
-  Response* _this = reinterpret_cast< Response* >(object);
+void CmdResponse::ArenaDtor(void* object) {
+  CmdResponse* _this = reinterpret_cast< CmdResponse* >(object);
   (void)_this;
 }
-void Response::RegisterArenaDtor(::google::protobuf::Arena* arena) {
+void CmdResponse::RegisterArenaDtor(::google::protobuf::Arena* arena) {
 }
-void Response::SetCachedSize(int size) const {
+void CmdResponse::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Response::descriptor() {
+const ::google::protobuf::Descriptor* CmdResponse::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Response_descriptor_;
+  return CmdResponse_descriptor_;
 }
 
-const Response& Response::default_instance() {
+const CmdResponse& CmdResponse::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_cms_2eproto();
   return *default_instance_;
 }
 
-Response* Response::default_instance_ = NULL;
+CmdResponse* CmdResponse::default_instance_ = NULL;
 
-Response* Response::New(::google::protobuf::Arena* arena) const {
-  return ::google::protobuf::Arena::CreateMessage<Response>(arena);
+CmdResponse* CmdResponse::New(::google::protobuf::Arena* arena) const {
+  return ::google::protobuf::Arena::CreateMessage<CmdResponse>(arena);
 }
 
-void Response::Clear() {
+void CmdResponse::Clear() {
   path_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   level_ = 0;
 }
 
-bool Response::MergePartialFromCodedStream(
+bool CmdResponse::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:cms.Response)
+  // @@protoc_insertion_point(parse_start:cms.CmdResponse)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -2231,7 +1865,7 @@ bool Response::MergePartialFromCodedStream(
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->path().data(), this->path().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "cms.Response.path");
+            "cms.CmdResponse.path");
         } else {
           goto handle_unusual;
         }
@@ -2239,7 +1873,7 @@ bool Response::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .cms.Response.Level level = 2;
+      // optional .cms.CmdResponse.Level level = 2;
       case 2: {
         if (tag == 16) {
          parse_level:
@@ -2247,7 +1881,7 @@ bool Response::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          set_level(static_cast< ::cms::Response_Level >(value));
+          set_level(static_cast< ::cms::CmdResponse_Level >(value));
         } else {
           goto handle_unusual;
         }
@@ -2268,61 +1902,61 @@ bool Response::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:cms.Response)
+  // @@protoc_insertion_point(parse_success:cms.CmdResponse)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:cms.Response)
+  // @@protoc_insertion_point(parse_failure:cms.CmdResponse)
   return false;
 #undef DO_
 }
 
-void Response::SerializeWithCachedSizes(
+void CmdResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:cms.Response)
+  // @@protoc_insertion_point(serialize_start:cms.CmdResponse)
   // optional string path = 1;
   if (this->path().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), this->path().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "cms.Response.path");
+      "cms.CmdResponse.path");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->path(), output);
   }
 
-  // optional .cms.Response.Level level = 2;
+  // optional .cms.CmdResponse.Level level = 2;
   if (this->level() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->level(), output);
   }
 
-  // @@protoc_insertion_point(serialize_end:cms.Response)
+  // @@protoc_insertion_point(serialize_end:cms.CmdResponse)
 }
 
-::google::protobuf::uint8* Response::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* CmdResponse::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:cms.Response)
+  // @@protoc_insertion_point(serialize_to_array_start:cms.CmdResponse)
   // optional string path = 1;
   if (this->path().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), this->path().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "cms.Response.path");
+      "cms.CmdResponse.path");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->path(), target);
   }
 
-  // optional .cms.Response.Level level = 2;
+  // optional .cms.CmdResponse.Level level = 2;
   if (this->level() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->level(), target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:cms.Response)
+  // @@protoc_insertion_point(serialize_to_array_end:cms.CmdResponse)
   return target;
 }
 
-int Response::ByteSize() const {
+int CmdResponse::ByteSize() const {
   int total_size = 0;
 
   // optional string path = 1;
@@ -2332,7 +1966,7 @@ int Response::ByteSize() const {
         this->path());
   }
 
-  // optional .cms.Response.Level level = 2;
+  // optional .cms.CmdResponse.Level level = 2;
   if (this->level() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->level());
@@ -2344,10 +1978,10 @@ int Response::ByteSize() const {
   return total_size;
 }
 
-void Response::MergeFrom(const ::google::protobuf::Message& from) {
+void CmdResponse::MergeFrom(const ::google::protobuf::Message& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  const Response* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Response*>(
+  const CmdResponse* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const CmdResponse*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2356,7 +1990,7 @@ void Response::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Response::MergeFrom(const Response& from) {
+void CmdResponse::MergeFrom(const CmdResponse& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   if (from.path().size() > 0) {
     set_path(from.path());
@@ -2366,187 +2000,57 @@ void Response::MergeFrom(const Response& from) {
   }
 }
 
-void Response::CopyFrom(const ::google::protobuf::Message& from) {
+void CmdResponse::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Response::CopyFrom(const Response& from) {
+void CmdResponse::CopyFrom(const CmdResponse& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Response::IsInitialized() const {
+bool CmdResponse::IsInitialized() const {
 
   return true;
 }
 
-void Response::Swap(Response* other) {
+void CmdResponse::Swap(CmdResponse* other) {
   if (other == this) return;
   if (GetArenaNoVirtual() == other->GetArenaNoVirtual()) {
     InternalSwap(other);
   } else {
-    Response temp;
+    CmdResponse temp;
     temp.MergeFrom(*this);
     CopyFrom(*other);
     other->CopyFrom(temp);
   }
 }
-void Response::UnsafeArenaSwap(Response* other) {
+void CmdResponse::UnsafeArenaSwap(CmdResponse* other) {
   if (other == this) return;
   GOOGLE_DCHECK(GetArenaNoVirtual() == other->GetArenaNoVirtual());
   InternalSwap(other);
 }
-void Response::InternalSwap(Response* other) {
+void CmdResponse::InternalSwap(CmdResponse* other) {
   path_.Swap(&other->path_);
   std::swap(level_, other->level_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata Response::GetMetadata() const {
+::google::protobuf::Metadata CmdResponse::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Response_descriptor_;
-  metadata.reflection = Response_reflection_;
+  metadata.descriptor = CmdResponse_descriptor_;
+  metadata.reflection = CmdResponse_reflection_;
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Response
-
-// optional string path = 1;
- void Response::clear_path() {
-  path_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- const ::std::string& Response::path() const {
-  // @@protoc_insertion_point(field_get:cms.Response.path)
-  return path_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void Response::set_path(const ::std::string& value) {
-  
-  path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Response.path)
-}
- void Response::set_path(const char* value) {
-  
-  path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Response.path)
-}
- void Response::set_path(const char* value,
-    size_t size) {
-  
-  path_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Response.path)
-}
- ::std::string* Response::mutable_path() {
-  
-  // @@protoc_insertion_point(field_mutable:cms.Response.path)
-  return path_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Response::release_path() {
-  
-  return path_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Response::unsafe_arena_release_path() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  
-  return path_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
-}
- void Response::set_allocated_path(::std::string* path) {
-  if (path != NULL) {
-    
-  } else {
-    
-  }
-  path_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), path,
-      GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Response.path)
-}
- void Response::unsafe_arena_set_allocated_path(
-    ::std::string* path) {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (path != NULL) {
-    
-  } else {
-    
-  }
-  
-  path_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      path, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Response.path)
-}
-
-// optional .cms.Response.Level level = 2;
- void Response::clear_level() {
-  level_ = 0;
-}
- ::cms::Response_Level Response::level() const {
-  // @@protoc_insertion_point(field_get:cms.Response.level)
-  return static_cast< ::cms::Response_Level >(level_);
-}
- void Response::set_level(::cms::Response_Level value) {
-  
-  level_ = value;
-  // @@protoc_insertion_point(field_set:cms.Response.level)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
-void Content::_slow_mutable_id() {
-  id_ = ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
-        GetArenaNoVirtual());
-}
-::cms::Uuid* Content::_slow_release_id() {
-  if (id_ == NULL) {
-    return NULL;
-  } else {
-    ::cms::Uuid* temp = new ::cms::Uuid;
-    temp->MergeFrom(*id_);
-    id_ = NULL;
-    return temp;
-  }
-}
-::cms::Uuid* Content::unsafe_arena_release_id() {
-  
-  ::cms::Uuid* temp = id_;
-  id_ = NULL;
-  return temp;
-}
-void Content::_slow_set_allocated_id(
-    ::google::protobuf::Arena* message_arena, ::cms::Uuid** id) {
-    if (message_arena != NULL && 
-        ::google::protobuf::Arena::GetArena(*id) == NULL) {
-      message_arena->Own(*id);
-    } else if (message_arena !=
-               ::google::protobuf::Arena::GetArena(*id)) {
-      ::cms::Uuid* new_id = 
-            ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
-            message_arena);
-      new_id->CopyFrom(**id);
-      *id = new_id;
-    }
-}
-void Content::unsafe_arena_set_allocated_id(
-    ::cms::Uuid* id) {
-  if (GetArenaNoVirtual() == NULL) {
-    delete id_;
-  }
-  id_ = id;
-  if (id) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Content.id)
-}
 #ifndef _MSC_VER
 const int Content::kIdFieldNumber;
 const int Content::kTitleFieldNumber;
@@ -2638,13 +2142,15 @@ Content* Content::New(::google::protobuf::Arena* arena) const {
 }
 
 void Content::Clear() {
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<Content*>(16)->f)
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Content*>(16)->f) - \
+   reinterpret_cast<char*>(16))
 
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
 
   ZR_(creation_timestamp_, updated_timestamp_);
   if (id_ != NULL) delete id_;
@@ -2652,7 +2158,7 @@ void Content::Clear() {
   title_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
   description_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
 
-#undef ZR_HELPER_
+#undef OFFSET_OF_FIELD_
 #undef ZR_
 
 }
@@ -2978,214 +2484,6 @@ void Content::InternalSwap(Content* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Content
-
-// optional .cms.Uuid id = 1;
- bool Content::has_id() const {
-  return !_is_default_instance_ && id_ != NULL;
-}
- void Content::clear_id() {
-  if (id_ != NULL) delete id_;
-  id_ = NULL;
-}
- const ::cms::Uuid& Content::id() const {
-  // @@protoc_insertion_point(field_get:cms.Content.id)
-  return id_ != NULL ? *id_ : *default_instance_->id_;
-}
- ::cms::Uuid* Content::mutable_id() {
-  
-  if (id_ == NULL) {
-    _slow_mutable_id();  }
-  // @@protoc_insertion_point(field_mutable:cms.Content.id)
-  return id_;
-}
- ::cms::Uuid* Content::release_id() {
-  
-  if (GetArenaNoVirtual() != NULL) {
-    return _slow_release_id();
-  } else {
-    ::cms::Uuid* temp = id_;
-    id_ = NULL;
-    return temp;
-  }
-}
- void Content::set_allocated_id(::cms::Uuid* id) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete id_;
-  }
-  if (id != NULL) {
-    _slow_set_allocated_id(message_arena, &id);
-  }
-  id_ = id;
-  if (id) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:cms.Content.id)
-}
-
-// optional string title = 2;
- void Content::clear_title() {
-  title_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- const ::std::string& Content::title() const {
-  // @@protoc_insertion_point(field_get:cms.Content.title)
-  return title_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void Content::set_title(const ::std::string& value) {
-  
-  title_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Content.title)
-}
- void Content::set_title(const char* value) {
-  
-  title_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Content.title)
-}
- void Content::set_title(const char* value,
-    size_t size) {
-  
-  title_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Content.title)
-}
- ::std::string* Content::mutable_title() {
-  
-  // @@protoc_insertion_point(field_mutable:cms.Content.title)
-  return title_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Content::release_title() {
-  
-  return title_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Content::unsafe_arena_release_title() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  
-  return title_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
-}
- void Content::set_allocated_title(::std::string* title) {
-  if (title != NULL) {
-    
-  } else {
-    
-  }
-  title_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title,
-      GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Content.title)
-}
- void Content::unsafe_arena_set_allocated_title(
-    ::std::string* title) {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (title != NULL) {
-    
-  } else {
-    
-  }
-  
-  title_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      title, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Content.title)
-}
-
-// optional string description = 3;
- void Content::clear_description() {
-  description_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- const ::std::string& Content::description() const {
-  // @@protoc_insertion_point(field_get:cms.Content.description)
-  return description_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void Content::set_description(const ::std::string& value) {
-  
-  description_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set:cms.Content.description)
-}
- void Content::set_description(const char* value) {
-  
-  description_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
-              GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_char:cms.Content.description)
-}
- void Content::set_description(const char* value,
-    size_t size) {
-  
-  description_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
-      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_pointer:cms.Content.description)
-}
- ::std::string* Content::mutable_description() {
-  
-  // @@protoc_insertion_point(field_mutable:cms.Content.description)
-  return description_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Content::release_description() {
-  
-  return description_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
-}
- ::std::string* Content::unsafe_arena_release_description() {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  
-  return description_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      GetArenaNoVirtual());
-}
- void Content::set_allocated_description(::std::string* description) {
-  if (description != NULL) {
-    
-  } else {
-    
-  }
-  description_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), description,
-      GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Content.description)
-}
- void Content::unsafe_arena_set_allocated_description(
-    ::std::string* description) {
-  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
-  if (description != NULL) {
-    
-  } else {
-    
-  }
-  
-  description_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      description, GetArenaNoVirtual());
-  // @@protoc_insertion_point(field_set_allocated:cms.Content.description)
-}
-
-// optional uint32 creation_timestamp = 4;
- void Content::clear_creation_timestamp() {
-  creation_timestamp_ = 0u;
-}
- ::google::protobuf::uint32 Content::creation_timestamp() const {
-  // @@protoc_insertion_point(field_get:cms.Content.creation_timestamp)
-  return creation_timestamp_;
-}
- void Content::set_creation_timestamp(::google::protobuf::uint32 value) {
-  
-  creation_timestamp_ = value;
-  // @@protoc_insertion_point(field_set:cms.Content.creation_timestamp)
-}
-
-// optional uint32 updated_timestamp = 5;
- void Content::clear_updated_timestamp() {
-  updated_timestamp_ = 0u;
-}
- ::google::protobuf::uint32 Content::updated_timestamp() const {
-  // @@protoc_insertion_point(field_get:cms.Content.updated_timestamp)
-  return updated_timestamp_;
-}
- void Content::set_updated_timestamp(::google::protobuf::uint32 value) {
-  
-  updated_timestamp_ = value;
-  // @@protoc_insertion_point(field_set:cms.Content.updated_timestamp)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
@@ -3422,232 +2720,123 @@ void ContentList::InternalSwap(ContentList* other) {
   return metadata;
 }
 
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// ContentList
 
-// repeated .cms.Content contents = 1;
- int ContentList::contents_size() const {
-  return contents_.size();
-}
- void ContentList::clear_contents() {
-  contents_.Clear();
-}
- const ::cms::Content& ContentList::contents(int index) const {
-  // @@protoc_insertion_point(field_get:cms.ContentList.contents)
-  return contents_.Get(index);
-}
- ::cms::Content* ContentList::mutable_contents(int index) {
-  // @@protoc_insertion_point(field_mutable:cms.ContentList.contents)
-  return contents_.Mutable(index);
-}
- ::cms::Content* ContentList::add_contents() {
-  // @@protoc_insertion_point(field_add:cms.ContentList.contents)
-  return contents_.Add();
-}
- const ::google::protobuf::RepeatedPtrField< ::cms::Content >&
-ContentList::contents() const {
-  // @@protoc_insertion_point(field_list:cms.ContentList.contents)
-  return contents_;
-}
- ::google::protobuf::RepeatedPtrField< ::cms::Content >*
-ContentList::mutable_contents() {
-  // @@protoc_insertion_point(field_mutable_list:cms.ContentList.contents)
-  return &contents_;
+static const char* ContentCmdHandler_method_names[] = {
+  "/cms.ContentCmdHandler/Create",
+};
+
+std::unique_ptr< ContentCmdHandler::Stub> ContentCmdHandler::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel) {
+  std::unique_ptr< ContentCmdHandler::Stub> stub(new ContentCmdHandler::Stub());
+  stub->set_channel(channel);
+  return stub;
 }
 
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-CmsCmd::~CmsCmd() {}
-
-const ::google::protobuf::ServiceDescriptor* CmsCmd::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return CmsCmd_descriptor_;
+::grpc::Status ContentCmdHandler::Stub::Create(::grpc::ClientContext* context, const ::cms::Content& request, ::cms::CmdResponse* response) {
+  return ::grpc::BlockingUnaryCall(channel(),::grpc::RpcMethod(ContentCmdHandler_method_names[0]), context, request, response);
 }
 
-const ::google::protobuf::ServiceDescriptor* CmsCmd::GetDescriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return CmsCmd_descriptor_;
+std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> ContentCmdHandler::Stub::AsyncCreate(::grpc::ClientContext* context, const ::cms::Content& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>>(new ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>(channel(), cq, ::grpc::RpcMethod(ContentCmdHandler_method_names[0]), context, request, tag));
 }
 
-void CmsCmd::Create(::google::protobuf::RpcController* controller,
-                         const ::cms::Content*,
-                         ::cms::Response*,
-                         ::google::protobuf::Closure* done) {
-  controller->SetFailed("Method Create() not implemented.");
-  done->Run();
+ContentCmdHandler::AsyncService::AsyncService(::grpc::CompletionQueue* cq) : ::grpc::AsynchronousService(cq, ContentCmdHandler_method_names, 1) {}
+
+ContentCmdHandler::Service::~Service() {
+  delete service_;
 }
 
-void CmsCmd::CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                             ::google::protobuf::RpcController* controller,
-                             const ::google::protobuf::Message* request,
-                             ::google::protobuf::Message* response,
-                             ::google::protobuf::Closure* done) {
-  GOOGLE_DCHECK_EQ(method->service(), CmsCmd_descriptor_);
-  switch(method->index()) {
-    case 0:
-      Create(controller,
-             ::google::protobuf::down_cast<const ::cms::Content*>(request),
-             ::google::protobuf::down_cast< ::cms::Response*>(response),
-             done);
-      break;
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      break;
+::grpc::Status ContentCmdHandler::Service::Create(::grpc::ServerContext* context, const ::cms::Content* request, ::cms::CmdResponse* response) {
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED);
+}
+
+void ContentCmdHandler::AsyncService::RequestCreate(::grpc::ServerContext* context, ::cms::Content* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void* tag) {
+  AsynchronousService::RequestAsyncUnary(0, context, request, response, cq, tag);
+}
+
+::grpc::RpcService* ContentCmdHandler::Service::service() {
+  if (service_ != nullptr) {
+    return service_;
   }
+  service_ = new ::grpc::RpcService();
+  service_->AddMethod(new ::grpc::RpcServiceMethod(
+      ContentCmdHandler_method_names[0],
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< ContentCmdHandler::Service, ::cms::Content, ::cms::CmdResponse>(
+          std::function< ::grpc::Status(ContentCmdHandler::Service*, ::grpc::ServerContext*, const ::cms::Content*, ::cms::CmdResponse*)>(&ContentCmdHandler::Service::Create), this),
+      new ::cms::Content, new ::cms::CmdResponse));
+  return service_;
 }
 
-const ::google::protobuf::Message& CmsCmd::GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::cms::Content::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *static_cast< ::google::protobuf::Message*>(NULL);
+
+static const char* CmsQuery_method_names[] = {
+  "/cms.CmsQuery/get",
+  "/cms.CmsQuery/get_all",
+};
+
+std::unique_ptr< CmsQuery::Stub> CmsQuery::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel) {
+  std::unique_ptr< CmsQuery::Stub> stub(new CmsQuery::Stub());
+  stub->set_channel(channel);
+  return stub;
+}
+
+::grpc::Status CmsQuery::Stub::get(::grpc::ClientContext* context, const ::cms::Uuid& request, ::cms::Content* response) {
+  return ::grpc::BlockingUnaryCall(channel(),::grpc::RpcMethod(CmsQuery_method_names[0]), context, request, response);
+}
+
+std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::Content>> CmsQuery::Stub::Asyncget(::grpc::ClientContext* context, const ::cms::Uuid& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::Content>>(new ::grpc::ClientAsyncResponseReader< ::cms::Content>(channel(), cq, ::grpc::RpcMethod(CmsQuery_method_names[0]), context, request, tag));
+}
+
+::grpc::Status CmsQuery::Stub::get_all(::grpc::ClientContext* context, const ::cms::Query& request, ::cms::ContentList* response) {
+  return ::grpc::BlockingUnaryCall(channel(),::grpc::RpcMethod(CmsQuery_method_names[1]), context, request, response);
+}
+
+std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::ContentList>> CmsQuery::Stub::Asyncget_all(::grpc::ClientContext* context, const ::cms::Query& request, ::grpc::CompletionQueue* cq, void* tag) {
+  return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::ContentList>>(new ::grpc::ClientAsyncResponseReader< ::cms::ContentList>(channel(), cq, ::grpc::RpcMethod(CmsQuery_method_names[1]), context, request, tag));
+}
+
+CmsQuery::AsyncService::AsyncService(::grpc::CompletionQueue* cq) : ::grpc::AsynchronousService(cq, CmsQuery_method_names, 2) {}
+
+CmsQuery::Service::~Service() {
+  delete service_;
+}
+
+::grpc::Status CmsQuery::Service::get(::grpc::ServerContext* context, const ::cms::Uuid* request, ::cms::Content* response) {
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED);
+}
+
+void CmsQuery::AsyncService::Requestget(::grpc::ServerContext* context, ::cms::Uuid* request, ::grpc::ServerAsyncResponseWriter< ::cms::Content>* response, ::grpc::CompletionQueue* cq, void* tag) {
+  AsynchronousService::RequestAsyncUnary(0, context, request, response, cq, tag);
+}
+
+::grpc::Status CmsQuery::Service::get_all(::grpc::ServerContext* context, const ::cms::Query* request, ::cms::ContentList* response) {
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED);
+}
+
+void CmsQuery::AsyncService::Requestget_all(::grpc::ServerContext* context, ::cms::Query* request, ::grpc::ServerAsyncResponseWriter< ::cms::ContentList>* response, ::grpc::CompletionQueue* cq, void* tag) {
+  AsynchronousService::RequestAsyncUnary(1, context, request, response, cq, tag);
+}
+
+::grpc::RpcService* CmsQuery::Service::service() {
+  if (service_ != nullptr) {
+    return service_;
   }
+  service_ = new ::grpc::RpcService();
+  service_->AddMethod(new ::grpc::RpcServiceMethod(
+      CmsQuery_method_names[0],
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< CmsQuery::Service, ::cms::Uuid, ::cms::Content>(
+          std::function< ::grpc::Status(CmsQuery::Service*, ::grpc::ServerContext*, const ::cms::Uuid*, ::cms::Content*)>(&CmsQuery::Service::get), this),
+      new ::cms::Uuid, new ::cms::Content));
+  service_->AddMethod(new ::grpc::RpcServiceMethod(
+      CmsQuery_method_names[1],
+      ::grpc::RpcMethod::NORMAL_RPC,
+      new ::grpc::RpcMethodHandler< CmsQuery::Service, ::cms::Query, ::cms::ContentList>(
+          std::function< ::grpc::Status(CmsQuery::Service*, ::grpc::ServerContext*, const ::cms::Query*, ::cms::ContentList*)>(&CmsQuery::Service::get_all), this),
+      new ::cms::Query, new ::cms::ContentList));
+  return service_;
 }
 
-const ::google::protobuf::Message& CmsCmd::GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::cms::Response::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *static_cast< ::google::protobuf::Message*>(NULL);
-  }
-}
-
-CmsCmd_Stub::CmsCmd_Stub(::google::protobuf::RpcChannel* channel)
-  : channel_(channel), owns_channel_(false) {}
-CmsCmd_Stub::CmsCmd_Stub(
-    ::google::protobuf::RpcChannel* channel,
-    ::google::protobuf::Service::ChannelOwnership ownership)
-  : channel_(channel),
-    owns_channel_(ownership == ::google::protobuf::Service::STUB_OWNS_CHANNEL) {}
-CmsCmd_Stub::~CmsCmd_Stub() {
-  if (owns_channel_) delete channel_;
-}
-
-void CmsCmd_Stub::Create(::google::protobuf::RpcController* controller,
-                              const ::cms::Content* request,
-                              ::cms::Response* response,
-                              ::google::protobuf::Closure* done) {
-  channel_->CallMethod(descriptor()->method(0),
-                       controller, request, response, done);
-}
-// ===================================================================
-
-CmsQuery::~CmsQuery() {}
-
-const ::google::protobuf::ServiceDescriptor* CmsQuery::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return CmsQuery_descriptor_;
-}
-
-const ::google::protobuf::ServiceDescriptor* CmsQuery::GetDescriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return CmsQuery_descriptor_;
-}
-
-void CmsQuery::get(::google::protobuf::RpcController* controller,
-                         const ::cms::Uuid*,
-                         ::cms::Content*,
-                         ::google::protobuf::Closure* done) {
-  controller->SetFailed("Method get() not implemented.");
-  done->Run();
-}
-
-void CmsQuery::get_all(::google::protobuf::RpcController* controller,
-                         const ::cms::Query*,
-                         ::cms::ContentList*,
-                         ::google::protobuf::Closure* done) {
-  controller->SetFailed("Method get_all() not implemented.");
-  done->Run();
-}
-
-void CmsQuery::CallMethod(const ::google::protobuf::MethodDescriptor* method,
-                             ::google::protobuf::RpcController* controller,
-                             const ::google::protobuf::Message* request,
-                             ::google::protobuf::Message* response,
-                             ::google::protobuf::Closure* done) {
-  GOOGLE_DCHECK_EQ(method->service(), CmsQuery_descriptor_);
-  switch(method->index()) {
-    case 0:
-      get(controller,
-             ::google::protobuf::down_cast<const ::cms::Uuid*>(request),
-             ::google::protobuf::down_cast< ::cms::Content*>(response),
-             done);
-      break;
-    case 1:
-      get_all(controller,
-             ::google::protobuf::down_cast<const ::cms::Query*>(request),
-             ::google::protobuf::down_cast< ::cms::ContentList*>(response),
-             done);
-      break;
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      break;
-  }
-}
-
-const ::google::protobuf::Message& CmsQuery::GetRequestPrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::cms::Uuid::default_instance();
-    case 1:
-      return ::cms::Query::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *static_cast< ::google::protobuf::Message*>(NULL);
-  }
-}
-
-const ::google::protobuf::Message& CmsQuery::GetResponsePrototype(
-    const ::google::protobuf::MethodDescriptor* method) const {
-  GOOGLE_DCHECK_EQ(method->service(), descriptor());
-  switch(method->index()) {
-    case 0:
-      return ::cms::Content::default_instance();
-    case 1:
-      return ::cms::ContentList::default_instance();
-    default:
-      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
-      return *static_cast< ::google::protobuf::Message*>(NULL);
-  }
-}
-
-CmsQuery_Stub::CmsQuery_Stub(::google::protobuf::RpcChannel* channel)
-  : channel_(channel), owns_channel_(false) {}
-CmsQuery_Stub::CmsQuery_Stub(
-    ::google::protobuf::RpcChannel* channel,
-    ::google::protobuf::Service::ChannelOwnership ownership)
-  : channel_(channel),
-    owns_channel_(ownership == ::google::protobuf::Service::STUB_OWNS_CHANNEL) {}
-CmsQuery_Stub::~CmsQuery_Stub() {
-  if (owns_channel_) delete channel_;
-}
-
-void CmsQuery_Stub::get(::google::protobuf::RpcController* controller,
-                              const ::cms::Uuid* request,
-                              ::cms::Content* response,
-                              ::google::protobuf::Closure* done) {
-  channel_->CallMethod(descriptor()->method(0),
-                       controller, request, response, done);
-}
-void CmsQuery_Stub::get_all(::google::protobuf::RpcController* controller,
-                              const ::cms::Query* request,
-                              ::cms::ContentList* response,
-                              ::google::protobuf::Closure* done) {
-  channel_->CallMethod(descriptor()->method(1),
-                       controller, request, response, done);
-}
 
 // @@protoc_insertion_point(namespace_scope)
 

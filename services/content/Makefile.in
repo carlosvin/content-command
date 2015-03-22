@@ -92,9 +92,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_server_OBJECTS = server.$(OBJEXT)
+am_server_OBJECTS = server.$(OBJEXT) ContentCmdHandlerImpl.$(OBJEXT)
 server_OBJECTS = $(am_server_OBJECTS)
-server_LDADD = $(LDADD)
+server_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -124,6 +124,18 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_@AM_V@)
+am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_@AM_V@)
+am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 SOURCES = $(server_SOURCES)
 DIST_SOURCES = $(server_SOURCES)
 am__can_run_installinfo = \
@@ -256,9 +268,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = -std=c++11 -I../../libcmslight
-server_SOURCES = server.cpp
-AM_LDFLAGS = -lgrpc -lgrpc++ -lprotobuf
-server_LADD = -lcmslight
+AM_LDFLAGS = -L../../libcmslight
+server_SOURCES = server.cpp ContentCmdHandlerImpl.cpp ContentCmdHandlerImpl.h
+server_LDADD = -lcmslight -lgrpc -lgrpc++ -lprotobuf
 all: all-am
 
 .SUFFIXES:
@@ -346,6 +358,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ContentCmdHandlerImpl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/server.Po@am__quote@
 
 .cpp.o:
