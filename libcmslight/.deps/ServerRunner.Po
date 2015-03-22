@@ -1,4 +1,4 @@
-server.o: server.cpp /usr/include/stdc-predef.h \
+ServerRunner.o: ServerRunner.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/iostream \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -104,17 +104,8 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/unique_ptr.h \
  /usr/include/c++/4.8/bits/shared_ptr.h \
  /usr/include/c++/4.8/bits/shared_ptr_base.h \
- /usr/include/c++/4.8/backward/auto_ptr.h /usr/local/include/grpc/grpc.h \
- /usr/local/include/grpc/status.h /usr/local/include/grpc/support/slice.h \
- /usr/local/include/grpc/support/sync.h \
- /usr/local/include/grpc/support/port_platform.h \
- /usr/local/include/grpc/support/sync_generic.h \
- /usr/local/include/grpc/support/atm.h \
- /usr/local/include/grpc/support/atm_gcc_atomic.h \
- /usr/local/include/grpc/support/sync_posix.h \
- /usr/local/include/grpc/support/time.h \
- /usr/local/include/grpc/support/cancellable_platform.h \
- ContentCmdHandlerImpl.h /usr/local/include/grpc++/server.h \
+ /usr/include/c++/4.8/backward/auto_ptr.h \
+ /usr/local/include/grpc++/server.h \
  /usr/include/c++/4.8/condition_variable /usr/include/c++/4.8/chrono \
  /usr/include/c++/4.8/ratio /usr/include/c++/4.8/limits \
  /usr/include/c++/4.8/ctime /usr/include/c++/4.8/mutex \
@@ -143,28 +134,24 @@ server.o: server.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/bits/stl_tree.h /usr/include/c++/4.8/bits/stl_set.h \
  /usr/include/c++/4.8/bits/stl_multiset.h \
  /usr/local/include/google/protobuf/io/zero_copy_stream.h \
- /usr/local/include/grpc++/impl/call.h /usr/local/include/grpc++/status.h \
+ /usr/local/include/grpc++/impl/call.h /usr/local/include/grpc/grpc.h \
+ /usr/local/include/grpc/status.h /usr/local/include/grpc/support/slice.h \
+ /usr/local/include/grpc/support/sync.h \
+ /usr/local/include/grpc/support/port_platform.h \
+ /usr/local/include/grpc/support/sync_generic.h \
+ /usr/local/include/grpc/support/atm.h \
+ /usr/local/include/grpc/support/atm_gcc_atomic.h \
+ /usr/local/include/grpc/support/sync_posix.h \
+ /usr/local/include/grpc/support/time.h \
+ /usr/local/include/grpc/support/cancellable_platform.h \
+ /usr/local/include/grpc++/status.h \
  /usr/local/include/grpc++/status_code_enum.h /usr/include/c++/4.8/map \
  /usr/include/c++/4.8/bits/stl_map.h \
  /usr/include/c++/4.8/bits/stl_multimap.h \
  /usr/local/include/grpc++/impl/service_type.h \
- /usr/local/include/grpc++/server_context.h ../../libcmslight/cms.pb.h \
- /usr/local/include/google/protobuf/arenastring.h \
- /usr/local/include/google/protobuf/stubs/fastmem.h \
- /usr/local/include/google/protobuf/generated_message_util.h \
- /usr/local/include/google/protobuf/stubs/once.h \
- /usr/local/include/google/protobuf/metadata.h \
- /usr/local/include/google/protobuf/unknown_field_set.h \
- /usr/local/include/google/protobuf/repeated_field.h \
- /usr/include/c++/4.8/iterator \
- /usr/include/c++/4.8/bits/stream_iterator.h \
- /usr/local/include/google/protobuf/stubs/casts.h \
- /usr/local/include/google/protobuf/extension_set.h \
- /usr/local/include/google/protobuf/generated_enum_reflection.h \
- /usr/local/include/grpc++/impl/internal_stub.h \
- /usr/local/include/grpc++/channel_interface.h \
- ../../libcmslight/ServerRunner.h \
- /usr/local/include/grpc++/server_builder.h
+ /usr/local/include/grpc++/server_builder.h \
+ /usr/local/include/grpc++/server_context.h \
+ /usr/local/include/grpc++/server_credentials.h ServerRunner.h
 
 /usr/include/stdc-predef.h:
 
@@ -464,30 +451,6 @@ server.o: server.cpp /usr/include/stdc-predef.h \
 
 /usr/include/c++/4.8/backward/auto_ptr.h:
 
-/usr/local/include/grpc/grpc.h:
-
-/usr/local/include/grpc/status.h:
-
-/usr/local/include/grpc/support/slice.h:
-
-/usr/local/include/grpc/support/sync.h:
-
-/usr/local/include/grpc/support/port_platform.h:
-
-/usr/local/include/grpc/support/sync_generic.h:
-
-/usr/local/include/grpc/support/atm.h:
-
-/usr/local/include/grpc/support/atm_gcc_atomic.h:
-
-/usr/local/include/grpc/support/sync_posix.h:
-
-/usr/local/include/grpc/support/time.h:
-
-/usr/local/include/grpc/support/cancellable_platform.h:
-
-ContentCmdHandlerImpl.h:
-
 /usr/local/include/grpc++/server.h:
 
 /usr/include/c++/4.8/condition_variable:
@@ -566,6 +529,28 @@ ContentCmdHandlerImpl.h:
 
 /usr/local/include/grpc++/impl/call.h:
 
+/usr/local/include/grpc/grpc.h:
+
+/usr/local/include/grpc/status.h:
+
+/usr/local/include/grpc/support/slice.h:
+
+/usr/local/include/grpc/support/sync.h:
+
+/usr/local/include/grpc/support/port_platform.h:
+
+/usr/local/include/grpc/support/sync_generic.h:
+
+/usr/local/include/grpc/support/atm.h:
+
+/usr/local/include/grpc/support/atm_gcc_atomic.h:
+
+/usr/local/include/grpc/support/sync_posix.h:
+
+/usr/local/include/grpc/support/time.h:
+
+/usr/local/include/grpc/support/cancellable_platform.h:
+
 /usr/local/include/grpc++/status.h:
 
 /usr/local/include/grpc++/status_code_enum.h:
@@ -578,38 +563,10 @@ ContentCmdHandlerImpl.h:
 
 /usr/local/include/grpc++/impl/service_type.h:
 
+/usr/local/include/grpc++/server_builder.h:
+
 /usr/local/include/grpc++/server_context.h:
 
-../../libcmslight/cms.pb.h:
+/usr/local/include/grpc++/server_credentials.h:
 
-/usr/local/include/google/protobuf/arenastring.h:
-
-/usr/local/include/google/protobuf/stubs/fastmem.h:
-
-/usr/local/include/google/protobuf/generated_message_util.h:
-
-/usr/local/include/google/protobuf/stubs/once.h:
-
-/usr/local/include/google/protobuf/metadata.h:
-
-/usr/local/include/google/protobuf/unknown_field_set.h:
-
-/usr/local/include/google/protobuf/repeated_field.h:
-
-/usr/include/c++/4.8/iterator:
-
-/usr/include/c++/4.8/bits/stream_iterator.h:
-
-/usr/local/include/google/protobuf/stubs/casts.h:
-
-/usr/local/include/google/protobuf/extension_set.h:
-
-/usr/local/include/google/protobuf/generated_enum_reflection.h:
-
-/usr/local/include/grpc++/impl/internal_stub.h:
-
-/usr/local/include/grpc++/channel_interface.h:
-
-../../libcmslight/ServerRunner.h:
-
-/usr/local/include/grpc++/server_builder.h:
+ServerRunner.h:

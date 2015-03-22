@@ -127,7 +127,7 @@ am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
 libcmslight_a_AR = $(AR) $(ARFLAGS)
 libcmslight_a_LIBADD =
-am_libcmslight_a_OBJECTS = cms.pb.$(OBJEXT)
+am_libcmslight_a_OBJECTS = cms.pb.$(OBJEXT) ServerRunner.$(OBJEXT)
 libcmslight_a_OBJECTS = $(am_libcmslight_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -158,6 +158,18 @@ AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_$(V))
+am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+am__v_CC_0 = @echo "  CC      " $@;
+am__v_CC_1 = 
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_$(V))
+am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
+am__v_CCLD_0 = @echo "  CCLD    " $@;
+am__v_CCLD_1 = 
 SOURCES = $(libcmslight_a_SOURCES)
 DIST_SOURCES = $(libcmslight_a_SOURCES)
 am__can_run_installinfo = \
@@ -293,7 +305,7 @@ top_srcdir = ..
 AM_CXXFLAGS = -std=c++11
 AM_LDFLAGS = -lprotobuf -lgrpc -lgrpc++ 
 lib_LIBRARIES = libcmslight.a
-libcmslight_a_SOURCES = cms.pb.cc 
+libcmslight_a_SOURCES = cms.pb.cc ServerRunner.cpp ServerRunner.h
 
 #libcmslight_a_LIBADD = -lgrpc -lgrpc++ -lprotobuf
 cmslightdir = $(includedir)/cmslight
@@ -301,7 +313,7 @@ cmslight_HEADERS = cms.pb.h
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .o .obj
+.SUFFIXES: .cc .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -375,6 +387,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/ServerRunner.Po
 include ./$(DEPDIR)/cms.pb.Po
 
 .cc.o:
@@ -385,6 +398,20 @@ include ./$(DEPDIR)/cms.pb.Po
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
 
 .cc.obj:
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.o:
+	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	$(AM_V_CXX)source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
