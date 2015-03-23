@@ -57,6 +57,10 @@ class Filter;
 class CmdResponse;
 class Content;
 class ContentList;
+class Event;
+class EventType;
+class EventListener;
+class Aggregate;
 
 enum CmdResponse_Level {
   CmdResponse_Level_DEBUG = 0,
@@ -990,6 +994,481 @@ class ContentList : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ContentList* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class Event : public ::google::protobuf::Message {
+ public:
+  Event();
+  virtual ~Event();
+
+  Event(const Event& from);
+
+  inline Event& operator=(const Event& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline ::google::protobuf::Arena* GetArena() const { return GetArenaNoVirtual(); }
+  inline void* GetMaybeArenaPointer() const {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Event& default_instance();
+
+  void UnsafeArenaSwap(Event* other);
+  void Swap(Event* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Event* New() const { return New(NULL); }
+
+  Event* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Event& from);
+  void MergeFrom(const Event& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Event* other);
+  protected:
+  explicit Event(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .cms.Uuid aggregateId = 1;
+  inline bool has_aggregateid() const;
+  inline void clear_aggregateid();
+  static const int kAggregateIdFieldNumber = 1;
+  inline const ::cms::Uuid& aggregateid() const;
+  inline ::cms::Uuid* mutable_aggregateid();
+  inline ::cms::Uuid* release_aggregateid();
+  inline void set_allocated_aggregateid(::cms::Uuid* aggregateid);
+  inline ::cms::Uuid* unsafe_arena_release_aggregateid();
+  inline void unsafe_arena_set_allocated_aggregateid(
+      ::cms::Uuid* aggregateid);
+
+  // optional uint32 version = 2;
+  inline void clear_version();
+  static const int kVersionFieldNumber = 2;
+  inline ::google::protobuf::uint32 version() const;
+  inline void set_version(::google::protobuf::uint32 value);
+
+  // optional string data = 3;
+  inline void clear_data();
+  static const int kDataFieldNumber = 3;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const char* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+  inline ::std::string* unsafe_arena_release_data();
+  inline void unsafe_arena_set_allocated_data(
+      ::std::string* data);
+
+  // optional .cms.EventType type = 4;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 4;
+  inline const ::cms::EventType& type() const;
+  inline ::cms::EventType* mutable_type();
+  inline ::cms::EventType* release_type();
+  inline void set_allocated_type(::cms::EventType* type);
+  inline ::cms::EventType* unsafe_arena_release_type();
+  inline void unsafe_arena_set_allocated_type(
+      ::cms::EventType* type);
+
+  // @@protoc_insertion_point(class_scope:cms.Event)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  friend class ::google::protobuf::Arena;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool _is_default_instance_;
+  ::cms::Uuid* aggregateid_;
+  ::google::protobuf::internal::ArenaStringPtr data_;
+  ::cms::EventType* type_;
+  ::google::protobuf::uint32 version_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_cms_2eproto();
+  friend void protobuf_AssignDesc_cms_2eproto();
+  friend void protobuf_ShutdownFile_cms_2eproto();
+
+  void InitAsDefaultInstance();
+  static Event* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class EventType : public ::google::protobuf::Message {
+ public:
+  EventType();
+  virtual ~EventType();
+
+  EventType(const EventType& from);
+
+  inline EventType& operator=(const EventType& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline ::google::protobuf::Arena* GetArena() const { return GetArenaNoVirtual(); }
+  inline void* GetMaybeArenaPointer() const {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EventType& default_instance();
+
+  void UnsafeArenaSwap(EventType* other);
+  void Swap(EventType* other);
+
+  // implements Message ----------------------------------------------
+
+  inline EventType* New() const { return New(NULL); }
+
+  EventType* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EventType& from);
+  void MergeFrom(const EventType& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(EventType* other);
+  protected:
+  explicit EventType(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional string type = 1;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline const ::std::string& type() const;
+  inline void set_type(const ::std::string& value);
+  inline void set_type(const char* value);
+  inline void set_type(const char* value, size_t size);
+  inline ::std::string* mutable_type();
+  inline ::std::string* release_type();
+  inline void set_allocated_type(::std::string* type);
+  inline ::std::string* unsafe_arena_release_type();
+  inline void unsafe_arena_set_allocated_type(
+      ::std::string* type);
+
+  // @@protoc_insertion_point(class_scope:cms.EventType)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  friend class ::google::protobuf::Arena;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr type_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_cms_2eproto();
+  friend void protobuf_AssignDesc_cms_2eproto();
+  friend void protobuf_ShutdownFile_cms_2eproto();
+
+  void InitAsDefaultInstance();
+  static EventType* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class EventListener : public ::google::protobuf::Message {
+ public:
+  EventListener();
+  virtual ~EventListener();
+
+  EventListener(const EventListener& from);
+
+  inline EventListener& operator=(const EventListener& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline ::google::protobuf::Arena* GetArena() const { return GetArenaNoVirtual(); }
+  inline void* GetMaybeArenaPointer() const {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EventListener& default_instance();
+
+  void UnsafeArenaSwap(EventListener* other);
+  void Swap(EventListener* other);
+
+  // implements Message ----------------------------------------------
+
+  inline EventListener* New() const { return New(NULL); }
+
+  EventListener* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const EventListener& from);
+  void MergeFrom(const EventListener& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(EventListener* other);
+  protected:
+  explicit EventListener(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .cms.EventType type = 1;
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline const ::cms::EventType& type() const;
+  inline ::cms::EventType* mutable_type();
+  inline ::cms::EventType* release_type();
+  inline void set_allocated_type(::cms::EventType* type);
+  inline ::cms::EventType* unsafe_arena_release_type();
+  inline void unsafe_arena_set_allocated_type(
+      ::cms::EventType* type);
+
+  // optional string endpoint_address = 2;
+  inline void clear_endpoint_address();
+  static const int kEndpointAddressFieldNumber = 2;
+  inline const ::std::string& endpoint_address() const;
+  inline void set_endpoint_address(const ::std::string& value);
+  inline void set_endpoint_address(const char* value);
+  inline void set_endpoint_address(const char* value, size_t size);
+  inline ::std::string* mutable_endpoint_address();
+  inline ::std::string* release_endpoint_address();
+  inline void set_allocated_endpoint_address(::std::string* endpoint_address);
+  inline ::std::string* unsafe_arena_release_endpoint_address();
+  inline void unsafe_arena_set_allocated_endpoint_address(
+      ::std::string* endpoint_address);
+
+  // @@protoc_insertion_point(class_scope:cms.EventListener)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  friend class ::google::protobuf::Arena;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool _is_default_instance_;
+  ::cms::EventType* type_;
+  ::google::protobuf::internal::ArenaStringPtr endpoint_address_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_cms_2eproto();
+  friend void protobuf_AssignDesc_cms_2eproto();
+  friend void protobuf_ShutdownFile_cms_2eproto();
+
+  void InitAsDefaultInstance();
+  static EventListener* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Aggregate : public ::google::protobuf::Message {
+ public:
+  Aggregate();
+  virtual ~Aggregate();
+
+  Aggregate(const Aggregate& from);
+
+  inline Aggregate& operator=(const Aggregate& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline ::google::protobuf::Arena* GetArena() const { return GetArenaNoVirtual(); }
+  inline void* GetMaybeArenaPointer() const {
+    return MaybeArenaPtr();
+  }
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Aggregate& default_instance();
+
+  void UnsafeArenaSwap(Aggregate* other);
+  void Swap(Aggregate* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Aggregate* New() const { return New(NULL); }
+
+  Aggregate* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Aggregate& from);
+  void MergeFrom(const Aggregate& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Aggregate* other);
+  protected:
+  explicit Aggregate(::google::protobuf::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::google::protobuf::Arena* arena);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .cms.Uuid aggregateId = 1;
+  inline bool has_aggregateid() const;
+  inline void clear_aggregateid();
+  static const int kAggregateIdFieldNumber = 1;
+  inline const ::cms::Uuid& aggregateid() const;
+  inline ::cms::Uuid* mutable_aggregateid();
+  inline ::cms::Uuid* release_aggregateid();
+  inline void set_allocated_aggregateid(::cms::Uuid* aggregateid);
+  inline ::cms::Uuid* unsafe_arena_release_aggregateid();
+  inline void unsafe_arena_set_allocated_aggregateid(
+      ::cms::Uuid* aggregateid);
+
+  // optional uint32 version = 2;
+  inline void clear_version();
+  static const int kVersionFieldNumber = 2;
+  inline ::google::protobuf::uint32 version() const;
+  inline void set_version(::google::protobuf::uint32 value);
+
+  // optional string data = 3;
+  inline void clear_data();
+  static const int kDataFieldNumber = 3;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const char* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
+  inline ::std::string* unsafe_arena_release_data();
+  inline void unsafe_arena_set_allocated_data(
+      ::std::string* data);
+
+  // optional .cms.EventListener listener = 4;
+  inline bool has_listener() const;
+  inline void clear_listener();
+  static const int kListenerFieldNumber = 4;
+  inline const ::cms::EventListener& listener() const;
+  inline ::cms::EventListener* mutable_listener();
+  inline ::cms::EventListener* release_listener();
+  inline void set_allocated_listener(::cms::EventListener* listener);
+  inline ::cms::EventListener* unsafe_arena_release_listener();
+  inline void unsafe_arena_set_allocated_listener(
+      ::cms::EventListener* listener);
+
+  // @@protoc_insertion_point(class_scope:cms.Aggregate)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  friend class ::google::protobuf::Arena;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  bool _is_default_instance_;
+  ::cms::Uuid* aggregateid_;
+  ::google::protobuf::internal::ArenaStringPtr data_;
+  ::cms::EventListener* listener_;
+  ::google::protobuf::uint32 version_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_cms_2eproto();
+  friend void protobuf_AssignDesc_cms_2eproto();
+  friend void protobuf_ShutdownFile_cms_2eproto();
+
+  void InitAsDefaultInstance();
+  static Aggregate* default_instance_;
+};
 // ===================================================================
 
 
@@ -1783,32 +2262,725 @@ ContentList::mutable_contents() {
   return &contents_;
 }
 
+// -------------------------------------------------------------------
 
-class ContentCmdHandler GRPC_FINAL {
- public:
-  class Stub GRPC_FINAL : public ::grpc::InternalStub {
-   public:
-    ::grpc::Status Create(::grpc::ClientContext* context, const ::cms::Content& request, ::cms::CmdResponse* response);
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> AsyncCreate(::grpc::ClientContext* context, const ::cms::Content& request, ::grpc::CompletionQueue* cq, void* tag);
-  };
-  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+// Event
 
-  class Service : public ::grpc::SynchronousService {
-   public:
-    Service() : service_(nullptr) {}
-    virtual ~Service();
-    virtual ::grpc::Status Create(::grpc::ServerContext* context, const ::cms::Content* request, ::cms::CmdResponse* response);
-    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
-   private:
-    ::grpc::RpcService* service_;
-  };
-  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
-   public:
-    explicit AsyncService(::grpc::CompletionQueue* cq);
-    ~AsyncService() {};
-    void RequestCreate(::grpc::ServerContext* context, ::cms::Content* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
-  };
-};
+// optional .cms.Uuid aggregateId = 1;
+inline bool Event::has_aggregateid() const {
+  return !_is_default_instance_ && aggregateid_ != NULL;
+}
+inline void Event::clear_aggregateid() {
+  if (aggregateid_ != NULL) delete aggregateid_;
+  aggregateid_ = NULL;
+}
+inline const ::cms::Uuid& Event::aggregateid() const {
+  // @@protoc_insertion_point(field_get:cms.Event.aggregateId)
+  return aggregateid_ != NULL ? *aggregateid_ : *default_instance_->aggregateid_;
+}
+inline ::cms::Uuid* Event::mutable_aggregateid() {
+  
+  if (aggregateid_ == NULL) {
+    aggregateid_ = ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:cms.Event.aggregateId)
+  return aggregateid_;
+}
+inline ::cms::Uuid* Event::release_aggregateid() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    if (aggregateid_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::Uuid* temp = new ::cms::Uuid;
+      temp->MergeFrom(*aggregateid_);
+      aggregateid_ = NULL;
+      return temp;
+    }
+  } else {
+    ::cms::Uuid* temp = aggregateid_;
+    aggregateid_ = NULL;
+    return temp;
+  }
+}
+inline ::cms::Uuid* Event::unsafe_arena_release_aggregateid() {
+  
+  ::cms::Uuid* temp = aggregateid_;
+  aggregateid_ = NULL;
+  return temp;
+}
+inline void Event::set_allocated_aggregateid(::cms::Uuid* aggregateid) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete aggregateid_;
+  }
+  if (aggregateid != NULL) {
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(aggregateid) == NULL) {
+      GetArenaNoVirtual()->Own(aggregateid);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(aggregateid)) {
+      ::cms::Uuid* new_aggregateid = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+            GetArenaNoVirtual());
+      new_aggregateid->CopyFrom(*aggregateid);
+      aggregateid = new_aggregateid;
+    }
+  }
+  aggregateid_ = aggregateid;
+  if (aggregateid) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:cms.Event.aggregateId)
+}
+inline void Event::unsafe_arena_set_allocated_aggregateid(
+    ::cms::Uuid* aggregateid) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete aggregateid_;
+  }
+  aggregateid_ = aggregateid;
+  if (aggregateid) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Event.aggregateId)
+}
+
+// optional uint32 version = 2;
+inline void Event::clear_version() {
+  version_ = 0u;
+}
+inline ::google::protobuf::uint32 Event::version() const {
+  // @@protoc_insertion_point(field_get:cms.Event.version)
+  return version_;
+}
+inline void Event::set_version(::google::protobuf::uint32 value) {
+  
+  version_ = value;
+  // @@protoc_insertion_point(field_set:cms.Event.version)
+}
+
+// optional string data = 3;
+inline void Event::clear_data() {
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& Event::data() const {
+  // @@protoc_insertion_point(field_get:cms.Event.data)
+  return data_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Event::set_data(const ::std::string& value) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:cms.Event.data)
+}
+inline void Event::set_data(const char* value) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:cms.Event.data)
+}
+inline void Event::set_data(const char* value,
+    size_t size) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:cms.Event.data)
+}
+inline ::std::string* Event::mutable_data() {
+  
+  // @@protoc_insertion_point(field_mutable:cms.Event.data)
+  return data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* Event::release_data() {
+  
+  return data_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* Event::unsafe_arena_release_data() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return data_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void Event::set_allocated_data(::std::string* data) {
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.Event.data)
+}
+inline void Event::unsafe_arena_set_allocated_data(
+    ::std::string* data) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  
+  data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      data, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.Event.data)
+}
+
+// optional .cms.EventType type = 4;
+inline bool Event::has_type() const {
+  return !_is_default_instance_ && type_ != NULL;
+}
+inline void Event::clear_type() {
+  if (type_ != NULL) delete type_;
+  type_ = NULL;
+}
+inline const ::cms::EventType& Event::type() const {
+  // @@protoc_insertion_point(field_get:cms.Event.type)
+  return type_ != NULL ? *type_ : *default_instance_->type_;
+}
+inline ::cms::EventType* Event::mutable_type() {
+  
+  if (type_ == NULL) {
+    type_ = ::google::protobuf::Arena::CreateMessage< ::cms::EventType >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:cms.Event.type)
+  return type_;
+}
+inline ::cms::EventType* Event::release_type() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    if (type_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::EventType* temp = new ::cms::EventType;
+      temp->MergeFrom(*type_);
+      type_ = NULL;
+      return temp;
+    }
+  } else {
+    ::cms::EventType* temp = type_;
+    type_ = NULL;
+    return temp;
+  }
+}
+inline ::cms::EventType* Event::unsafe_arena_release_type() {
+  
+  ::cms::EventType* temp = type_;
+  type_ = NULL;
+  return temp;
+}
+inline void Event::set_allocated_type(::cms::EventType* type) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete type_;
+  }
+  if (type != NULL) {
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(type) == NULL) {
+      GetArenaNoVirtual()->Own(type);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(type)) {
+      ::cms::EventType* new_type = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::EventType >(
+            GetArenaNoVirtual());
+      new_type->CopyFrom(*type);
+      type = new_type;
+    }
+  }
+  type_ = type;
+  if (type) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:cms.Event.type)
+}
+inline void Event::unsafe_arena_set_allocated_type(
+    ::cms::EventType* type) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete type_;
+  }
+  type_ = type;
+  if (type) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Event.type)
+}
+
+// -------------------------------------------------------------------
+
+// EventType
+
+// optional string type = 1;
+inline void EventType::clear_type() {
+  type_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& EventType::type() const {
+  // @@protoc_insertion_point(field_get:cms.EventType.type)
+  return type_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void EventType::set_type(const ::std::string& value) {
+  
+  type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:cms.EventType.type)
+}
+inline void EventType::set_type(const char* value) {
+  
+  type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:cms.EventType.type)
+}
+inline void EventType::set_type(const char* value,
+    size_t size) {
+  
+  type_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:cms.EventType.type)
+}
+inline ::std::string* EventType::mutable_type() {
+  
+  // @@protoc_insertion_point(field_mutable:cms.EventType.type)
+  return type_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* EventType::release_type() {
+  
+  return type_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* EventType::unsafe_arena_release_type() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return type_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void EventType::set_allocated_type(::std::string* type) {
+  if (type != NULL) {
+    
+  } else {
+    
+  }
+  type_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), type,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.EventType.type)
+}
+inline void EventType::unsafe_arena_set_allocated_type(
+    ::std::string* type) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (type != NULL) {
+    
+  } else {
+    
+  }
+  
+  type_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      type, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.EventType.type)
+}
+
+// -------------------------------------------------------------------
+
+// EventListener
+
+// optional .cms.EventType type = 1;
+inline bool EventListener::has_type() const {
+  return !_is_default_instance_ && type_ != NULL;
+}
+inline void EventListener::clear_type() {
+  if (type_ != NULL) delete type_;
+  type_ = NULL;
+}
+inline const ::cms::EventType& EventListener::type() const {
+  // @@protoc_insertion_point(field_get:cms.EventListener.type)
+  return type_ != NULL ? *type_ : *default_instance_->type_;
+}
+inline ::cms::EventType* EventListener::mutable_type() {
+  
+  if (type_ == NULL) {
+    type_ = ::google::protobuf::Arena::CreateMessage< ::cms::EventType >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:cms.EventListener.type)
+  return type_;
+}
+inline ::cms::EventType* EventListener::release_type() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    if (type_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::EventType* temp = new ::cms::EventType;
+      temp->MergeFrom(*type_);
+      type_ = NULL;
+      return temp;
+    }
+  } else {
+    ::cms::EventType* temp = type_;
+    type_ = NULL;
+    return temp;
+  }
+}
+inline ::cms::EventType* EventListener::unsafe_arena_release_type() {
+  
+  ::cms::EventType* temp = type_;
+  type_ = NULL;
+  return temp;
+}
+inline void EventListener::set_allocated_type(::cms::EventType* type) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete type_;
+  }
+  if (type != NULL) {
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(type) == NULL) {
+      GetArenaNoVirtual()->Own(type);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(type)) {
+      ::cms::EventType* new_type = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::EventType >(
+            GetArenaNoVirtual());
+      new_type->CopyFrom(*type);
+      type = new_type;
+    }
+  }
+  type_ = type;
+  if (type) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:cms.EventListener.type)
+}
+inline void EventListener::unsafe_arena_set_allocated_type(
+    ::cms::EventType* type) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete type_;
+  }
+  type_ = type;
+  if (type) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.EventListener.type)
+}
+
+// optional string endpoint_address = 2;
+inline void EventListener::clear_endpoint_address() {
+  endpoint_address_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& EventListener::endpoint_address() const {
+  // @@protoc_insertion_point(field_get:cms.EventListener.endpoint_address)
+  return endpoint_address_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void EventListener::set_endpoint_address(const ::std::string& value) {
+  
+  endpoint_address_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:cms.EventListener.endpoint_address)
+}
+inline void EventListener::set_endpoint_address(const char* value) {
+  
+  endpoint_address_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:cms.EventListener.endpoint_address)
+}
+inline void EventListener::set_endpoint_address(const char* value,
+    size_t size) {
+  
+  endpoint_address_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:cms.EventListener.endpoint_address)
+}
+inline ::std::string* EventListener::mutable_endpoint_address() {
+  
+  // @@protoc_insertion_point(field_mutable:cms.EventListener.endpoint_address)
+  return endpoint_address_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* EventListener::release_endpoint_address() {
+  
+  return endpoint_address_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* EventListener::unsafe_arena_release_endpoint_address() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return endpoint_address_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void EventListener::set_allocated_endpoint_address(::std::string* endpoint_address) {
+  if (endpoint_address != NULL) {
+    
+  } else {
+    
+  }
+  endpoint_address_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), endpoint_address,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.EventListener.endpoint_address)
+}
+inline void EventListener::unsafe_arena_set_allocated_endpoint_address(
+    ::std::string* endpoint_address) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (endpoint_address != NULL) {
+    
+  } else {
+    
+  }
+  
+  endpoint_address_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      endpoint_address, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.EventListener.endpoint_address)
+}
+
+// -------------------------------------------------------------------
+
+// Aggregate
+
+// optional .cms.Uuid aggregateId = 1;
+inline bool Aggregate::has_aggregateid() const {
+  return !_is_default_instance_ && aggregateid_ != NULL;
+}
+inline void Aggregate::clear_aggregateid() {
+  if (aggregateid_ != NULL) delete aggregateid_;
+  aggregateid_ = NULL;
+}
+inline const ::cms::Uuid& Aggregate::aggregateid() const {
+  // @@protoc_insertion_point(field_get:cms.Aggregate.aggregateId)
+  return aggregateid_ != NULL ? *aggregateid_ : *default_instance_->aggregateid_;
+}
+inline ::cms::Uuid* Aggregate::mutable_aggregateid() {
+  
+  if (aggregateid_ == NULL) {
+    aggregateid_ = ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:cms.Aggregate.aggregateId)
+  return aggregateid_;
+}
+inline ::cms::Uuid* Aggregate::release_aggregateid() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    if (aggregateid_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::Uuid* temp = new ::cms::Uuid;
+      temp->MergeFrom(*aggregateid_);
+      aggregateid_ = NULL;
+      return temp;
+    }
+  } else {
+    ::cms::Uuid* temp = aggregateid_;
+    aggregateid_ = NULL;
+    return temp;
+  }
+}
+inline ::cms::Uuid* Aggregate::unsafe_arena_release_aggregateid() {
+  
+  ::cms::Uuid* temp = aggregateid_;
+  aggregateid_ = NULL;
+  return temp;
+}
+inline void Aggregate::set_allocated_aggregateid(::cms::Uuid* aggregateid) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete aggregateid_;
+  }
+  if (aggregateid != NULL) {
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(aggregateid) == NULL) {
+      GetArenaNoVirtual()->Own(aggregateid);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(aggregateid)) {
+      ::cms::Uuid* new_aggregateid = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::Uuid >(
+            GetArenaNoVirtual());
+      new_aggregateid->CopyFrom(*aggregateid);
+      aggregateid = new_aggregateid;
+    }
+  }
+  aggregateid_ = aggregateid;
+  if (aggregateid) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:cms.Aggregate.aggregateId)
+}
+inline void Aggregate::unsafe_arena_set_allocated_aggregateid(
+    ::cms::Uuid* aggregateid) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete aggregateid_;
+  }
+  aggregateid_ = aggregateid;
+  if (aggregateid) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Aggregate.aggregateId)
+}
+
+// optional uint32 version = 2;
+inline void Aggregate::clear_version() {
+  version_ = 0u;
+}
+inline ::google::protobuf::uint32 Aggregate::version() const {
+  // @@protoc_insertion_point(field_get:cms.Aggregate.version)
+  return version_;
+}
+inline void Aggregate::set_version(::google::protobuf::uint32 value) {
+  
+  version_ = value;
+  // @@protoc_insertion_point(field_set:cms.Aggregate.version)
+}
+
+// optional string data = 3;
+inline void Aggregate::clear_data() {
+  data_.ClearToEmpty(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline const ::std::string& Aggregate::data() const {
+  // @@protoc_insertion_point(field_get:cms.Aggregate.data)
+  return data_.Get(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Aggregate::set_data(const ::std::string& value) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set:cms.Aggregate.data)
+}
+inline void Aggregate::set_data(const char* value) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_char:cms.Aggregate.data)
+}
+inline void Aggregate::set_data(const char* value,
+    size_t size) {
+  
+  data_.Set(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_pointer:cms.Aggregate.data)
+}
+inline ::std::string* Aggregate::mutable_data() {
+  
+  // @@protoc_insertion_point(field_mutable:cms.Aggregate.data)
+  return data_.Mutable(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* Aggregate::release_data() {
+  
+  return data_.Release(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), GetArenaNoVirtual());
+}
+inline ::std::string* Aggregate::unsafe_arena_release_data() {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  
+  return data_.UnsafeArenaRelease(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      GetArenaNoVirtual());
+}
+inline void Aggregate::set_allocated_data(::std::string* data) {
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  data_.SetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), data,
+      GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.Aggregate.data)
+}
+inline void Aggregate::unsafe_arena_set_allocated_data(
+    ::std::string* data) {
+  GOOGLE_DCHECK(GetArenaNoVirtual() != NULL);
+  if (data != NULL) {
+    
+  } else {
+    
+  }
+  
+  data_.UnsafeArenaSetAllocated(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      data, GetArenaNoVirtual());
+  // @@protoc_insertion_point(field_set_allocated:cms.Aggregate.data)
+}
+
+// optional .cms.EventListener listener = 4;
+inline bool Aggregate::has_listener() const {
+  return !_is_default_instance_ && listener_ != NULL;
+}
+inline void Aggregate::clear_listener() {
+  if (listener_ != NULL) delete listener_;
+  listener_ = NULL;
+}
+inline const ::cms::EventListener& Aggregate::listener() const {
+  // @@protoc_insertion_point(field_get:cms.Aggregate.listener)
+  return listener_ != NULL ? *listener_ : *default_instance_->listener_;
+}
+inline ::cms::EventListener* Aggregate::mutable_listener() {
+  
+  if (listener_ == NULL) {
+    listener_ = ::google::protobuf::Arena::CreateMessage< ::cms::EventListener >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:cms.Aggregate.listener)
+  return listener_;
+}
+inline ::cms::EventListener* Aggregate::release_listener() {
+  
+  if (GetArenaNoVirtual() != NULL) {
+    if (listener_ == NULL) {
+      return NULL;
+    } else {
+      ::cms::EventListener* temp = new ::cms::EventListener;
+      temp->MergeFrom(*listener_);
+      listener_ = NULL;
+      return temp;
+    }
+  } else {
+    ::cms::EventListener* temp = listener_;
+    listener_ = NULL;
+    return temp;
+  }
+}
+inline ::cms::EventListener* Aggregate::unsafe_arena_release_listener() {
+  
+  ::cms::EventListener* temp = listener_;
+  listener_ = NULL;
+  return temp;
+}
+inline void Aggregate::set_allocated_listener(::cms::EventListener* listener) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete listener_;
+  }
+  if (listener != NULL) {
+    if (GetArenaNoVirtual() != NULL && 
+        ::google::protobuf::Arena::GetArena(listener) == NULL) {
+      GetArenaNoVirtual()->Own(listener);
+    } else if (GetArenaNoVirtual() !=
+               ::google::protobuf::Arena::GetArena(listener)) {
+      ::cms::EventListener* new_listener = 
+            ::google::protobuf::Arena::CreateMessage< ::cms::EventListener >(
+            GetArenaNoVirtual());
+      new_listener->CopyFrom(*listener);
+      listener = new_listener;
+    }
+  }
+  listener_ = listener;
+  if (listener) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:cms.Aggregate.listener)
+}
+inline void Aggregate::unsafe_arena_set_allocated_listener(
+    ::cms::EventListener* listener) {
+  if (GetArenaNoVirtual() == NULL) {
+    delete listener_;
+  }
+  listener_ = listener;
+  if (listener) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:cms.Aggregate.listener)
+}
+
 
 class CmsQuery GRPC_FINAL {
  public:
@@ -1837,6 +3009,122 @@ class CmsQuery GRPC_FINAL {
     ~AsyncService() {};
     void Requestget(::grpc::ServerContext* context, ::cms::Uuid* request, ::grpc::ServerAsyncResponseWriter< ::cms::Content>* response, ::grpc::CompletionQueue* cq, void *tag);
     void Requestget_all(::grpc::ServerContext* context, ::cms::Query* request, ::grpc::ServerAsyncResponseWriter< ::cms::ContentList>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
+
+class ContentCmdHandler GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status create(::grpc::ClientContext* context, const ::cms::Content& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asynccreate(::grpc::ClientContext* context, const ::cms::Content& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status create(::grpc::ServerContext* context, const ::cms::Content* request, ::cms::CmdResponse* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void Requestcreate(::grpc::ServerContext* context, ::cms::Content* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
+
+class EventListenerEndpoint GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status on(::grpc::ClientContext* context, const ::cms::Event& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asyncon(::grpc::ClientContext* context, const ::cms::Event& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status on(::grpc::ServerContext* context, const ::cms::Event* request, ::cms::CmdResponse* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void Requeston(::grpc::ServerContext* context, ::cms::Event* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
+
+class EventSource GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status apply(::grpc::ClientContext* context, const ::cms::Event& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asyncapply(::grpc::ClientContext* context, const ::cms::Event& request, ::grpc::CompletionQueue* cq, void* tag);
+    ::grpc::Status subscribe(::grpc::ClientContext* context, const ::cms::EventListener& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asyncsubscribe(::grpc::ClientContext* context, const ::cms::EventListener& request, ::grpc::CompletionQueue* cq, void* tag);
+    ::grpc::Status unsubscribe(::grpc::ClientContext* context, const ::cms::EventListener& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asyncunsubscribe(::grpc::ClientContext* context, const ::cms::EventListener& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status apply(::grpc::ServerContext* context, const ::cms::Event* request, ::cms::CmdResponse* response);
+    virtual ::grpc::Status subscribe(::grpc::ServerContext* context, const ::cms::EventListener* request, ::cms::CmdResponse* response);
+    virtual ::grpc::Status unsubscribe(::grpc::ServerContext* context, const ::cms::EventListener* request, ::cms::CmdResponse* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void Requestapply(::grpc::ServerContext* context, ::cms::Event* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+    void Requestsubscribe(::grpc::ServerContext* context, ::cms::EventListener* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+    void Requestunsubscribe(::grpc::ServerContext* context, ::cms::EventListener* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
+  };
+};
+
+class AggregateRepository GRPC_FINAL {
+ public:
+  class Stub GRPC_FINAL : public ::grpc::InternalStub {
+   public:
+    ::grpc::Status get(::grpc::ClientContext* context, const ::cms::Uuid& request, ::cms::Aggregate* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::Aggregate>> Asyncget(::grpc::ClientContext* context, const ::cms::Uuid& request, ::grpc::CompletionQueue* cq, void* tag);
+    ::grpc::Status set(::grpc::ClientContext* context, const ::cms::Aggregate& request, ::cms::CmdResponse* response);
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::cms::CmdResponse>> Asyncset(::grpc::ClientContext* context, const ::cms::Aggregate& request, ::grpc::CompletionQueue* cq, void* tag);
+  };
+  static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel);
+
+  class Service : public ::grpc::SynchronousService {
+   public:
+    Service() : service_(nullptr) {}
+    virtual ~Service();
+    virtual ::grpc::Status get(::grpc::ServerContext* context, const ::cms::Uuid* request, ::cms::Aggregate* response);
+    virtual ::grpc::Status set(::grpc::ServerContext* context, const ::cms::Aggregate* request, ::cms::CmdResponse* response);
+    ::grpc::RpcService* service() GRPC_OVERRIDE GRPC_FINAL;
+   private:
+    ::grpc::RpcService* service_;
+  };
+  class AsyncService GRPC_FINAL : public ::grpc::AsynchronousService {
+   public:
+    explicit AsyncService(::grpc::CompletionQueue* cq);
+    ~AsyncService() {};
+    void Requestget(::grpc::ServerContext* context, ::cms::Uuid* request, ::grpc::ServerAsyncResponseWriter< ::cms::Aggregate>* response, ::grpc::CompletionQueue* cq, void *tag);
+    void Requestset(::grpc::ServerContext* context, ::cms::Aggregate* request, ::grpc::ServerAsyncResponseWriter< ::cms::CmdResponse>* response, ::grpc::CompletionQueue* cq, void *tag);
   };
 };
 

@@ -57,12 +57,63 @@ message ContentList {
 	repeated Content contents = 1;
 }
 
-service ContentCmdHandler {
-	rpc Create (Content) returns (CmdResponse){}
-}
-
 service CmsQuery {
   rpc get (Uuid) returns (Content){}
   rpc get_all (Query) returns (ContentList){}
 }
+
+service ContentCmdHandler {
+	rpc create (Content) returns (CmdResponse){}
+}
+
+
+// event source
+
+message Event {
+	Uuid aggregateId = 1;
+	uint32 version = 2;
+	string data = 3;
+	EventType type = 4;
+}
+
+message EventType {
+	string type = 1;
+}
+
+message EventListener {
+	EventType type = 1;
+	string endpoint_address = 2;
+}
+
+service EventListenerEndpoint {
+	// should be void
+	rpc on (Event) returns (CmdResponse){}
+}
+
+service EventSource {
+	
+	rpc apply (Event) returns (CmdResponse){}
+	
+	rpc subscribe (EventListener) returns (CmdResponse){}
+	rpc unsubscribe (EventListener) returns (CmdResponse){}
+}
+
+ // aggregate
+
+message Aggregate {
+	Uuid aggregateId = 1;
+	uint32 version = 2;
+	string data = 3;
+	EventListener listener = 4;
+}
+
+service AggregateRepository {
+	// get and lock the aggregate
+	rpc get (Uuid) returns (Aggregate){}
+	
+	// set and unlock the aggregate
+	rpc set (Aggregate) returns (CmdResponse){}
+}
+
+
 
