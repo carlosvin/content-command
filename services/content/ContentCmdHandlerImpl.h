@@ -25,7 +25,7 @@ class ContentCmdHandlerImpl final: public ContentCmdHandler::Service
 public:
 	explicit ContentCmdHandlerImpl();
 	~ContentCmdHandlerImpl();
-	grpc::Status Create(grpc::ServerContext* context, const Content* request, CmdResponse* response) override;
+	grpc::Status create(grpc::ServerContext* context, const Content* request, CmdResponse* response) override;
 
 };
 

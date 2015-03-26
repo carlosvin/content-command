@@ -4742,7 +4742,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile libcmslight/Makefile frontend/Makefile services/Makefile services/content/Makefile"
+ac_config_files="$ac_config_files Makefile libcmslight/Makefile frontend/Makefile services/Makefile services/content/Makefile services/aggregate/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5495,6 +5495,7 @@ do
     "frontend/Makefile") CONFIG_FILES="$CONFIG_FILES frontend/Makefile" ;;
     "services/Makefile") CONFIG_FILES="$CONFIG_FILES services/Makefile" ;;
     "services/content/Makefile") CONFIG_FILES="$CONFIG_FILES services/content/Makefile" ;;
+    "services/aggregate/Makefile") CONFIG_FILES="$CONFIG_FILES services/aggregate/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

@@ -21,6 +21,9 @@ using cms::Content;
 using cms::CmdResponse;
 using cms::ContentCmdHandler;
 
+/*
+ * This client is only for tests purposes, the actual client will be developed in dart
+ * */
 class ContentCmdClient {
 public:
 	ContentCmdClient(std::shared_ptr<ChannelInterface> channel) :
@@ -34,7 +37,7 @@ public:
 		CmdResponse response;
 		ClientContext context;
 
-		Status status = stub_->Create(&context, content, &response);
+		Status status = stub_->create(&context, content, &response);
 		if (status.IsOk()) {
 			return "OK: " + to_string(response);
 		} else {

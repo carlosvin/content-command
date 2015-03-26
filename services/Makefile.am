@@ -1,1 +1,1 @@
-SUBDIRS=content
+SUBDIRS=content aggregate

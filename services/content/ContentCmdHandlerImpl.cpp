@@ -22,7 +22,7 @@ ContentCmdHandlerImpl::~ContentCmdHandlerImpl (){
 
 }
 
-Status ContentCmdHandlerImpl::Create(ServerContext* context, const Content* request, CmdResponse* response)
+Status ContentCmdHandlerImpl::create(ServerContext* context, const Content* request, CmdResponse* response)
 {
 	cout << "handling request <-(" << request->title() <<")"<< endl;
 	if (request->title().empty())
