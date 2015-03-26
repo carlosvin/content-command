@@ -79,7 +79,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = client$(EXEEXT)
+bin_PROGRAMS = client_aggregate$(EXEEXT) client_content_cmd$(EXEEXT)
 subdir = frontend
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -92,9 +92,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_client_OBJECTS = client.$(OBJEXT)
-client_OBJECTS = $(am_client_OBJECTS)
-client_DEPENDENCIES =
+am_client_aggregate_OBJECTS = client_aggregate.$(OBJEXT)
+client_aggregate_OBJECTS = $(am_client_aggregate_OBJECTS)
+client_aggregate_DEPENDENCIES =
+am_client_content_cmd_OBJECTS = client_content_cmd.$(OBJEXT)
+client_content_cmd_OBJECTS = $(am_client_content_cmd_OBJECTS)
+client_content_cmd_DEPENDENCIES =
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -124,8 +127,9 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(client_SOURCES)
-DIST_SOURCES = $(client_SOURCES)
+SOURCES = $(client_aggregate_SOURCES) $(client_content_cmd_SOURCES)
+DIST_SOURCES = $(client_aggregate_SOURCES) \
+	$(client_content_cmd_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -257,8 +261,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CXXFLAGS = -std=c++11 -I../libcmslight
 AM_LDFLAGS = -L../libcmslight
-client_SOURCES = client.cpp
-client_LDADD = -lcmslight -lgrpc -lgrpc++ -lprotobuf
+client_aggregate_SOURCES = client_aggregate.cpp 
+client_content_cmd_SOURCES = client_content_cmd.cpp
+client_aggregate_LDADD = -lcmslight -lgrpc -lgrpc++ -lprotobuf
+client_content_cmd_LDADD = -lcmslight -lgrpc -lgrpc++ -lprotobuf
 all: all-am
 
 .SUFFIXES:
@@ -336,9 +342,13 @@ uninstall-binPROGRAMS:
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
-client$(EXEEXT): $(client_OBJECTS) $(client_DEPENDENCIES) $(EXTRA_client_DEPENDENCIES) 
-	@rm -f client$(EXEEXT)
-	$(AM_V_CXXLD)$(CXXLINK) $(client_OBJECTS) $(client_LDADD) $(LIBS)
+client_aggregate$(EXEEXT): $(client_aggregate_OBJECTS) $(client_aggregate_DEPENDENCIES) $(EXTRA_client_aggregate_DEPENDENCIES) 
+	@rm -f client_aggregate$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(client_aggregate_OBJECTS) $(client_aggregate_LDADD) $(LIBS)
+
+client_content_cmd$(EXEEXT): $(client_content_cmd_OBJECTS) $(client_content_cmd_DEPENDENCIES) $(EXTRA_client_content_cmd_DEPENDENCIES) 
+	@rm -f client_content_cmd$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(client_content_cmd_OBJECTS) $(client_content_cmd_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -346,7 +356,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_aggregate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/client_content_cmd.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

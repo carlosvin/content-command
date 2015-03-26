@@ -1,4 +1,4 @@
-client.o: client.cpp /usr/include/stdc-predef.h \
+client_content_cmd.o: client_content_cmd.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/4.8/iostream \
  /usr/include/c++/4.8/x86_64-suse-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
