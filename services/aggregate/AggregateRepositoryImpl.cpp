@@ -83,6 +83,7 @@ AggregateImpl::AggregateImpl(const AggregateImpl & aggregate):
 AggregateImpl & AggregateImpl::operator=(const AggregateImpl & aggregate)
 {
 	*aggregate_ = *(aggregate.aggregate_);
+	return *this;
 }
 
 AggregateImpl::~AggregateImpl(){}

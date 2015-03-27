@@ -32,27 +32,29 @@ public:
 	}
 
 
-	shared_ptr<Aggregate> get(const Uuid & request){
+	void get(const Uuid & request, Aggregate * response){
 		ClientContext context;
-		Aggregate * agregate = new Aggregate{};
-		shared_ptr<Aggregate> response = shared_ptr<Aggregate>{agregate};
-		Status status = stub_->get(&context, request, agregate);
+		Status status = stub_->get(&context, request, response);
 		if (status.IsOk())
 		{
 			cout << "OK:\tget " << request.most_significant_bits() << "-" << request.least_significant_bits() << endl;
-			return response;
+			//return response;
 		}
 		else
 		{
 			cout << "Err:\tget " << request.most_significant_bits() << "-" << request.least_significant_bits() << endl;
-			return nullptr;
+			//return nullptr;
 		}
 	}
 
-    bool set(const Aggregate & request)
+    bool set(const Uuid & id, int version, const string & data)
     {
 		CmdResponse response;
     	ClientContext context;
+    	Aggregate request;
+    	request.set_allocated_aggregateid(new Uuid{id});
+    	request.set_data(data);
+    	request.set_version(version);
 		Status status = stub_->set(&context, request, &response);
 		cout << to_string(response) << endl;
 		return status.IsOk();
@@ -82,17 +84,19 @@ private:
 int main(int argc, char** argv) {
 	grpc_init();
 
-	AggregateClient client( grpc::CreateChannel("localhost:10001", grpc::InsecureCredentials(), ChannelArguments()));
-
 	Uuid id;
-	Aggregate aggregate;
+	id.set_least_significant_bits(1);
+	id.set_most_significant_bits(2);
 
-	aggregate.set_version(1);
-	aggregate.set_data("bla");
-	aggregate.set_allocated_aggregateid(&id);
 
-	cout << client.set(aggregate)<< endl;
-	cout << client.get(id)->data() << std::endl;
+	AggregateClient client{grpc::CreateChannel("localhost:10001", grpc::InsecureCredentials(), ChannelArguments())};
+
+	auto set_result = client.set(id, 1, "BLA") ? "OK" : "Fail";
+	cout << "set: " <<  set_result  << endl;
+
+	Aggregate aggregate_response;
+	client.get(id,&aggregate_response);
+	cout <<  "get: " << aggregate_response.data() << endl;
 
 	client.Shutdown();
 
