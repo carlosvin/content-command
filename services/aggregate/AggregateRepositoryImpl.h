@@ -62,7 +62,7 @@ public:
 	AggregateImpl(const AggregateImpl & aggregate);
 	AggregateImpl & operator=(const AggregateImpl & aggregate);
 
-	void lock();
+	bool try_lock();
 	void unlock();
 };
 

@@ -37,7 +37,7 @@ public:
 		Status status = stub_->get(&context, request, response);
 		if (status.IsOk())
 		{
-			cout << "OK:\tget " << request.most_significant_bits() << "-" << request.least_significant_bits() << endl;
+			cout << "OK:\tget " << request.most_significant_bits() << "-" << request.least_significant_bits() << "("<< response->data() << ")" << endl;
 			//return response;
 		}
 		else
@@ -56,7 +56,7 @@ public:
     	request.set_data(data);
     	request.set_version(version);
 		Status status = stub_->set(&context, request, &response);
-		cout << to_string(response) << endl;
+		cout << "Set Response " << to_string(response) << endl;
 		return status.IsOk();
     }
 
@@ -84,19 +84,35 @@ private:
 int main(int argc, char** argv) {
 	grpc_init();
 
-	Uuid id;
-	id.set_least_significant_bits(1);
-	id.set_most_significant_bits(2);
-
-
 	AggregateClient client{grpc::CreateChannel("localhost:10001", grpc::InsecureCredentials(), ChannelArguments())};
 
-	auto set_result = client.set(id, 1, "BLA") ? "OK" : "Fail";
-	cout << "set: " <<  set_result  << endl;
+	cout << "Save?";
+	bool save;
+	cin >> save;
 
-	Aggregate aggregate_response;
-	client.get(id,&aggregate_response);
-	cout <<  "get: " << aggregate_response.data() << endl;
+	cout << "Id: ";
+	int most = 0;
+	cin >> most;
+	Uuid id;
+	id.set_least_significant_bits(0);
+	id.set_most_significant_bits(most);
+
+	if (save)
+	{
+		cout << "Data to add into aggregate: ";
+		string data;
+		cin >> data;
+
+		auto set_result = client.set(id, 1, data) ? "OK" : "Fail";
+		cout << "set: " <<  set_result  << endl;
+	}
+	else
+	{
+		Aggregate aggregate_response;
+		client.get(id,&aggregate_response);
+		cout <<  "get: " << aggregate_response.aggregateid().most_significant_bits() << endl;
+		cout <<  "get: " << aggregate_response.data() << endl;
+	}
 
 	client.Shutdown();
 

@@ -5,4 +5,4 @@ bin_PROGRAMS	= server
 
 server_SOURCES	= server.cpp AggregateRepositoryImpl.cpp AggregateRepositoryImpl.h
 
-server_LDADD 	= -lcmslight -lgrpc -lgrpc++ -lprotobuf
+server_LDADD 	= -lcmslight -lgrpc -lgrpc++ -lprotobuf -lhiredis -lm

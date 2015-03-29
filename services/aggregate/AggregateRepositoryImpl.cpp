@@ -88,9 +88,9 @@ AggregateImpl & AggregateImpl::operator=(const AggregateImpl & aggregate)
 
 AggregateImpl::~AggregateImpl(){}
 
-void AggregateImpl::lock()
+bool AggregateImpl::try_lock()
 {
-	mutex_.lock();
+	return mutex_.try_lock();
 }
 void  AggregateImpl::unlock()
 {
@@ -105,23 +105,34 @@ AggregateRepositoryImpl::AggregateRepositoryImpl() {
 
 Status AggregateRepositoryImpl::get(ServerContext* context, const Uuid* request, Aggregate* response)
 {
+	cout << "get "  << request->most_significant_bits()<< ":BEG" << endl;
+
 	Status status = Status::Cancelled;
 	mutex_.lock();
 	Uuid id = *request;
 	auto search = aggregates_.find(id );
 	if(search != aggregates_.end())
 	{
-		aggregates_[id ]->lock();
-		//aggregate->lock();
-		//*response = *aggregate;
-		status =  Status::OK;
+		if (aggregates_[id]->try_lock())
+		{
+			*(aggregates_[id]) = *response;
+			status =  Status::OK;
+		}
+		else
+		{
+			status =  Status::Cancelled;
+		}
 	}
 	mutex_.unlock();
+
+	cout << "get "  << request->most_significant_bits() << ":END" << endl;
+
 	return status;
 }
 
 Status AggregateRepositoryImpl::set(ServerContext* context, const Aggregate* request, CmdResponse* response)
 {
+	cout << "set "  << request->aggregateid().most_significant_bits() << ":BEG" << endl;
 	Uuid id = request->aggregateid();
 
 	mutex_.lock();
@@ -130,17 +141,20 @@ Status AggregateRepositoryImpl::set(ServerContext* context, const Aggregate* req
 	{
 		//auto aggregate = std::unique_ptr<AggregateImpl>(new AggregateImpl(*request));
 		aggregates_[id] = unique_ptr<AggregateImpl>(new AggregateImpl(*request));
-		response->set_info("New aggregate added");
+		response->set_info("New aggregate added: " + request->data());
 	}
 	else
 	{
 		*(aggregates_[id]) = *request;
 		aggregates_[id]->unlock();
-		response->set_info("Aggregate updated");
+		response->set_info("Aggregate updated: " + request->data());
 	}
 	mutex_.unlock();
 	response->set_level(CmdResponse_Level_INFO);
 	response->set_path("Aggregate");
+
+	cout << "set "  << request->aggregateid().most_significant_bits() << ":END" << endl;
+
 	return Status::OK;
 }
 
