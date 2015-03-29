@@ -294,7 +294,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-SUBDIRS = libcmslight services frontend
+SUBDIRS = libaggregaterepo libcmslight services frontend
 all: all-recursive
 
 .SUFFIXES:

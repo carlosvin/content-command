@@ -6,7 +6,7 @@ MAINTAINER Carlos Martin Sanchez "carlosvin@gmail.com"
 RUN apt-get update
 
 # Install software 
-RUN apt-get install build-essential autoconf libtool git redis
+RUN apt-get install build-essential autoconf libtool git redis uuid-dev
 
 # Install grpc lib
 RUN cd /tmp

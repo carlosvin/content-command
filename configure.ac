@@ -17,13 +17,10 @@ AC_SEARCH_LIBS([redisFree], [hiredis], [], [
   AC_MSG_ERROR([unable to find the redisCommand() function])
 ])
 
+AC_CHECK_HEADERS([grpc/grpc.h], [cms_found_int_headers=yes; break;])
 
-AC_CHECK_HEADERS([grpc/grpc.h],
-	[cms_found_int_headers=yes; break;])
-
-AC_CHECK_HEADERS([hiredis/hiredis.h],
-	[cms_found_int_headers=yes; break;])
+AC_CHECK_HEADERS([hiredis/hiredis.h], [cms_found_int_headers=yes; break;])
 	
-AC_CONFIG_FILES(Makefile libcmslight/Makefile frontend/Makefile services/Makefile services/content/Makefile services/aggregate/Makefile)
+AC_CONFIG_FILES(Makefile libcmslight/Makefile libaggregaterepo/Makefile frontend/Makefile services/Makefile services/content/Makefile services/aggregate/Makefile)
 AC_OUTPUT
 

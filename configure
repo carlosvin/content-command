@@ -4392,7 +4392,6 @@ else
 fi
 
 
-
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -4816,7 +4815,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile libcmslight/Makefile frontend/Makefile services/Makefile services/content/Makefile services/aggregate/Makefile"
+ac_config_files="$ac_config_files Makefile libcmslight/Makefile libaggregaterepo/Makefile frontend/Makefile services/Makefile services/content/Makefile services/aggregate/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -5566,6 +5565,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "libcmslight/Makefile") CONFIG_FILES="$CONFIG_FILES libcmslight/Makefile" ;;
+    "libaggregaterepo/Makefile") CONFIG_FILES="$CONFIG_FILES libaggregaterepo/Makefile" ;;
     "frontend/Makefile") CONFIG_FILES="$CONFIG_FILES frontend/Makefile" ;;
     "services/Makefile") CONFIG_FILES="$CONFIG_FILES services/Makefile" ;;
     "services/content/Makefile") CONFIG_FILES="$CONFIG_FILES services/content/Makefile" ;;

@@ -6,7 +6,7 @@
 
 #include "AggregateRepositoryImpl.h"
 #include "ServerRunner.h"
-
+#include "Uuid.h"
 
 using namespace std;
 using namespace cms;
@@ -16,6 +16,11 @@ int main(int argc, char** argv) {
 	const string address = "0.0.0.0:10001";
 
 	grpc_init();
+
+	ddd::Uuid id1, id2;
+
+	cout << "id1: " << id1.to_str() << endl;
+	cout << "id2: " << id2.to_str() << endl;
 
 	cms::AggregateRepositoryImpl aggregate_repository_handler{};
 
