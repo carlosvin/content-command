@@ -16,9 +16,10 @@ namespace ddd {
 class Uuid {
 private:
 	static constexpr char SEP = '-';
-	static constexpr short FIRST_SEP_POSITION = 7;
-	static const std::mt19937 RND_METHOD{FIRST_SEP_POSITION};//std::random_device{}};
-    static const std::uniform_int_distribution<int64_t> DISTRIBUTION;
+	static constexpr short FIRST_SEP_POSITION = 8;
+	//static const auto RND =  std::bind (std::uniform_int_distribution<int64_t>{}, std::mt19937{} );
+	//static const std::mt19937 RND_METHOD;
+    //static const std::uniform_int_distribution<int64_t> DISTRIBUTION;
 
 	static int64_t get_rnd();
 
@@ -33,7 +34,6 @@ public:
 
 	Uuid(const Uuid & id);
 
-	Uuid & operator=(const Uuid & id);
 	bool operator==(const Uuid & id);
 	bool operator!=(const Uuid & id);
 

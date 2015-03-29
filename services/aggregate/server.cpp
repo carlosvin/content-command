@@ -17,7 +17,8 @@ int main(int argc, char** argv) {
 
 	grpc_init();
 
-	ddd::Uuid id1, id2;
+	ddd::Uuid id1{};
+	ddd::Uuid id2{};
 
 	cout << "id1: " << id1.to_str() << endl;
 	cout << "id2: " << id2.to_str() << endl;

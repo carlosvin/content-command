@@ -128,7 +128,7 @@ am__v_AR_0 = @echo "  AR      " $@;
 am__v_AR_1 = 
 libaggregaterepo_a_AR = $(AR) $(ARFLAGS)
 libaggregaterepo_a_LIBADD =
-am_libaggregaterepo_a_OBJECTS = Aggregate.$(OBJEXT)
+am_libaggregaterepo_a_OBJECTS = Aggregate.$(OBJEXT) Uuid.$(OBJEXT)
 libaggregaterepo_a_OBJECTS = $(am_libaggregaterepo_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -294,9 +294,9 @@ top_srcdir = ..
 AM_CXXFLAGS = -std=c++11
 AM_LDFLAGS = -lprotobuf -lgrpc -lgrpc++ 
 lib_LIBRARIES = libaggregaterepo.a
-libaggregaterepo_a_SOURCES = Aggregate.cpp
+libaggregaterepo_a_SOURCES = Aggregate.cpp Uuid.cpp
 libaggregaterepo_a_dir = $(includedir)/aggregaterepo
-libaggregaterepo_a__HEADERS = Aggregate.h
+libaggregaterepo_a__HEADERS = Aggregate.h Uuid.h
 server_LADD = -lhiredis -lm
 all: all-am
 
@@ -376,6 +376,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/Aggregate.Po
+include ./$(DEPDIR)/Uuid.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
