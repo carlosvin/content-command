@@ -35,3 +35,6 @@
 services/content/server
 frontend/client_aggregate
 frontend/client_content_cmd
+*.Po
+compile
+services/aggregate/server

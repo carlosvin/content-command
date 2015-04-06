@@ -7,6 +7,8 @@
 
 #include "ContentCmdHandlerImpl.h"
 #include <iostream>
+#include <hiredis/hiredis.h>
+
 
 namespace cms {
 
@@ -34,10 +36,29 @@ Status ContentCmdHandlerImpl::create(ServerContext* context, const Content* requ
 	}
 	else
 	{
-		response->set_path("Content");
-		response->set_level(CmdResponse_Level_DEBUG);
-		response->set_info("Content created properly");
-		return Status::OK;
+		Status status;
+		redisContext *c = redisConnect("127.0.0.1", 6379);
+		if (c == nullptr){
+			response->set_path("Content");
+			response->set_level(CmdResponse_Level_ERROR);
+			response->set_info("Cannot get connection");
+			return Status::Cancelled;
+		}else if (c->err) {
+			response->set_path("Content");
+			response->set_level(CmdResponse_Level_ERROR);
+			response->set_info((const char *)c->errstr);
+		    redisFree(c);
+			return Status::Cancelled;
+		}else{
+			response->set_path("Content");
+			response->set_level(CmdResponse_Level_DEBUG);
+			response->set_info("Content created properly");
+			redisReply *reply = (redisReply *)redisCommand(c, "PING");
+		    cout << "PING: " << reply->str << endl;
+		    freeReplyObject(reply);
+		    redisFree(c);
+			return Status::OK;
+		}
 	}
 }
 
