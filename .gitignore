@@ -38,3 +38,4 @@ frontend/client_content_cmd
 *.Po
 compile
 services/aggregate/server
+.deps
