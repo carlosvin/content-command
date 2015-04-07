@@ -7,7 +7,7 @@
 
 #include "ContentCmdHandlerImpl.h"
 #include <iostream>
-#include <hiredis/hiredis.h>
+#include "RedisWrapper.h"
 
 
 namespace cms {
