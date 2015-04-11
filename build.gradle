@@ -1,19 +1,9 @@
 apply plugin: 'cpp'
-
-model {
-    platforms {
-        x86 {
-            architecture "x86"
-        }
-        x64 {
-            architecture "x86_64"
-        }
-    }
-}
+apply plugin: 'eclipse-cdt'
 
 binaries.all {
-    cppCompiler.args "-std=c++11"
-    linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib -lgrpc -lgrpc++ -lprotobuf -lhiredis -lm"
+    cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
+    linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf", "-lhiredis", "-lm"
 
 }
 
