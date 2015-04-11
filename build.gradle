@@ -1,5 +1,13 @@
+plugins {
+  id "nebula.os-package" version "2.2.2"
+  id 'nebula.nebula-release' version '2.2.5'  
+}
 apply plugin: 'cpp'
-apply plugin: 'eclipse-cdt'
+apply plugin: 'eclipse'
+
+ospackage {
+    release '1'
+}
 
 binaries.all {
     cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
@@ -18,8 +26,22 @@ executables {
             lib libraries.common.shared
         }
     }
+    
+    test {
+        binaries.all {
+            lib libraries.common.shared
+        }
+    }
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+
+task test (dependsOn:assemble) << {
+    println 'compiling unit tests'
+}
+
+test {
+    group = 'test'
 }

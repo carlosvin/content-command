@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>cms</name>
+	<name>cms-light</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -18,7 +18,6 @@
 		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
-			<triggers>full,incremental,</triggers>
 			<arguments>
 			</arguments>
 		</buildCommand>
