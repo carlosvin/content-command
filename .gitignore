@@ -39,8 +39,10 @@ frontend/client_content_cmd
 compile
 services/aggregate/server
 .deps
+/build/
+.autotools
+.cproject
 .gradle
 .idea
-build
-dump.rdb
-dump.rdb git status
+.project
+.settings
