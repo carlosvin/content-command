@@ -38,10 +38,14 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-task test (dependsOn:assemble) << {
-    println 'compiling unit tests'
+task test(dependsOn: assemble, type:Exec) {
+
+   environment "LD_LIBRARY_PATH", "/usr/local/lib"
+   executable "build/install/testExecutable/test"
+
 }
 
 test {
     group = 'test'
 }
+
