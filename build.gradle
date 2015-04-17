@@ -1,45 +1,36 @@
-plugins {
-  id "nebula.os-package" version "2.2.2"
-  id 'nebula.nebula-release' version '2.2.5'  
-}
 apply plugin: 'cpp'
 apply plugin: 'eclipse'
 
-ospackage {
-    release '1'
-}
 
 binaries.all {
     cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
-    linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf", "-lhiredis", "-lm"
-
+    linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf"
 }
 
-libraries {
- 	common {
-    }
-}
+model {
+    components {
+        common(NativeLibrarySpec)
 
-executables {
-    content_server {
-        binaries.all {
-            lib libraries.common.shared
+        content_server(NativeExecutableSpec) {
+            sources {
+               cpp {
+                    lib library: "common"
+               }
+            }
         }
-    }
-    
-    test {
-        binaries.all {
-            lib libraries.common.shared
-        }
+
+	test(NativeExecutableSpec){
+		sources {
+               		cpp {
+                    		lib library: "common"
+               		}
+            	}
+	}
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
-}
 
 task test(dependsOn: assemble, type:Exec) {
-
    environment "LD_LIBRARY_PATH", "/usr/local/lib"
    executable "build/install/testExecutable/test"
 
@@ -48,4 +39,5 @@ task test(dependsOn: assemble, type:Exec) {
 test {
     group = 'test'
 }
+
 
