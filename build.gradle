@@ -40,3 +40,9 @@ test {
 }
 
 
+task protoc (type:Exec) {
+    workingDir "src/common"
+    executable "./build.proto.sh"
+    
+}
+
