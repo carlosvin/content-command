@@ -9,9 +9,43 @@
 
 #include "Uuid.h"
 #include <catch.hpp>
+#include <string>
 
-ddd::Uuid uuid;
+constexpr int MAX_ITERS = 1000;
 
 TEST_CASE( "Uuid", "[uuid]" ) {
-    REQUIRE( uuid.to_str() != nullptr );
+  for (int i=0; i<MAX_ITERS; i++){
+    ddd::Uuid uuid;
+    std::string uuid_str {uuid.to_str()};
+
+    INFO(uuid_str);
+    REQUIRE(uuid.most > 0);
+    REQUIRE(uuid.least > 0);
+    REQUIRE(uuid_str.size() == 36);
+  }
+
 }
+
+
+/*
+SCENARIO( "UUID creation", "[Uuid]" ) {
+
+    for (int i=0; i<MAX_ITERS; i++){
+      ddd::Uuid uuid;
+      std::string uuid_str {uuid.to_str()};
+
+      GIVEN( "A random UUID " + uuid_str) {
+    	REQUIRE(uuid_str.size() == 36);
+
+	WHEN( "get the most and least" ) {
+		THEN( "should be more than 0" ) {
+			REQUIRE( uuid.most > 0);
+			REQUIRE( uuid.least > 0);
+
+		}
+	}
+
+      }
+    }
+}*/
+
