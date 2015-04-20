@@ -1,5 +1,0 @@
-Aggregate.o: Aggregate.cpp /usr/include/stdc-predef.h Aggregate.h
-
-/usr/include/stdc-predef.h:
-
-Aggregate.h:
