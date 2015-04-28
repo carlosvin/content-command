@@ -2,27 +2,23 @@ apply plugin: 'cpp'
 apply plugin: 'eclipse'
 
 binaries.all {
-    cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
-    linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf", "-lhiredis"
+	cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
+	linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf", "-lhiredis"
 }
 
 model {
 	components {
 		common(NativeLibrarySpec) {}
-		
+
 		content_server(NativeExecutableSpec) {
-        	sources {
-            	cpp {
-                	lib library: "common"
-                }
+			sources {
+				cpp { lib library: "common" }
 			}
-        }
+		}
 
 		test(NativeExecutableSpec){
 			sources {
-            	cpp {
-                	lib library: "common"
-                }
+				cpp { lib library: "common" }
 			}
 		}
 	}
@@ -30,19 +26,16 @@ model {
 
 
 task test(dependsOn: assemble, type:Exec) {
-   environment "LD_LIBRARY_PATH", "/usr/local/lib"
-   executable "build/install/testExecutable/test"
-   args "--out", "build/test_output.txt"
+	environment "LD_LIBRARY_PATH", "/usr/local/lib"
+	executable "build/install/testExecutable/test"
+	args "--out", "build/test_output.txt"
 }
 
-test {
-    group = 'test'
-}
+test { group = 'test' }
 
 
 task protoc (type:Exec) {
-    workingDir "src/common"
-    executable "./build.proto.sh"
-    
+	workingDir "src/common"
+	executable "./build.proto.sh"
 }
 
