@@ -25,17 +25,19 @@ model {
 }
 
 
-task test(dependsOn: assemble, type:Exec) {
-	environment "LD_LIBRARY_PATH", "/usr/local/lib"
+task runTest(type:Exec) {
+	dependsOn tasks.withType(InstallExecutable)
+	//environment "LD_LIBRARY_PATH", "/usr/local/lib"
 	executable "build/install/testExecutable/test"
 	args "--out", "build/test_output.txt"
 }
 
-test { group = 'test' }
+runTest { group = 'test' }
 
 
 task protoc (type:Exec) {
 	workingDir "src/common"
 	executable "./build.proto.sh"
+	args "protos/cms.proto"
 }
 

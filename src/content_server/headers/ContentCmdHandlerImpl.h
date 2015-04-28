@@ -14,7 +14,7 @@
 #include <grpc++/server.h>
 #include <grpc++/server_context.h>
 #include <grpc++/status.h>
-#include "cms.pb.h"
+#include "cms.grpc.pb.h"
 
 namespace cms {
 
