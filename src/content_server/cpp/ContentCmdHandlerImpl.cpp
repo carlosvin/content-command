@@ -7,7 +7,6 @@
 
 #include "ContentCmdHandlerImpl.h"
 #include <iostream>
-#include "RedisWrapper.h"
 
 
 namespace cms {
@@ -27,7 +26,7 @@ ContentCmdHandlerImpl::~ContentCmdHandlerImpl (){
 Status ContentCmdHandlerImpl::create(ServerContext* context, const Content* request, CmdResponse* response)
 {
 	cout << "handling request <-(" << request->title() <<")"<< endl;
-	if (request->title().empty())
+	/*if (request->title().empty())
 	{
 		response->set_path("Content.title");
 		response->set_info("Title cannot be empty");
@@ -59,7 +58,9 @@ Status ContentCmdHandlerImpl::create(ServerContext* context, const Content* requ
 		    redisFree(c);
 			return Status::OK;
 		}
-	}
+	}*/
+	return Status::OK;
+
 }
 
 }

@@ -1,24 +1,59 @@
 apply plugin: 'cpp'
 apply plugin: 'eclipse'
 
+def base_dir = "/usr/local"
+
+def libgpr = 'libgpr.a'
+def libgrpc = 'libgrpc.a'
+def libgrpcpp = 'libgrpc++_unsecure.a'
+def libprotobuf = "libprotobuf.a"
+
+
 binaries.all {
-	cppCompiler.args "-std=c++11", "-I/usr/local/inlcude"
-	linker.args "-L/usr/lib:/usr/lib64:/usr/local/lib", "-lgrpc", "-lgrpc++", "-lprotobuf", "-lhiredis"
+	cppCompiler.args "-std=c++11"
+	linker.args "-L/usr/local/lib" //, "-lgpr", "-lgrpc", "-lgrpc++_unsecure", "-lprotobuf", "-lpthread" , "-ldl"
 }
 
 model {
+	
+	repositories {
+		libs(PrebuiltLibraries) {
+			gpr {
+				binaries.withType(StaticLibraryBinary) {
+					staticLibraryFile = file(base_dir + "/lib/" + libgpr)
+				}
+			}
+			grpc {
+				headers.srcDir base_dir + "/include"
+				binaries.withType(StaticLibraryBinary) {
+					staticLibraryFile = file(base_dir + "/lib/" + libgrpc)
+				}
+			}
+			grpcpp {
+				headers.srcDir base_dir + "/include"
+				binaries.withType(StaticLibraryBinary) {
+					staticLibraryFile = file(base_dir + "/lib/" + libgrpcpp)
+				}
+			}
+			protobuf {
+				headers.srcDir base_dir + "/include/google"
+				binaries.withType(StaticLibraryBinary) {
+					staticLibraryFile = file(base_dir + "/lib/" + libprotobuf)
+				}
+			}
+		}
+	}
+	
 	components {
-		common(NativeLibrarySpec) {}
 
 		content_server(NativeExecutableSpec) {
 			sources {
-				cpp { lib library: "common" }
-			}
-		}
-
-		test(NativeExecutableSpec){
-			sources {
-				cpp { lib library: "common" }
+				cpp { 
+					lib library: "gpr", linkage: "static"
+					lib library: "grpc", linkage: "static"
+					lib library: "grpcpp", linkage: "static"
+					lib library: "protobuf", linkage: "static"
+				}
 			}
 		}
 	}
@@ -27,7 +62,6 @@ model {
 
 task runTest(type:Exec) {
 	dependsOn tasks.withType(InstallExecutable)
-	//environment "LD_LIBRARY_PATH", "/usr/local/lib"
 	executable "build/install/testExecutable/test"
 	args "--out", "build/test_output.txt"
 }
@@ -36,8 +70,8 @@ runTest { group = 'test' }
 
 
 task protoc (type:Exec) {
-	workingDir "src/common"
+	workingDir "protos"
 	executable "./build.proto.sh"
-	args "protos/cms.proto"
+	args "cms.proto", "../src/content_server"
 }
 
