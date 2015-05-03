@@ -2,9 +2,11 @@ FROM grpc/cxx
 
 MAINTAINER Carlos Martin Sanchez "carlosvin@gmail.com"
 
+RUN apt-get update
+RUN apt-get install -y scons
 
 #Install cms light
-RUN git clone git@github.com:carlosvin/cms-light.git
-RUN cd cms-light
-RUN ./gradlew installContent_serverExecutable
-RUN ./build/install/content_serverExecutable/content_server
+RUN git clone https://github.com/carlosvin/cms-light.git
+WORKDIR /cms-light
+RUN scons
+ENTRYPOINT ./content_server
