@@ -13,9 +13,20 @@ using namespace cms;
 
 constexpr int DEFAULT_PORT = 10001;
 
+int get_port (int argc, char ** argv)
+{
+	return argc > 1 ? stoi(argv[1]) : DEFAULT_PORT;
+}
+
+string get_address(int argc, char ** argv)
+{
+	// TODO we can add set the host as configurable as parameter
+	return string{"0.0.0.0:"} + to_string(get_port(argc, argv));
+}
+
 int main(int argc, char** argv) {
 
-	const string address = "0.0.0.0:10001";
+	const string address = get_address(argc, argv);
 
 	grpc_init();
 
@@ -26,10 +37,4 @@ int main(int argc, char** argv) {
 	grpc_shutdown();
 
 	return 0;
-}
-
-
-int get_port (int argc, char ** argv)
-{
-	return argc > 1 ? stoi(argv[1]) : DEFAULT_PORT;
 }
