@@ -35,4 +35,9 @@ RUN git clone https://github.com/carlosvin/cms-light.git
 WORKDIR /cms-light
 RUN git pull
 RUN scons
-ENTRYPOINT ./content_server
+
+ENV port 10001
+
+EXPOSE $port
+
+ENTRYPOINT ./content_server $port

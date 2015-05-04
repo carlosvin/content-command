@@ -11,6 +11,8 @@
 using namespace std;
 using namespace cms;
 
+constexpr int DEFAULT_PORT = 10001;
+
 int main(int argc, char** argv) {
 
 	const string address = "0.0.0.0:10001";
@@ -24,4 +26,10 @@ int main(int argc, char** argv) {
 	grpc_shutdown();
 
 	return 0;
+}
+
+
+int get_port (int argc, char ** argv)
+{
+	return argc > 1 ? stoi(argv[1]) : DEFAULT_PORT;
 }
