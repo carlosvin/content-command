@@ -38,6 +38,6 @@ RUN scons
 
 ENV port 10002
 
-EXPOSE $port:$port
+EXPOSE $port
 
 ENTRYPOINT ./content_server $port
