@@ -48,3 +48,4 @@ services/aggregate/server
 .settings
 .sconsign.dblite
 .pydevproject
+bin/

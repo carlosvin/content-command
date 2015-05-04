@@ -36,8 +36,8 @@ WORKDIR /cms-light
 RUN git pull
 RUN scons
 
-ENV port 10001
+ENV port 10002
 
-EXPOSE $port
+EXPOSE $port:$port
 
 ENTRYPOINT ./content_server $port

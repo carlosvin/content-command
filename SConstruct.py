@@ -1,12 +1,14 @@
+SOURCE_DIR = 'src'
+SOURCES = Glob(SOURCE_DIR + '/*.c*')
+INSTALL_DIR = '/usr/local/bin'
+
 env = Environment(
-	CPPPATH=['src/content_server/headers'],
+	CPPPATH=[SOURCE_DIR],
 	CPPDEFINES=[],
 	LIBS=['grpc++_unsecure', 'grpc', 'gpr', 'protobuf', 'pthread', 'dl'],
     CXXFLAGS=['-std=c++11', '-g'],
-	#LIBPATH=["/usr/lib", "/usr/local/lib", '/usr/lib64'],
-    #LINKFLAGS="--static"
 )
 
-CPP_BASE = "src/content_server/cpp/"
-
-env.Program('content_server', Glob(CPP_BASE + '*.c*'))	
+prog = env.Program('bin/content_server', SOURCES)	
+env.Install(INSTALL_DIR, prog)
+env.Alias('install', INSTALL_DIR)
