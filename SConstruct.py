@@ -12,3 +12,7 @@ env = Environment(
 prog = env.Program('bin/content_server', SOURCES)	
 env.Install(INSTALL_DIR, prog)
 env.Alias('install', INSTALL_DIR)
+
+"""
+TODO unit tests, https://raw.githubusercontent.com/philsquared/Catch/develop/single_include/catch.hpp
+"""
