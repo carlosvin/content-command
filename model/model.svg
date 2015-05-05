@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Bouml (http://bouml.free.fr/) -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="790" height="408" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+	<line stroke="black" stroke-opacity="1" x1="141" y1="270" x2="161" y2="270" />
+	<ellipse fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" cx="151" cy="260" rx="10" ry="10" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="151" y="282">ContentData</text>
+	<line stroke="black" stroke-opacity="1" x1="62" y1="291" x2="240" y2="291" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="66" y="303">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="303">title : string [1]</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="66" y="322">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="322">id : Uuid [1]</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="66" y="341">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="341">creationDate : Datetime [1]</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="66" y="360">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="360">updatedDate : Datetime [1]</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="66" y="379">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="379">auths : Uuid [1..*]</text>
+	<line stroke="black" stroke-opacity="1" x1="62" y1="388" x2="240" y2="388" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="373" y1="295" x2="393" y2="295" />
+	<ellipse fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" cx="383" cy="285" rx="10" ry="10" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="383" y="307">ContentPart</text>
+	<line stroke="black" stroke-opacity="1" x1="322" y1="316" x2="444" y2="316" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="326" y="328">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="340" y="328">format : string [1]</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="326" y="347">-</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="340" y="347">data : string [1]</text>
+	<line stroke="black" stroke-opacity="1" x1="322" y1="356" x2="444" y2="356" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="614" y1="64" x2="622" y2="64" />
+	<line stroke="black" stroke-opacity="1" x1="614" y1="54" x2="614" y2="74" />
+	<ellipse fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" cx="632" cy="64" rx="10" ry="10" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="632" y="86">ContentService</text>
+	<line stroke="black" stroke-opacity="1" x1="486" y1="95" x2="778" y2="95" />
+	<line stroke="black" stroke-opacity="1" x1="486" y1="103" x2="778" y2="103" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="115">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="115">save(in content : Content)</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="134">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="134">removeContent(in id : Uuid)</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="153">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="153">savePart(in part : ContentPart, in position : int)</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="172">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="172">movePart(in from : int, in to : int)</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="191">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="191">removePart(in position : int)</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" x="490" y="210">+</text>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="504" y="210">removePart(in id : Uuid)</text>
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="168" y1="65" x2="188" y2="65" />
+	<ellipse fill="#ffffc0" stroke="black" stroke-width="1" stroke-opacity="1" cx="178" cy="55" rx="10" ry="10" />
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" font-weight="bold" text-anchor="middle" x="178" y="77">Content</text>
+	<line stroke="black" stroke-opacity="1" x1="150" y1="86" x2="206" y2="86" />
+	<line stroke="black" stroke-opacity="1" x1="150" y1="94" x2="206" y2="94" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="157" y1="249" x2="163" y2="243" />
+	<line stroke="black" stroke-opacity="1" x1="157" y1="249" x2="151" y2="242" />
+	<line stroke="black" stroke-opacity="1" x1="174" y1="101" x2="157" y2="249" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="240" y1="320" x2="246" y2="326" />
+	<line stroke="black" stroke-opacity="1" x1="240" y1="320" x2="246" y2="314" />
+	<line stroke="black" stroke-opacity="1" x1="321" y1="320" x2="240" y2="320" />
+</g>
+<g>
+	<line stroke="black" stroke-opacity="1" x1="345" y1="274" x2="345" y2="265" />
+	<line stroke="black" stroke-opacity="1" x1="345" y1="274" x2="336" y2="273" />
+	<line stroke="black" stroke-opacity="1" x1="201" y1="101" x2="345" y2="274" />
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="250" y="308">info</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="306" y="305">*</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="250" y="338">1</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="80" y="237">1</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="282" y="275">parts</text>
+</g>
+<g>
+	<text font-family="Helvetica" font-size="10" fill="#000000" xml:space="preserve" x="107" y="237">info</text>
+</g>
+</svg>
