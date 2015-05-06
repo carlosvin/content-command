@@ -26,7 +26,6 @@ TEST_CASE( "Uuid", "[uuid]" ) {
 
 }
 
-
 /*
 SCENARIO( "UUID creation", "[Uuid]" ) {
 

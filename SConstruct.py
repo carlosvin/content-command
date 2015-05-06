@@ -1,18 +1,38 @@
+"""
+Build
+"""
 SOURCE_DIR = 'src'
-SOURCES = Glob(SOURCE_DIR + '/*.c*')
-INSTALL_DIR = '/usr/local/bin'
+SOURCE_MAIN = Glob(SOURCE_DIR + '/main.cpp')
+SOURCES_LIB = Glob(SOURCE_DIR + '/*.c*')
+SOURCES_LIB.remove(SOURCE_MAIN[0])
 
 env = Environment(
 	CPPPATH=[SOURCE_DIR],
-	CPPDEFINES=[],
-	LIBS=['grpc++_unsecure', 'grpc', 'gpr', 'protobuf', 'pthread', 'dl'],
+	LIBS=['grpc++', 'grpc', 'gpr', 'protobuf', 'pthread', 'dl'],
     CXXFLAGS=['-std=c++11', '-g'],
 )
 
-prog = env.Program('bin/content_server', SOURCES)	
-env.Install(INSTALL_DIR, prog)
-env.Alias('install', INSTALL_DIR)
+prog = env.Program('bin/content_server', [SOURCE_MAIN, SOURCES_LIB ])	
 
 """
-TODO unit tests, https://raw.githubusercontent.com/philsquared/Catch/develop/single_include/catch.hpp
+Unit tests
+https://raw.githubusercontent.com/philsquared/Catch/develop/single_include/catch.hpp
 """
+TEST_DIR = 'test'
+TEST_SOURCES = Glob(TEST_DIR + '/*.c*')
+
+import os
+test_env = env.Clone(
+					CPPPATH=[TEST_DIR, SOURCE_DIR],
+					ENV=os.environ
+					)
+
+test_program = test_env.Program('bin/uuid_test', [TEST_SOURCES, SOURCES_LIB])
+AlwaysBuild(test_env.Alias('test', [test_program], test_program[0].abspath))
+
+"""
+Install
+"""
+INSTALL_DIR = '/usr/local/bin'
+env.Install(INSTALL_DIR, prog)
+env.Alias('install', INSTALL_DIR)

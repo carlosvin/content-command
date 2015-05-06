@@ -70,7 +70,7 @@
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2131584831" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1843001388" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1147459304" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1147459304" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/home/carlos/workspace/content-service/src"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.9.2"/>
 									<listOptionValue builtIn="false" value="/usr/local/include"/>
@@ -79,7 +79,7 @@
 									<listOptionValue builtIn="false" value="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
 									<listOptionValue builtIn="false" value="/usr/include/c++/4.9.2/x86_64-redhat-linux"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.1522137974" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.1522137974" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__FLOAT_WORD_ORDER__=__ORDER_LITTLE_ENDIAN__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__=1"/>
 									<listOptionValue builtIn="false" value="__INT_FAST64_TYPE__ long=int"/>
@@ -335,13 +335,13 @@
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.99702174" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.469214915" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.498041423" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.498041423" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/home/carlos/workspace/content-service/src"/>
 									<listOptionValue builtIn="false" value="/usr/lib/gcc/x86_64-redhat-linux/4.9.2/include"/>
 									<listOptionValue builtIn="false" value="/usr/local/include"/>
 									<listOptionValue builtIn="false" value="/usr/include"/>
 								</option>
-								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.272381675" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.build.core.settings.holder.symbols.272381675" name="Symbols" superClass="org.eclipse.cdt.build.core.settings.holder.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__FLOAT_WORD_ORDER__=__ORDER_LITTLE_ENDIAN__"/>
 									<listOptionValue builtIn="false" value="__gnu_linux__=1"/>
 									<listOptionValue builtIn="false" value="__INT_FAST64_TYPE__ long=int"/>
@@ -615,6 +615,7 @@
 		<configuration configurationName="Build (GNU)">
 			<resource resourceType="PROJECT" workspacePath="/cms-light"/>
 		</configuration>
+		<configuration configurationName="Default"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 		<buildTargets>
