@@ -5,14 +5,17 @@ SOURCE_DIR = 'src'
 SOURCE_MAIN = Glob(SOURCE_DIR + '/main.cpp')
 SOURCES_LIB = Glob(SOURCE_DIR + '/*.c*')
 SOURCES_LIB.remove(SOURCE_MAIN[0])
+LIBRARIES = ['grpc++', 'grpc', 'gpr', 'protobuf', 'pthread', 'dl']
 
 env = Environment(
 	CPPPATH=[SOURCE_DIR],
-	LIBS=['grpc++', 'grpc', 'gpr', 'protobuf', 'pthread', 'dl'],
+	LIBS=LIBRARIES,
     CXXFLAGS=['-std=c++11', '-g'],
 )
 
-prog = env.Program('bin/content_server', [SOURCE_MAIN, SOURCES_LIB ])	
+lib  = env.StaticLibrary('lib/content_server', [SOURCES_LIB])
+LIBRARIES.append(lib)
+prog = env.Program('bin/content_server', [SOURCE_MAIN], LIBS=LIBRARIES)
 
 """
 Unit tests
@@ -27,7 +30,7 @@ test_env = env.Clone(
 					ENV=os.environ
 					)
 
-test_program = test_env.Program('bin/uuid_test', [TEST_SOURCES, SOURCES_LIB])
+test_program = test_env.Program('bin/uuid_test', [TEST_SOURCES], LIBS=LIBRARIES)
 AlwaysBuild(test_env.Alias('test', [test_program], test_program[0].abspath))
 
 """
