@@ -17,7 +17,8 @@ using namespace std;
 
 auto SEED = chrono::system_clock::now().time_since_epoch().count();
 auto RND =  bind (uniform_int_distribution<int64_t>{}, mt19937{SEED} );
-
+constexpr short LEN = 16;
+auto convert_to_hex = [] (stringstream & stream, int64_t l) { stream << setfill('0') << setw(LEN) << hex << l; };
 
 Uuid::Uuid(): most(get_rnd()), least(get_rnd()){}
 
@@ -44,7 +45,8 @@ const char * Uuid::to_str()
 {
 	// 8-4-4-4-12
 	stringstream stream;
-	stream << hex << most << least;
+	convert_to_hex(stream, most);
+	convert_to_hex(stream, least);
 	string result( stream.str() );
 	for (int i=0; i<4; i++)
 	{
