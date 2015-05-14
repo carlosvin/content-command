@@ -1,11 +1,14 @@
-window_sizes 1715 898 226 1483 704 120
+window_sizes 1717 899 226 1485 705 120
 diagrams
-  active  classdiagram_ref 128002 // class diagram
+  classdiagram_ref 128002 // class diagram
     1186 563 100 4 0 0
+  active  componentdiagram_ref 134530 // component diagram
+    1188 564 100 4 0 0
 end
 show_stereotypes
-selected classdiagram_ref 128002 // class diagram
+selected componentdiagram_ref 134530 // component diagram
 open
-  classview_ref 128002 // content
+  class_ref 135170 // ContentQueryService
+  componentview_ref 128002 // services
 end
 end

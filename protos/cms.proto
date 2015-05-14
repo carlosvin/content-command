@@ -12,14 +12,30 @@ message Uuid {
     sint64 most_significant_bits = 2;
 }
 
-message Order {
-	bool asc = 1;
-	string property = 2;	
+message ContentData {
+	Uuid id = 1;
+	string title = 2;
+	repeated Uuid authors = 3;
 }
 
-message Page {
-	uint32 page = 1;
-	uint32 elements =2;
+enum Format {
+	HTML = 1;
+	MD = 2;
+	RST = 3;
+	SRC = 4;
+	IMG = 5;
+	GIST = 6;
+}
+
+message ContentPart {
+	ContentData info = 1;
+	Format format = 2;
+	string data = 3;
+}
+
+message Content {
+	ContentData info = 1;
+	repeated ContentPart parts = 2;
 }
 
 message Query {

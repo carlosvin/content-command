@@ -1,0 +1,29 @@
+format 74
+
+componentcanvas 128002 component_ref 128002 // ContentCmd
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 183 135 2000 169 59
+end
+componentcanvas 128130 component_ref 128130 // ContentQuery
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 387 133 2000 169 59
+end
+componentcanvas 128258 component_ref 128258 // ContentEventStore
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 316 370 2000 169 59
+end
+arrowjunctioncanvas 128642 class_ref 135170 // ContentQueryService
+  xyz 461 67 3005 label_xy 408 86
+arrowjunctioncanvas 128898 class_ref 128642 // ContentService
+  xyz 258 68 3005 label_xy 223 87
+simplerelationcanvas 128386 simplerelation_ref 128002
+  from ref 128002 z 2001 to ref 128258
+end
+simplerelationcanvas 128514 simplerelation_ref 128130
+  from ref 128258 z 2001 to ref 128130
+end
+line 128770 ---O
+  from ref 128130 z 3006 to ref 128642
+line 129026 ---O
+  from ref 128002 z 3006 to ref 128898
+end
