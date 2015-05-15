@@ -14,8 +14,7 @@ env = Environment(
 """
 Generate proto files
 """
-GRPC_CPP_PLUGIN="grpc_cpp_plugin"
-GRPC_CPP_PLUGIN_PATH="`which $GRPC_CPP_PLUGIN`"
+GRPC_CPP_PLUGIN_PATH="`which grpc_cpp_plugin`"
 PROTOS_PATH="protos"
 PROTO_FILE=PROTOS_PATH + "/content.proto"
 
