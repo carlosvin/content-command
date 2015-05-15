@@ -1,0 +1,67 @@
+
+syntax = "proto3";
+
+package cms;
+
+option java_package = "com.cms";
+option cc_enable_arenas = true;
+
+
+enum Format {
+	HTML = 0;
+	MD = 1;
+	RST = 2;
+	SRC = 3;
+	IMG = 4;
+	GIST = 5;
+}
+
+enum Level {
+	DEBUG = 0;
+	INFO = 1;
+	WARN = 2;
+	ERROR = 3;
+}
+
+
+// A 128-bit id, transferred as two 64-bit longs
+message Uuid {
+    sint64 least_significant_bits = 1;
+    sint64 most_significant_bits = 2;
+}
+
+message ContentData {
+	Uuid id = 1;
+	string title = 2;
+	repeated Uuid authors = 3;
+}
+
+message ContentPart {
+	ContentData info = 1;
+	Format format = 2;
+	string data = 3;
+}
+
+message Content {
+	ContentData info = 1;
+	repeated ContentPart parts = 2;
+}
+
+message CmdResponse {
+	string path = 1;
+	Level level = 2;
+	string msg = 3;
+}
+
+message UpdatePart{
+	ContentPart part = 1;
+	uint32 position = 2;
+}
+
+service ContentCmdHandler {
+	rpc save (Content) returns (CmdResponse){}
+	rpc remove (Uuid) returns (CmdResponse){}
+	rpc removePart (Uuid) returns (CmdResponse){}
+	rpc updatePart (UpdatePart) returns (CmdResponse){}
+}
+
