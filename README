@@ -1,2 +1,2 @@
-# cms-light
-Content Managements System based on CQRS, Microservices, C++ and GRPC (R&amp;D project)
+# Content Command Handler
+Microservice to handle Content commands, beloging to project: Content Managements System based on CQRS, Microservices, C++ and GRPC (R&D project)
