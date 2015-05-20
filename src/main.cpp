@@ -9,7 +9,7 @@
 
 
 using namespace std;
-using namespace cms;
+using namespace content;
 
 constexpr int DEFAULT_PORT = 10001;
 
@@ -30,9 +30,9 @@ int main(int argc, char** argv) {
 
 	grpc_init();
 
-	cms::ContentCmdHandlerImpl content_cmd_handler{};
+	ContentCmdHandlerImpl content_cmd_handler{};
 
-	cms::ServerRunner server_runner {address, {&content_cmd_handler}};
+	ServerRunner server_runner {address, {&content_cmd_handler}};
 
 	grpc_shutdown();
 

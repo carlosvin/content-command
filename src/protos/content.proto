@@ -1,9 +1,9 @@
 
 syntax = "proto3";
 
-package cms;
+package content;
 
-option java_package = "com.cms";
+option java_package = "com.content";
 option cc_enable_arenas = true;
 
 

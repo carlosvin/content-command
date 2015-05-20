@@ -8,7 +8,7 @@
 #include <grpc++/server_credentials.h>
 #include "ServerRunner.h"
 
-namespace cms {
+namespace content {
 
 using namespace std;
 using namespace grpc;

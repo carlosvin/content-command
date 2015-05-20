@@ -14,9 +14,9 @@
 #include <grpc++/server.h>
 #include <grpc++/server_context.h>
 #include <grpc++/status.h>
-#include "cms.grpc.pb.h"
+#include "content.grpc.pb.h"
 
-namespace cms {
+namespace content {
 
 
 class ContentCmdHandlerImpl final: public ContentCmdHandler::Service
@@ -25,8 +25,11 @@ class ContentCmdHandlerImpl final: public ContentCmdHandler::Service
 public:
 	explicit ContentCmdHandlerImpl();
 	~ContentCmdHandlerImpl();
-	grpc::Status create(grpc::ServerContext* context, const Content* request, CmdResponse* response) override;
 
+  	grpc::Status save (grpc::ServerContext* context, const Content* request, CmdResponse* response)  override;
+        grpc::Status remove (grpc::ServerContext* context, const Uuid* request, CmdResponse* response)  override;
+  	grpc::Status removePart (grpc::ServerContext* context, const Uuid* request, CmdResponse* response)  override;
+  	grpc::Status updatePart (grpc::ServerContext* context, const UpdatePart* request, CmdResponse* response)  override;
 };
 
 }
