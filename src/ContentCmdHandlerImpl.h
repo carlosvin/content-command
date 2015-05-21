@@ -18,18 +18,16 @@
 
 namespace content {
 
-
-class ContentCmdHandlerImpl final: public ContentCmdHandler::Service
-{
+class ContentCmdHandlerImpl final: public ContentCmdHandler::Service {
 
 public:
 	explicit ContentCmdHandlerImpl();
 	~ContentCmdHandlerImpl();
 
-  	grpc::Status save (grpc::ServerContext* context, const Content* request, CmdResponse* response)  override;
-        grpc::Status remove (grpc::ServerContext* context, const Uuid* request, CmdResponse* response)  override;
-  	grpc::Status removePart (grpc::ServerContext* context, const Uuid* request, CmdResponse* response)  override;
-  	grpc::Status updatePart (grpc::ServerContext* context, const UpdatePart* request, CmdResponse* response)  override;
+	grpc::Status save(grpc::ServerContext* context, const Content* request, CmdResponse* response) override;
+	grpc::Status remove(grpc::ServerContext* context, const Uuid* request, CmdResponse* response) override;
+	grpc::Status removePart(grpc::ServerContext* context, const Uuid* request, CmdResponse* response) override;
+	grpc::Status updatePart(grpc::ServerContext* context, const UpdatePart* request, CmdResponse* response) override;
 };
 
 }

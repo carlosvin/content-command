@@ -1,0 +1,29 @@
+
+syntax = "proto3";
+
+package common;
+
+option cc_enable_arenas = true;
+
+enum Format {
+	HTML = 0;
+	MD = 1;
+	RST = 2;
+	SRC = 3;
+	IMG = 4;
+	GIST = 5;
+}
+
+enum Level {
+	DEBUG = 0;
+	INFO = 1;
+	WARN = 2;
+	ERROR = 3;
+}
+
+
+// A 128-bit id, transferred as two 64-bit longs
+message Uuid {
+    sint64 least_significant_bits = 1;
+    sint64 most_significant_bits = 2;
+}

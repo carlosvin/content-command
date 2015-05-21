@@ -10,3 +10,7 @@ executable('content-command', 'main.cpp', 'ServerRunner.cpp', 'ContentCmdHandler
 
 # Build protocol buffers files
 run_target('protogen', 'protos/build.proto.sh', 'protos', 'content.proto', '.')
+
+# Tests
+uuid_test = executable('uuid_test', 'test/uuid_test.cpp', 'Uuid.cpp')
+test('uuid test', uuid_test)

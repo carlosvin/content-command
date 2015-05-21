@@ -8,7 +8,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 
 #include "Uuid.h"
-#include <catch.hpp>
+#include "test/catch.hpp"
 #include <string>
 
 constexpr int MAX_ITERS = 1000;
