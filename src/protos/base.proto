@@ -27,3 +27,8 @@ message Uuid {
     sint64 least_significant_bits = 1;
     sint64 most_significant_bits = 2;
 }
+
+message Event {
+	Uuid aggregate_id = 1;
+	string serialized_data = 2;
+}
