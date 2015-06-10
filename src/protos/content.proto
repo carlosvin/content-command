@@ -9,14 +9,14 @@ import "base.proto";
 
 
 message ContentData {
-	Uuid id = 1;
+	common.Uuid id = 1;
 	string title = 2;
-	repeated Uuid authors = 3;
+	repeated common.Uuid authors = 3;
 }
 
 message ContentPart {
 	ContentData info = 1;
-	Format format = 2;
+	common.Format format = 2;
 	string data = 3;
 }
 
@@ -27,7 +27,7 @@ message Content {
 
 message CmdResponse {
 	string path = 1;
-	Level level = 2;
+	common.Level level = 2;
 	string msg = 3;
 }
 
@@ -38,8 +38,8 @@ message UpdatePart{
 
 service ContentCmdHandler {
 	rpc save (Content) returns (CmdResponse){}
-	rpc remove (Uuid) returns (CmdResponse){}
-	rpc removePart (Uuid) returns (CmdResponse){}
+	rpc remove (common.Uuid) returns (CmdResponse){}
+	rpc removePart (common.Uuid) returns (CmdResponse){}
 	rpc updatePart (UpdatePart) returns (CmdResponse){}
 }
 
